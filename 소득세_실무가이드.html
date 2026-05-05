@@ -1,0 +1,4200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>종합소득세 실무 가이드북 2025</title>
+<style>
+:root{
+  --bg:#f6f7fb;--panel:#fff;--brand:#1A1F71;--brand2:#2a2fa0;
+  --accent:#4F46E5;--ok:#059669;--warn:#d97706;--danger:#dc2626;
+  --border:#e2e8f0;--soft:#eef2ff;--shadow:0 1px 4px rgba(0,0,0,.08);
+  --font:'Apple SD Gothic Neo','Pretendard','Noto Sans KR',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:#1e293b;font-size:14px;line-height:1.65}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── 레이아웃 ── */
+.page-shell{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+
+/* ── 사이드바 ── */
+.sidebar{
+  background:linear-gradient(180deg,#0f1647 0%,#2a2fa0 100%);
+  color:#fff;position:sticky;top:0;height:100vh;overflow-y:auto;
+  display:flex;flex-direction:column;padding:0 0 24px;
+}
+.sidebar-brand{
+  font-size:16px;font-weight:700;padding:24px 20px 4px;
+  border-bottom:1px solid rgba(255,255,255,.15);line-height:1.4;
+}
+.sidebar-version{font-size:11px;color:rgba(255,255,255,.55);padding:6px 20px 16px}
+.toc-search-wrap{padding:0 14px 10px}
+.toc-search-wrap input{
+  width:100%;padding:7px 10px;border-radius:6px;border:none;
+  background:rgba(255,255,255,.15);color:#fff;font-size:13px;
+  font-family:var(--font);outline:none;
+}
+.toc-search-wrap input::placeholder{color:rgba(255,255,255,.5)}
+.toc-search-wrap input:focus{outline:2px solid rgba(255,255,255,.7);outline-offset:-2px}
+nav.toc{padding:0 8px}
+.toc a{
+  display:block;padding:7px 12px;border-radius:6px;color:rgba(255,255,255,.8);
+  font-size:13px;transition:background .15s;
+}
+.toc a:hover,.toc a.active{background:rgba(255,255,255,.18);color:#fff;text-decoration:none}
+.toc-num{display:inline-block;width:20px;color:rgba(255,255,255,.45);font-size:11px}
+
+/* ── 메인 ── */
+.main{padding:32px 36px;max-width:960px}
+
+/* ── 상단 배너 ── */
+.top-banner{
+  background:linear-gradient(135deg,var(--brand) 0%,var(--accent) 100%);
+  color:#fff;border-radius:10px;padding:28px 32px;margin-bottom:20px;
+}
+.top-banner h1{font-size:22px;font-weight:700;margin-bottom:6px}
+.top-banner p{font-size:13px;opacity:.85}
+
+/* ── 경고 박스 ── */
+.warn-box{
+  border:1px solid var(--warn);background:#fffbeb;border-radius:8px;
+  padding:14px 18px;margin-bottom:16px;color:#92400e;font-size:13px;
+  display:flex;gap:10px;align-items:flex-start;
+}
+.warn-box strong{color:var(--warn)}
+
+/* ── 기능 버튼 바 ── */
+.action-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.action-bar button{
+  padding:7px 14px;border-radius:6px;border:1px solid var(--border);
+  background:#fff;color:#475569;font-size:13px;cursor:pointer;
+  font-family:var(--font);transition:all .15s;
+}
+.action-bar button:hover{background:var(--soft);border-color:var(--accent);color:var(--accent)}
+
+/* ── 섹션 카드 ── */
+.section-card{
+  background:var(--panel);border:1px solid var(--border);border-radius:10px;
+  box-shadow:var(--shadow);margin-bottom:28px;overflow:hidden;
+  border-left:4px solid var(--accent);
+}
+.section-header{
+  padding:18px 24px;cursor:pointer;display:flex;justify-content:space-between;
+  align-items:center;background:var(--soft);user-select:none;
+}
+.section-header:hover{background:#e0e7ff}
+.section-header h2{font-size:17px;font-weight:700;color:var(--brand)}
+.src-tag{font-size:11px;color:#94a3b8;white-space:nowrap;margin-left:12px}
+.section-toggle{font-size:18px;color:var(--accent);transition:transform .2s;flex-shrink:0}
+.section-card.collapsed .section-toggle{transform:rotate(-90deg)}
+.section-card.collapsed .section-body{display:none}
+
+/* ── 섹션 본문 ── */
+.section-body{padding:24px}
+.section-body h3{
+  font-size:15px;font-weight:700;color:var(--brand);margin:20px 0 10px;
+  padding-bottom:5px;border-bottom:2px solid var(--soft);
+}
+.section-body h3:first-child{margin-top:0}
+.section-body h4{font-size:14px;font-weight:600;color:#334155;margin:14px 0 7px}
+.section-body p{margin-bottom:10px;color:#334155}
+
+/* ── 표 ── */
+.content-table{
+  width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;
+}
+.content-table thead th{
+  background:var(--brand);color:#fff;padding:9px 12px;text-align:left;
+  font-weight:600;
+}
+.content-table tbody td{padding:8px 12px;border-bottom:1px solid var(--border)}
+.content-table tbody tr:nth-child(even) td{background:#f8faff}
+.content-table tbody tr:hover td{background:var(--soft)}
+
+/* ── 리스트 ── */
+.content-list{padding-left:20px;margin:8px 0 12px}
+.content-list li{margin-bottom:5px;color:#334155}
+ol{padding-left:20px;margin:8px 0 12px}
+ol li{margin-bottom:5px}
+
+/* ── 하이라이트 박스 ── */
+.highlight-box{
+  background:var(--soft);border-left:4px solid var(--accent);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;
+  font-size:13px;color:#1e1b4b;
+}
+
+/* ── 이미지 자리표시 ── */
+.img-placeholder{
+  background:#f1f5f9;border:2px dashed var(--border);border-radius:8px;
+  padding:20px;text-align:center;color:#94a3b8;font-size:13px;margin:12px 0;
+}
+
+/* ── 메모 영역 ── */
+.memo-wrap{border-top:1px dashed var(--border);padding:16px 24px;background:#fefce8}
+.memo-label{font-size:12px;font-weight:600;color:var(--warn);margin-bottom:6px}
+.memo-box{
+  width:100%;min-height:80px;padding:10px;border:1px dashed #d97706;
+  border-radius:6px;background:#fffbeb;font-family:var(--font);
+  font-size:13px;resize:vertical;outline:none;color:#334155;
+}
+.memo-box:focus{border-color:var(--accent);background:#fff;outline:2px solid var(--accent);outline-offset:-1px}
+.memo-clear{
+  margin-top:6px;padding:4px 10px;border:1px solid var(--border);
+  border-radius:4px;background:#fff;color:#94a3b8;font-size:12px;
+  cursor:pointer;font-family:var(--font);
+}
+.memo-clear:hover{color:var(--danger);border-color:var(--danger)}
+
+/* ── 검색 모달 ── */
+.search-overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);
+  z-index:90;backdrop-filter:blur(2px);
+}
+.search-overlay.open{display:flex;align-items:flex-start;justify-content:center;padding-top:80px}
+.search-modal{
+  background:#fff;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.2);
+  width:100%;max-width:560px;overflow:hidden;
+}
+.search-modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:center}
+.search-input{
+  flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:6px;
+  font-family:var(--font);font-size:14px;outline:none;
+}
+.search-input:focus{border-color:var(--accent);outline:2px solid var(--accent);outline-offset:-1px}
+.search-close{padding:6px 12px;border:1px solid var(--border);border-radius:6px;cursor:pointer;font-size:13px;background:#fff}
+.search-results{max-height:400px;overflow-y:auto;padding:8px 0}
+.search-result-item{
+  padding:12px 20px;cursor:pointer;border-bottom:1px solid var(--border);
+}
+.search-result-item:hover{background:var(--soft)}
+.search-result-title{font-weight:600;font-size:13px;color:var(--brand);margin-bottom:3px}
+.search-result-snippet{font-size:12px;color:#64748b}
+.search-result-snippet mark{background:#fef08a;color:inherit;padding:0 1px}
+.search-empty{padding:24px;text-align:center;color:#94a3b8;font-size:13px}
+
+/* ── 검색 하이라이트 ── */
+mark.search-hi{background:#fef08a;border-radius:2px;padding:0 1px}
+
+/* ── 반응형 ── */
+@media(max-width:900px){
+  .page-shell{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .main{padding:20px 16px;max-width:100%}
+}
+</style>
+</head>
+<body>
+<div class="page-shell">
+
+<!-- ── 사이드바 ── -->
+<aside class="sidebar">
+  <div class="sidebar-brand">종합소득세<br>실무 가이드북</div>
+  <div class="sidebar-version">2025년 귀속 | v1.0</div>
+  <div class="toc-search-wrap">
+    <input type="text" id="tocSearch" placeholder="목차 검색...">
+  </div>
+  <nav class="toc" id="toc">
+    <a href="#sec-overview"><span class="toc-num">01</span>종합소득세 특징</a>
+    <a href="#sec-filing-type"><span class="toc-num">02</span>신고유형 및 수입금액 확정</a>
+    <a href="#sec-interest-div"><span class="toc-num">03</span>이자·배당소득</a>
+    <a href="#sec-business"><span class="toc-num">04</span>사업소득</a>
+    <a href="#sec-earned"><span class="toc-num">05</span>근로소득</a>
+    <a href="#sec-pension"><span class="toc-num">06</span>연금소득</a>
+    <a href="#sec-other"><span class="toc-num">07</span>기타소득</a>
+    <a href="#sec-closing"><span class="toc-num">08</span>결산 및 세무조정</a>
+    <a href="#sec-tax-base"><span class="toc-num">09</span>과세표준 계산</a>
+    <a href="#sec-credit"><span class="toc-num">10</span>세액공제 및 세액감면</a>
+    <a href="#sec-sincere"><span class="toc-num">11</span>성실신고확인서·현금영수증</a>
+    <a href="#sec-final-filing"><span class="toc-num">12</span>확정신고 및 중간예납</a>
+    <a href="#sec-local-tax"><span class="toc-num">13</span>지방소득세</a>
+    <a href="#sec-overseas"><span class="toc-num">14</span>해외투자 및 거래 제출서류</a>
+    <a href="#sec-revision"><span class="toc-num">15</span>소득세 개정 (2023~2025)</a>
+  </nav>
+</aside>
+
+<!-- ── 메인 ── -->
+<main class="main">
+
+  <!-- 상단 배너 -->
+  <div class="top-banner">
+    <h1>종합소득세 실무 가이드북 2025</h1>
+    <p>세무법인한영 신우지점 | 직원용 내부 실무 참고자료 | 2025년 귀속 소득세 기준</p>
+  </div>
+
+  <!-- 경고 박스 -->
+  <div class="warn-box">
+    <div>
+      <strong>⚠ 세법 개정 주의</strong><br>
+      이 가이드북은 2025년 귀속 소득세법 기준입니다. 세법 개정 시 내용이 변경될 수 있습니다.
+      실무 적용 전 반드시 최신 법령을 확인하고 세무사 검수 후 사용하십시오.
+    </div>
+  </div>
+
+  <!-- 기능 버튼 바 -->
+  <div class="action-bar">
+    <button onclick="expandAll()">전체 펼치기</button>
+    <button onclick="collapseAll()">전체 접기</button>
+    <button onclick="openSearch()">검색 (Ctrl+F)</button>
+    <button onclick="exportMemo()">메모 내보내기</button>
+    <button onclick="scrollToTop()">맨 위로 ↑</button>
+  </div>
+
+  <!-- 검색 오버레이 -->
+  <div class="search-overlay" id="searchOverlay" onclick="closeSearchOnOverlay(event)">
+    <div class="search-modal">
+      <div class="search-modal-head">
+        <input type="text" class="search-input" id="searchInput" placeholder="검색어를 입력하세요..." oninput="doSearch()">
+        <button class="search-close" onclick="closeSearch()">닫기 (Esc)</button>
+      </div>
+      <div class="search-results" id="searchResults">
+        <div class="search-empty">검색어를 입력하세요</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 섹션 시작 ── -->
+<section id="sec-overview" class="section-card">
+  <div class="section-header">
+    <h2>제01장 종합소득세 특징</h2>
+    <span class="src-tag">원천: 종소세특징_2025.pdf</span>
+  </div>
+  <div class="section-body">
+
+    <h3>1. 개인사업자와 법인의 주요 비교</h3>
+
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>개인사업자 (종합소득세)</th>
+          <th>법인 (법인세)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>부가가치세</strong></td>
+          <td>
+            <ul class="content-list">
+              <li>간이과세자와 일반사업자 구분</li>
+              <li>신용카드세액공제 1.3%, 2.6%</li>
+              <li>택시운송사업자 납부세액경감 없음</li>
+              <li>의제매입세액공제 음식점 8/108</li>
+              <li>전자세금계산서 의무발행 (사업장별 전년도 공급가액 1억 이상)</li>
+              <li>예정고지 (예정신고 제도 없음)</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="content-list">
+              <li>일반사업자</li>
+              <li>신용카드세액공제 없음</li>
+              <li>택시운송사업자 납부세액경감 90%</li>
+              <li>의제매입세액공제 음식점 6/106</li>
+              <li>전자세금계산서 의무발행 (모든 법인 해당)</li>
+              <li>예정신고 (예정고지 제도 없음)</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>기타</strong></td>
+          <td>
+            <ul class="content-list">
+              <li>개인 지방소득세 감면·공제는 국세와 동일하게 적용</li>
+              <li>자금의 운용, 인출이 자유로우며 현금·예금의 변동은 별도 분개사항 아님</li>
+              <li>대표자 급여 경비처리 불가</li>
+              <li>휴·폐업 자유로우며 휴폐업시 별도의 청산소득·배당소득 과세 없음</li>
+              <li>감면시 감가상각의제 적용되나 신고조정 적용되지 않는다 (★주의)</li>
+              <li>신축분양의 경우 수입시기는 준공후 잔금수령이다 (완성도기준)</li>
+              <li>주택을 제외한 부동산매매업은 예정신고 납부제도 있다</li>
+              <li>업무용승용차 규정은 복식부기의 무자만 적용하며, 사업당 1대에 추가하는 승용차는 업무전용보험에 가입하여야 한다</li>
+              <li>출자공동사업자는 배당소득으로 보아 지급시 25% 원천징수후 14%와 비교과세한다</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="content-list">
+              <li>법인 지방소득세: 감면·공제는 2014년부터 적용되지 않는다</li>
+              <li>자금의 운용, 인출 및 현금·예금 등 자산의 변동은 별도 분개 사항이며 법적 규제 대상에 해당한다</li>
+              <li>대표이사 별도 급여 책정함</li>
+              <li>휴폐업은 법적 절차(해산등기 등)를 거쳐야 하고 청산소득·배당소득 과세</li>
+              <li>감면시 감가상각 신고조정이 적용되므로 감면시 감가상각 부족액은 세무조정 경정청구 가능</li>
+              <li>신축분양의 경우 작업진행율이 적용된다</li>
+              <li>부동산매매업자. 부동산매매에 대한 예정신고제도 없다</li>
+              <li>업무용승용차 비용규제에서 임직원 전용보험가입해야 하며 모든 법인에게 적용한다</li>
+              <li>출자공동사업자는 이를 대여금으로 보아 이자소득으로 간주한다</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>2. 납세의무자</h3>
+
+    <h4>(1) 자연인 — 거주자와 비거주자의 구분</h4>
+    <div class="highlight-box">
+      거주자란 "국내에 주소를 두거나 183일 이상의 거소를 둔 개인을 말한다". (법 제1조의2 제1항 1호, 시행령 제2조, 제2조의2, 제4조)
+    </div>
+
+    <p><strong>거주기간의 계산</strong></p>
+    <ol>
+      <li>국내에 거소를 둔 기간은 입국하는 날의 다음 날부터 출국하는 날까지로 한다.</li>
+      <li>국내에 거소를 두고 있던 개인이 출국 후 다시 입국한 경우에 생계를 같이하는 가족의 거주지나 자산소재지 등에 비추어 그 출국목적이 명백하게 일시적인 것으로 인정되는 때에는 그 출국 기간도 국내에 거소를 둔 기간으로 본다.</li>
+      <li>국내에 거소를 둔 기간이 1과세기간(1.1~12.31) 동안 183일 이상인 경우에는 국내에 183일 이상 거소를 둔 것으로 보며, 또는 2과세기간에 걸쳐 계속하여 183일 이상인 경우에는 2026년 이후부터 국내에 183일 이상 거소를 둔 것으로 본다 (즉 거주자에 해당한다).</li>
+    </ol>
+
+    <p><strong>주소:</strong> 국내에서 생계를 같이 하는 가족 및 국내에 소재하는 주택등 자산의 유무동 생활의 근거지가 되는 곳으로 국내에 주소가 있으면 국내 거주일자에 관계없이 거주자에 해당한다.</p>
+    <p><strong>거소:</strong> 주소가 아니면서 상당기간 거주하는 장소를 말한다 (예: 게스트하우스, 임대주택 등 체류지). 1과세기간(1.1~12.31) 내에 183일 이상 거주한 경우 183일이 되는 날부터 거주자로 본다. (183일의 계산은 입국일의 다음날부터 출국일까지 계산하며, 연속하여 거주한날을 말하는 것이 아니고 1과세기간중 통산하여 계산한다. 서울행정법원2006구합32726 2007.01.25.)</p>
+
+    <p><strong>재외동포</strong>가 입국한 경우, 재외동포의 원활한 국내 방문을 위하여 생계를 같이 하는 가족의 거주지나 자산소재지등에 비추어 그 입국목적이 단기관광, 질병치료, 병역의무이행, 친족경조사 참석등 그 입국한 기간이 명백하게 비사업목적의 일시적인 입국에 해당하는 경우에는 그 입국기간을 국내 거주 기간에서 제외하는 것임 (시행령 제4조 제4항 규칙 제2조 2항)</p>
+
+    <h4>국내에 주소를 가진 것으로 보는 경우</h4>
+    <ul class="content-list">
+      <li>계속하여 183일 이상 국내에 거주할 것을 통상 필요로 하는 직업을 가진 때 (1년이상 체류 취업비자를 받은 외국인 근로자, 1년이상 전속계약을 한 외국인 운동선수 등)</li>
+      <li>국내에 생계를 같이하는 가족이 있고, 그 직업 및 자산상태에 비추어 계속하여 183일 이상 국내에 거주할 것으로 인정되는 때</li>
+      <li>외국을 항행하는 선박 또는 항공기의 승무원의 경우 그 승무원과 생계를 같이하는 가족이 거주하는 장소 또는 그 승무원이 근무기간 외의 기간 중 통상 체재하는 장소가 국내에 있는 때</li>
+      <li>거주자나 내국법인의 국외사업장 또는 해외현지법인(내국법인 100%를 직접 또는 간접 출자한 경우에 한정)에 파견된 임원 또는 직원. 그리고 국외에서 근무하는 공무원은 1년 이상 국외에 거주할 것을 통상 필요로 하는 직업을 가진 경우에도 불구하고 거주자로 본다.</li>
+    </ul>
+
+    <h4>외국인 거주자에 대한 과세특례</h4>
+    <p>원칙적으로 거주자의 경우 국적과 관계없이 전세계 소득에 대하여 우리나라에서 과세한다. 다만, 해당 과세기간 종료일 10년 전부터 국내에 주소나 거소를 둔 기간의 합계가 5년 이하인 외국인 거주자에게는 과세대상 소득 중 국외에서 발생한 소득의 경우 국내에서 지급되거나 국내로 송금된 소득에 대해서만 과세한다. (제3조 제1항)</p>
+
+    <h4>주소우선에 의한 거주자와 비거주자의 구분 (통칙 2-2…1)</h4>
+    <p>계속하여 183일 이상 이상 국외에 거주할 것을 통상 필요로 하는 직업을 가지고 출국하거나, 국외에서 직업을 갖고 183일 이상 계속하여 거주하는 때에도 국내에 가족 및 자산의 유무 등과 관련하여 생활의 근거가 국내에 있는 것으로 보는 때에는 거주자로 본다.</p>
+
+    <h4>외국영주권을 얻은자들의 경우</h4>
+    <p>미국영주권자가 국내에 부동산 임대소득이있고 가족 및 국내에 소재하는 자산과 관련하여 생활 근거가 국내에 있는 경우 거주자로 보아 세법을 적용하나, 외국영주권을 얻은자로서 국내에 생계를 같이하는 가족이 없고 그 직업 및 자산상태에 비추어 다시 입국하여 국내에 거주하리라고 인정되지 않는 경우 비거주자에 해당한다. (서일46011-11937 2003.12.30 등)</p>
+
+    <h4>국외 파견 임직원 등의 거주자 여부 판정 (집행기준1의2-3-1)</h4>
+    <p>거주자 또는 내국법인의 국외사업장 또는 해외현지법인(100% 직·간접 출자법인)에 파견된 임원 또는 직원이 파견지에서 가족이나 자산상태로 보아 파견기간의 종료 후 재입국할 것으로 인정되는 때에는 파견기간이나 외국의 국적 또는 영주권의 취득과는 관계없이 거주자로 본다.</p>
+
+    <h4>(2) 사단·재단</h4>
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>거주자로 보는 경우 (소득세 과세)</th>
+          <th>법인으로 보는 경우 (법인세 과세)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            법인격이 없는 사단, 재단, 기타 단체의 경우 이를 자연인으로 보아 다음과 같이 과세한다.<br><br>
+            <strong>1. 거주자로 보는 경우</strong><br>
+            단체의 대표자, 관리인이 있으나 이익의 분배 방법, 비율이 정해지지 않은 경우<br>
+            예: 종중, 동창회, 새마을 부녀회, 동민회<br><br>
+            <strong>2. 공동사업으로 보는 경우</strong><br>
+            위의 1거주자로 보는 경우외에 경우에는 이를 공동사업을 영위하는 것으로 본다.<br>
+            예: 수익을 분배하는 상가차운영단, 지역 또는 직장 주택조합
+          </td>
+          <td>
+            <strong>1. 성격상 당연히 법인으로 보는 경우</strong><br>
+            주무관청의 인·허가를 받아 설립한 경우로서 등기되지 아니한 경우및 공익을 목적으로 출연된 기본재산이 있는 재단으로서 등기되지 아니한것.<br><br>
+            <strong>2. 신청, 승인에 의하여 법인으로 보는 경우</strong><br>
+            원칙적으로 개인인 단체이지만 다음의 요건을 갖추어 세무서장의 승인을 얻은 경우 이를 법인으로 본다 (종중, 아파트관리사무소, 교회 등)<br>
+            ①조직과 운영에 관한 규칙과 대표자 또는 관리인을 선임하고 있을 것<br>
+            ②재산과 수익을 단체가 독립적으로 소유·관리하고 있을 것<br>
+            ③그 단체의 수익을 구성원에게 분배하지 않을 것
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>교회</h4>
+    <p>재단법인인 중앙종단과 별도로 회계 및 운영을 독립적으로 수행하는 대부분의 산하 교회는 법인격이 없는 사단법인이고, 사단법인은 기본재산이 있다고 하더라도 법인으로 보는 단체에 해당되지 않는다. 따라서 세무서장에게 법인으로 보는 단체로서 승인을 받지 않은 대부분의 교회는 법인세법이 아닌 소득세법이 적용된다.</p>
+    <div class="highlight-box">
+      <strong>※ 청구교회를 「소득세법」상 거주자로 보아 양도소득세를 과세한 처분의 당부</strong><br>
+      청구교회가 쟁점부동산 양도당시 주무관청의 허가 또는 인가를 받거나 법령에 따라 주무관청에 등록한 사실이 확인되지 아니하고, 관할 세무서장에게 신청하여 법인으로 보는 단체로서 승인을 받은 사실도 없으므로 처분청이 청구교회를 「소득세법」상 거주자로 보아 양도소득세를 과세한 처분은 잘못이 없음 (조심2014광2993 2014.10.17) (조심2014중8612014.04.08)
+    </div>
+
+    <h4>외국으로 진출한 프로운동선수</h4>
+    <ul class="content-list">
+      <li>외국국적을 가졌거나 외국법령에 의하여 그 외국의 영주권을 얻은 자에 해당하지 아니하는 점, 계속하여 국내에 주민등록주소를 두고 있었고, 일본에서 프로축구 선수생활을 하기 전에는 모친 및 누나와 함께 거주하였으며, 결혼한 후에도 2000.1.8.까지 모친과 누나의 주소지에 주소를 두고 있었던 점, 인적 및 경제적 관계가 더 밀접한 중대한 이해관계의 중심지는 국내에 있다고 보이는 점 등에서 국내 거주자에 해당한다 (조심2021서6881 2023.01.05.)</li>
+      <li>국내에 주택이나 재산이 있다고 하더라도 1년 이상 국외에 거주할 직업을 갖고 가족과 함께 출국하면 그 다음 날부터 비거주자에 해당한다며 "해외 프로축구 선수로 활동하면서 가족과 함께 체류한 점을 감안하면 국세청이 거주자로 보고 과세한 것은 잘못"이라고 결정하였다. (약 3년간 사우디로 진출하여 활동하다가 국내로 복귀한 축구선수의 사례로서 사우디에서 활동시는 비거주자로 본 사례. 조심 2019. 3. 15. 일본에서 발생한 한국인 프로 축구선수의 일본소득 과세시 비거주자로 본 사례 대법원2018두60847 2019.3.14.)</li>
+    </ul>
+
+    <h4>우리나라에서 활동하는 외국인 운동선수의 거주자 판정 및 원천징수</h4>
+    <p>외국인 운동선수가 계속하여 183일 이상 국내에 거주할 것을 통상 필요로 하는 직업을 가진 때에는 소득세법 시행령 제2조 제3항에 따라 국내에 주소를 가진 것으로 보는 것임. 국내 거주자인 외국인 운동선수가 고용관계 없이 독립된 자격으로 국내에서 개최되는 프로운동경기에 참가하고 지급받는 대가는 「소득세법」 제127조 제1항 제3호에 규정된 원천징수대상 사업소득에 해당하여 그 소득을 지급하는 자는 같은 법 제129조 제1항 제3호의 세율(3%)을 적용하여 원천징수하여야 하는 것입니다. (서면국제세원2015-509 2015.06.23.)</p>
+    <p>(거주자인 직업운동가로서 계약기간 3년 이하의 외국인 직업운동가의 경우 사업소득원천징수세율을 지급금액의 3%에서 20%로 개정하여 2019년 이후 지급분부터 적용한다.)</p>
+
+    <h4>(3) 비거주자의 과세방법</h4>
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>국내사업장(부동산 임대포함)이 있는 경우</th>
+          <th>국내사업장이 없는 경우</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <ul class="content-list">
+              <li>당해 국내사업장에 귀속되는 이자·배당·임대·사업·인적용역·기타소득을 합산하여 신고하고,</li>
+              <li>국내사업장에 직접 귀속되지 않는 이자·배당등의 소득은 원천징수로서 분리과세됨 (금융소득종합과세 제외)</li>
+              <li>소득세의 결정, 징수는 거주자와 동일하나 소득공제는 본인 기초공제만 해당되며, 특별공제, 표준공제는 해당되지 않는다. 다만 본인이 장애인·경로자의 경우 추가공제 가능하다.</li>
+              <li>조특법상 공제, 감면은 거주자에 한하므로 비거주자는 세액공제, 감면 대상이 되지 않는다.</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="content-list">
+              <li>소득의 종류 별로 완납적 원천징수로서 분리과세됨</li>
+              <li>원천징수시 소득세법 제156조 제1항의 규정에 따라 원천징수세율을 적용하되 조세조약상 제한세율을 적용 받을 경우 제한세율을 우선 적용한다.</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>3. 과세 기간</h3>
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>원칙</th>
+          <th>예외</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>소득세법</td>
+          <td><strong>1월 1일 ~ 12월 31일</strong></td>
+          <td>사망시: 1월 1일 ~ 사망일<br>비거주자 되어 출국시: 1월 1일 ~ 출국일</td>
+        </tr>
+        <tr>
+          <td>법인세법</td>
+          <td>법령 또는 정관에 의하여 정하는 1회 계기간을 사업연도로 하되 1년을 초과하지 못한다.</td>
+          <td>별도의 정관등이 없고 신고가 없는 경우 1월 1일 ~ 12월 31일까지로 한다.</td>
+        </tr>
+        <tr>
+          <td>부가가치세</td>
+          <td>계속사업자의 경우<br>1월 1일 ~ 6월 30일까지<br>7월 1일 ~ 12월 31일까지</td>
+          <td>신규개업자: 개업일 ~ 6.30 또는 12.31<br>1기 폐업자: 1월 1일 ~ 폐업일<br>2기 폐업자: 7월 1일 ~ 폐업일</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>(개인사업자의 소득세법상 과세기간은 사업장의 폐업, 신규 개업여부에 불문하고 사망, 해외 이민 출국등이 아닌 경우에는 1.1 ~ 12.31을 과세기간으로 한다)</p>
+
+    <h3>4. 과세 제외 소득</h3>
+    <p>다음의 소득은 소득세법상 비과세대상으로 규정되지는 않았지만 과세대상으로 열거되어 있지 않으므로 종합소득세가 과세되지 않는 소득이다.</p>
+    <ul class="content-list">
+      <li>아파트자치관리사무소가 입주자로부터 일정액의 주차비를 징수하는 경우</li>
+      <li>교통사고 및 손해 배상청구소송 등에서 육체적 정신적인 피해에 대한 피해보상금, 위자료, 상해보상금, 명예훼손 보상금, 토지공단절용에 대한 부당이득금의 반환 등</li>
+      <li>채권매매차익, 상장법인 주식에 대한 양도차익 (대주주의 주식은 양도소득세 과세)</li>
+      <li>사업용 고정자산인 기계장치, 차량운반구, 시설장치등의 처분 이익 또는 폐기 보상금. 기계장치 등의 임대의 경우 사업소득중 기계장치 임대업으로 과세대상이 된다. (2016년부터 성실신고의무자 등의 경우 승용차에 대하여는 처분손익, 2018년부터 복식부기의무자의 경우 고정자산 처분손익이 과세대상이다)</li>
+      <li>전답의 임대소득, 과수원 임대소득, 주택중 1세대주택 (고가주택제외)의 임대소득</li>
+      <li>작물재배업 (곡물, 채소, 과일, 화초, 버섯, 종자, 묘목, 콩나물등의 재배업)</li>
+      <li>사회복지사업법에 따른 사회복지사업 (아동복지법, 노인복지법, 장애인복지법, 영유아복지법) 및 노인장기요양법에 따른 장기요양사업 (2013부터). (따라서 어린이집, 요양원은 소득세 비과세 대상이다. 그러나 이익금이 발생하여 인출하거나 근무수당등으로 인출하는 경우에는 이를 근로소득으로 과세하고 있다)</li>
+      <li>교육서비스업종 교육기관 (유치원, 초중고 대학교, 직업능력개발훈련시설, 노인대학)</li>
+    </ul>
+
+    <div class="highlight-box">
+      <strong>태양광 임여전력에 대한 현금정산시 소득세 및 부가가치세 과세 여부</strong><br>
+      자가소비목적으로 신재생에너지 발전설비를 설치하여 자가소비한 후 남은 전력을 한국전력공사에 송전한 경우 공급받은 전력과 상계한 후의 임여전력량에 대해 현금으로 정산받는 금액은 소득세 과세대상에 해당되지 아니하는 것임 (서면소득2018-590 2018.10.18.)<br><br>
+      태양광발전 설비를 설치한 주택에서 생산한 전력을 주거용 등에 사용·소비하고 남은 임여전력을 한전의 전력계통으로 보내고 현금 정산받는 경우 태양광발전주택 소유자는 부가가치세법에 의한 사업자에 해당하지 아니하는 것입니다. (서면부가 2017-3090, 2017.11.30.)
+    </div>
+
+    <h3>5. 합산과세와 분리과세</h3>
+    <p>분리과세는 합산과세와 달리 일정 세율로 원천징수 하여 납세의무를 종결시키는 것이므로 별도의 신고 절차가 없다. 이는 국세 징수 행정의 편리, 금융시장의 육성, 저소득층의 보호를 위한 것으로 아래와 같이 이자, 배당, 근로, 기타소득에 분리과세가 있으며 부동산임대소득, 사업소득에는 분리과세 소득이 없다.</p>
+
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>소득 종류</th>
+          <th>분리과세 (완납적원천징수)</th>
+          <th>합산 과세 (예납적원천징수)</th>
+          <th>선택 적용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>특징</td>
+          <td>확정신고 의무 없음. 원천징수로서 납세의무종결</td>
+          <td>확정신고 의무 있음.</td>
+          <td>확정신고 여부, 납세자의 선택.</td>
+        </tr>
+        <tr>
+          <td>이자소득</td>
+          <td>2천만원 이내 이자·배당소득 비과세 및 분리과세 대상</td>
+          <td>2천만원 초과 이자소득 및 당연종합과세 대상</td>
+          <td>해당 없음</td>
+        </tr>
+        <tr>
+          <td>배당소득</td>
+          <td>2천만원 이내 이자·배당소득 비과세 및 분리과세 대상</td>
+          <td>2천만원 초과 배당소득 및 당연종합과세 대상</td>
+          <td>해당 없음</td>
+        </tr>
+        <tr>
+          <td>사업소득</td>
+          <td>해당 없음</td>
+          <td>전부 합산 과세 대상</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>근로소득</td>
+          <td>일용근로자 근로소득</td>
+          <td>왼쪽을 제외한 전부</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>기타소득</td>
+          <td>복권·복표등의 당첨소득 승마권의 당첨 환급금</td>
+          <td>왼쪽을 제외한 전부</td>
+          <td>기타소득 연합계액 300만원 이하자</td>
+        </tr>
+        <tr>
+          <td>연금소득</td>
+          <td>공적연금의 연금소득 연간 수입금액 1500만원 이하</td>
+          <td>왼쪽을 제외한 전부</td>
+          <td>사적연금 저율 또는 고율 선택적용 가능</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>6. 공동사업 과세 특례</h3>
+
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>업무집행공동사업자 = 영업자</td>
+          <td>공동사업의 업무집행 결정에 관여하는 자로서 공동사업 경영에 자신의 성명, 상호등의 사용을 허락한 경우와 약정에 따라 공동사업에서 발생한 채무에 대하여 무한 책임을 지는자</td>
+        </tr>
+        <tr>
+          <td>출자공동사업자 = 익명조합원 = 투자자</td>
+          <td>경영에 참여하지 않고 금전 기타 재산을 출자만 하는 자로서 이익에 대한 일정비율 분배를 받으며, 공동사업에서 발생한 채무에 대하여 투자금액의 범위내에서 유한 책임을 지는자</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>부가가치세법의 적용</h4>
+    <p>법인과 법인, 법인과 개인, 개인과 개인의 공동사업장의 경우 이는 법인의 지점으로 등록하는 것이 아니고, 이 공동사업장을 1 납세의무자로 보아 대표자 명의로 사업자등록증을 교부하며, 사업장이 법인인지 개인인지는 공동사업체의 인격에 따라 법인 또는 개인으로 등록하여야한다. 공동사업장은 새로운 법인설립등이 아닌한 개인사업자로서 부가가치세법이 적용된다.</p>
+
+    <h4>소득세법의 적용</h4>
+    <ul class="content-list">
+      <li>사업소득이 발생하는 사업을 공동으로 경영하고 그 손익을 분배하는 공동사업[경영에 참여하지 아니하고 출자만하는 출자공동사업자 포함]의 경우에는 해당 사업을 경영하는 장소를 1거주자로 보아 공동사업장별로 기장의무의 판정, 성실신고대상자의 판정및 각종 가산세(지급명세서 미제출, 원천징수불성실, 계산서 관련 가산세, 정규증빙불비 가산세등)를 적용하고 소득금액을 계산한다.</li>
+      <li>공동사업에서 발생한 소득금액은 해당 공동사업을 경영하는 각 거주자(출자공동사업자 포함) 간에 약정된 손익분배비율에 의하여 분배되었거나 분배될 소득금액에 따라 각 공동사업자별로 분배한다.</li>
+      <li>경영에 참여하지 않고 출자만 하는 출자공동사업자 (외부에 노출되지 않는 익명의 출자자)의 경우 종전에는 출자금의 배당을 이자소득으로 과세하였으나 2007년부터 이를 공동사업으로 인정하되 경영에 참여한 업무집행공동사업자는 종전과 같이 사업소득으로, 출자공동사업자의 분배금은 이를 배당소득으로 보아 25% 세율로 원천징수하여 금융소득 계산시 당연종합 과세하되 14%와 비교과세 한다. (이규정은 개인과 개인의 동업에만 적용되고 법인과 개인의 공동사업에는 적용되지 않고 이때는 종전과 같이 이자소득중 비영업대금의 이익으로 과세된다)</li>
+      <li>공동사업자가 그 공동사업장에 관한 사업자등록을 할 때에는 공동사업자(출자공동사업자 해당여부에 관한 사항 포함), 약정한 손익분배비율, 대표공동사업자, 지분·출자명세, 그 밖에 필요한 사항을 사업장 소재지 관할 세무서장에게 신고하여야 한다. 위반시 공동사업자등록 불성실가산세 수입금액의 0.5% 0.1% 해당한다 (법 제87조)</li>
+    </ul>
+
+    <h4>공동사업의 합산과세</h4>
+    <p>거주자 1인과 그의 특수관계인이 공동사업자에 포함되어 있는 경우로서 손익분배비율을 거짓으로 정하는 등 사유가 있는 경우에는 그 특수관계인의 소득금액은 그 손익분배비율이 큰 공동사업자 (손익분배비율이 같은 경우 "주된 공동사업자"라 한다)의 소득금액으로 본다.</p>
+
+    <h4>법인세법의 적용</h4>
+    <ul class="content-list">
+      <li>업무집행공동사업자: 법인이 다른 법인 또는 개인과 동업계약등에 의한 경우에는 이를 공동사업으로 보고 그 지분 만큼 법인 경리의 일부로 보아야 할 것이고, 이 경우 공동사업장의 손익 및 재산과 부채를 출자지분 만큼 법인의 손익과 재산으로 보고 법인세법에 의하여 세무조정후 법인세에 신고하여야 한다</li>
+      <li>출자공동사업자: 경영에 참여하지 않는 단순 투자의 경우 이는 출자금 또는 대여금으로 처리하고 이로부터 발생되는 이익은 이자소득으로 보아야 할 것이다.</li>
+      <li>소득세법 제43조의 익명조합원(출자공동사업자)에 대한 배당소득세 (25%원천징수 후 14%와 비교과세) 과세는 개인과 개인의 공동사업에 대하여만 적용되고 법인과 개인으로 구성된 익명조합에 대하여는 적용되지 않는다. (소득-1065, 2011.12.20.) (기획재정부 소득세제과-189 2010.4.15.) (조심2013서0327 2015. 7. 3)</li>
+    </ul>
+
+    <div class="highlight-box">
+      <strong>※ 부동산임대 공동사업을 위한 출자금에 대한 지급이자의 필요경비 산입여부</strong><br>
+      위 인정 사실에 비추어 알 수 있는 다음과 같은 사정을 종합하면, 이 사건 토지 매수대금 및 이 사건 건물의 신축비용으로 사용된 이 사건 차입금이 원고의 개인적인 출자의무를 이행하기 위한 것으로서 업무와 무관하다고 단정할 수 없고, 달리 이 사건 이자비용이 이 사건 공동사업의 필요경비에 해당하지 않는다고 인정할 만한 증거가 없다. 따라서 원고의 주장은 이유 있다. (서울행법2021구합60472 2022.09.15.) (서울고법2022누62880 2023.04.06)<br><br>
+      <strong>※ 출자공동사업자의 배당소득이 창업중소기업 감면 대상에 해당하는지?</strong><br>
+      출자공동사업자의 배당소득에서 발생한 소득세는 창업중소기업세액감면 대상에 해당하지 않는다. 기획재정부금융세제 -539(2024.10.18)
+    </div>
+
+  </div>
+  <div class="memo-wrap">
+    <div class="memo-label">메모</div>
+    <textarea class="memo-box" id="memo-sec-overview" placeholder="메모를 입력하세요..."></textarea>
+    <button class="memo-clear" onclick="clearMemo('memo-sec-overview')">지우기</button>
+  </div>
+</section>
+
+<section id="sec-filing-type" class="section-card">
+  <div class="section-header">
+    <h2>제02장 신고유형 및 수입금액의 확정</h2>
+    <span class="src-tag">원천: 신고유형및수입금액의확정_2025.pdf</span>
+  </div>
+  <div class="section-body">
+
+    <h3>1. 신고유형의 확정</h3>
+    <p>소득금액의 계산 방법에 따라 추계신고(기준·단순경비율에 의한 신고)와 기장신고 (간편장부, 복식부기)로 나누어지며 복식부기의무자는 다시 내부조정계산서 첨부 대상자와 외부조정계산서 첨부 대상자로 나누어 진다.</p>
+    <p>법인의 무조건 복식부기의무자에 해당하나, 이와 달리 개인의 경우 직전연도 수입금액, 당해 연도 수입금액에 따라 복식부기 또는 간편장부 대상자로 기장의무, 성실신고확인서 첨부 대상여부가 달라지며 이에 따라 지켜야 될 의무와 혜택이 달라지므로 소득세 신고시 정확한 기장의무의 판정, 성실신고 확인서 대상 여부, 이에 따른 신고 유형의 결정이 중요하다.</p>
+
+    <h4>① 추계신고 (기준 및 단순경비율에 의한 신고)</h4>
+    <p><strong>장점:</strong> 신고업무가 단순하고 간단하며, 추후 수입 금액 누락이 발견되었을 경우에도 추정되는 소득세가 일정 한도이다. 또한 3만원 초과분의 세금계산서등의 미수취로 인한 증빙불비 가산세의 적용이 되지 않는다.</p>
+    <p><strong>단점:</strong> 세 부담이 과다. 재무제표 증명원의 발급이 불가. 이월결손금 공제배제. 특히 경비율 적용시 단순경비율이 아닌 기준경비율의 적용 대상인 경우 세부담이 과다하며, 복식부기의무자의 경우 조특법상 공제, 감면이 원칙적으로배제되며 무신고가산세(20%) 소규모 사업자가 아닌 간편장부 의무자의 경우 무기장가산세 (20%) 사업자로서 의료비·교육비 세액공제, 기부금 공제를 받기 위하여는 기장에 의한 신고가 필수적인 요건에 해당한다.</p>
+
+    <h4>② 기장 신고 (간편장부, 복식부기)</h4>
+    <p>소득세 과세표준의 결정은 실지조사결정에 의하는 것을 원칙으로 하고 실지조사결정이 불가능한 경우에만 예외적으로 추계조사결정의 방법에 의하도록 하고 있으므로 실지조사방법에 의하여 결정된 소득세액이 추계조사방법에 의하여 결정된 소득세액보다 많은지 적은지에 따라 그 과세표준의 결정방법의 적법 여부가 좌우되는 것은 아니다. (대법원95누6809, 1996.1.26. 참조)</p>
+    <p>따라서 단순경비율에 의하여 신고, 기준경비율에 의하여 주요경비 외에 기준경비를 추계신고, 단순경비율에 의한 배율 적용신고등의 추계신고 하였더라도, 장부와 증빙에 의하여 실지 소득금액 계산이 가능하면 실지소득금액에 의하여 과세 할 수 있으므로 주의하여야한다.</p>
+
+    <h4>③ 무기장자에 대한 가산세 부과</h4>
+    <p>기장에 의한 신고를 하지 않고 단순·기준경비율에 의하여 추계신고를 하는 경우에는 아래의 소규모 사업자를 제외한 간편장부의무자에게는 무기장가산세 20%, 복식부기의무자에게는 무신고가산세 20%와 무기장가산세 20%중 큰금액이 적용되고 조특법상 공제, 감면이 배제된다.</p>
+
+    <div class="highlight-box">
+      <strong>무기장·무신고·증빙불비·영수증수취명세서미제출·계산서 미발행등 가산세 적용 제외</strong><br>
+      <strong>소규모 사업자의 범위</strong> (법제73조1항 4호 령제132조4항 령137조1항 령제143조3항1의3)<br>
+      <ul class="content-list">
+        <li>당해연도 신규사업자</li>
+        <li>직전과세기간 총수입금액의 합계액이 4,800만원 미만인 사업자</li>
+        <li>독립된 자격의 보험모집인, 방문판매원, 음료배달원으로서 간편장부대상자가 받은 사업소득으로 원천징수의무자가 사업소득 연말정산을 한 경우 - 다만, 보험모집인은 간편장부(직전연도7500만원이하)대상자에 해당되면 사업소득 연말정산과 관계 없이 소규모사업자에 해당된다 (시행령 제137조 제1항 제1호)</li>
+        <li>연말정산한 사업소득에 대하여는 연말정산시 계산된 추계소득 (단순경비비율)을 그대로 인정하고, 확정신고시 타수입금액의 발생으로 인한 추계소득금액 재계산을 하지 않는다.</li>
+      </ul>
+    </div>
+
+    <h4>④ 기장의무에 따른 혜택과 가산세</h4>
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th rowspan="2">구분</th>
+          <th colspan="2">복식부기의무자</th>
+          <th colspan="2">간편장부대상자</th>
+        </tr>
+        <tr>
+          <th>외부조정대상자</th>
+          <th>내부조정대상배자</th>
+          <th>일반간편장부사업자</th>
+          <th>소규모사업자</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>기장신고</td>
+          <td>외부조정대상 내부조정: 무신고가산세<br>간편장부 신고: 무신고·무기장가산세<br>복식장부 신고: 당연</td>
+          <td>간편장부 신고: 무신고 · 무기장가산세<br>복식장부 신고: 당연</td>
+          <td>간편장부 신고: 당연<br>복식장부 신고: 기장세액공제 20%</td>
+          <td>간편장부 신고: 당연<br>복식장부 신고: 기장세액공제 20%</td>
+        </tr>
+        <tr>
+          <td>추계신고</td>
+          <td>
+            -무신고·무기장가산세 중 큰 금액<br>
+            -기준경비율 1/2만 적용<br>
+            -공제·감면 배제
+          </td>
+          <td>
+            -무신고·무기장가산세 중 큰 금액<br>
+            -기준경비율 1/2만 적용<br>
+            -공제·감면 배제
+          </td>
+          <td>무기장가산세 20%</td>
+          <td>무기장·무신고 가산세 없음</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul class="content-list">
+      <li>무신고·과소신고 가산세 = 무신고·과소신고납부세액 × 10%, 20%, 40% (무신고·과소신고납부세액=산출세액-기납부세액, 신고납부세액, 세액공제, 세액감면)</li>
+      <li>무기장(기장불성실)가산세 = 산출세액 × 20%</li>
+      <li>소규모사업자를 제외한 사업자가 추계신고시는 소득세법 81조의5 규정에 의한 무기장가산세(산출세액에서 원천징수세액등 공제 없음)가 적용되고 복식부기의무자가 추계신고하거나, 간편 장부하거나, 외부조정대상자가 내부조정할 경우에는 소득세법 제70조 제4항에 의하여 무신고로 간주하여 조특법상 감면이 배제되고 무신고가산세(산출세액에서 기납부세액공제) 또는 무기장가산세 (기납부세액공제등 없음)가 적용됩니다.</li>
+    </ul>
+
+    <h3>2. 기장의무등의 구분</h3>
+
+    <h4>(1): 업종별 기준 수입금액</h4>
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th rowspan="3">업종별</th>
+          <th colspan="3">기장의무의 판정 (전기수입금액기준)</th>
+          <th colspan="4">추계 신고 유형 (전기 또는 당기수입금액 기준)</th>
+          <th rowspan="3">성실신고확인서 첨부대상 (당기수입금액)</th>
+        </tr>
+        <tr>
+          <th rowspan="2">간편장부</th>
+          <th colspan="2">복식 부기</th>
+          <th colspan="2">(전기수입금액기준)</th>
+          <th colspan="2">(당기수입금액기준)</th>
+        </tr>
+        <tr>
+          <th>내부 조정</th>
+          <th>외부 조정</th>
+          <th>기준 경비율</th>
+          <th>단순 경비율</th>
+          <th>기준 경비율</th>
+          <th>단순 경비율</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>아래 1</td>
+          <td>3억 미만</td>
+          <td>↔</td>
+          <td>6억 이상</td>
+          <td>60백만원 이상</td>
+          <td>60백만원 미만</td>
+          <td>3억이상</td>
+          <td>3억미만</td>
+          <td>15억 이상</td>
+        </tr>
+        <tr>
+          <td>아래 2</td>
+          <td>1억5천만원미만</td>
+          <td>↔</td>
+          <td>3억 이상</td>
+          <td>36백만원 이상</td>
+          <td>36백만원 미만</td>
+          <td>1억5천만원이상</td>
+          <td>1억5천만원미만</td>
+          <td>7.5억 이상</td>
+        </tr>
+        <tr>
+          <td>아래 3</td>
+          <td>7천5백만원미만</td>
+          <td>↔</td>
+          <td>1억5천이상</td>
+          <td>24백만원 이상</td>
+          <td>24백만원 미만</td>
+          <td>7천5백만원이상</td>
+          <td>7천5백만원미만</td>
+          <td>5억 이상</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul class="content-list">
+      <li>2019귀속부터 전기, 당기 수입금액 모두 위 단순경비율 기준에 해당되어야 단순경비율이 적용되며, 2023귀속부터 인적용역자는 아래2를 적용하여 직전연도 3600만원 기준으로 변경</li>
+      <li>기장의무, 성실신고 대상 판정, 외부조정 대상판정시 수입금액에서 일시적으로 발생한 유형자산 양도금액은 제외하고 판정한다. (그러나 경비율 적용시는 제외규정 없다)</li>
+    </ul>
+
+    <h4>업종 구분</h4>
+    <ol>
+      <li>농업·임업 및 어업, 광업, 도매 및 소매업(상품중개업 제외), 부동산매매업(비주거용 건물 자영건설업만 해당)과 부동산 개발 및 공급업 기타 아래의 2·3에 해당되지 아니하는 사업</li>
+      <li>제조업, 숙박 및 음식점업, 전기·가스·증기 및 공기조절 공급업, 수도·하수·폐기물처리·원료재생업, 건설업(비주거용 건물 건설업은 제외하고, 주거용 건물의 개발 및 공급업을 포함), 운수업, 창업, 정보통신업, 금융 및 보험업, 욕탕업, 상품중개업, 인적용역(2023년부터 경비율 판단시)</li>
+      <li>부동산임대업, 부동산업(제122조 제1항에 따른 부동산매매업은 제외한다), 전문·과학 및 기술서비스업, 사업시설관리·사업지원 및 임대서비스업, 교육서비스업, 보건업 및 사회복지서비스업, 예술·스포츠 및 여가관련 서비스업, 협회 및 단체, 수리및 기타 개인서비스업, 가구내 고용활동</li>
+    </ol>
+    <ul class="content-list">
+      <li>신규개업자란 업종을 불문하고 직전 과세기간에 수입금액이 없는 자로서 처음으로 사업을 시작하는 신규 사업자를 의미한다. 전기수입금액이 없더라도 계속사업자이라면 직전연도수입금액 일정금액 미만인 0에 해당하므로 간편장부에 해당한다. 그러나 2019년부터 추계신고시에는 당기 수입금액이 복식부기 대상 금액에 해당하면 전년 수입금액과 관계없이 추계 신고시 기준경비율 적용대상자에 해당한다.</li>
+      <li>기장의무는 사업소득(부동산임대소득포함)만 있으므로 위의 수입금액 계산시 이자, 배당, 근로, 기타, 연금소득은 수입금액에서 제외하고, 사업장 단위별 기준이 아닌 개인사업자 전체 수입금액을 합하여 판단한다. (소규모사업자. 기장의무에서 신규자, 폐업자 수입금액 환산은 없음)</li>
+      <li>전문직사업자는 위 수입금액과 관계없이 무조건 복식부기의무자, 기준경비율 적용대상자이다. 부가세법 제109조 제2항 제7호에서 규정한 세무사, 변호사등 전문자격사와 의료업, 한의사업, 한약사업, 수의사업, 약사업 (약국은 성실신고 확인대상 판정시는 도소매업으로 15억 기준).</li>
+    </ul>
+
+    <h4>업종분류시 주의사항</h4>
+    <ol>
+      <li>소득세법상 업종 분류시 소득세법에 특별한 규정이 없는한 한국표준산업분류표에 따라야 한다. 현재 소득세법상 별도의 규정은 주거용건물 개발 및 공급업에 대해서는 건설업으로 보는 별도의 규정이 있으므로 주택신축분양업은 소득세법 (기장의무, 경비율의 적용, 성실신고대상, 부동산 매매업자 예정신고 대상여부)적용시는 건설업으로, 조특법상 중소기업특별세액감면 대상 여부의 판단시 직접신축 및 외부 도급 여부를 기준으로 건설업 또는 부동산업으로 분류하여야 한다 (예: 주차장운영업은 운수업에 해당한다).</li>
+      <li>기장의무 판단(간편, 복식) 사업용계좌 개설의무, 추계신고 (단순경비율과 기준경비율) 성실신고대상 판단시 업종 분류는 전페이지 기장의무 판단시 업종 분류와 동일합니다. 다만 약국의 경우에는 성실신고대상 판단시 및 부가가치세법상 현금매출명세서 제출대상 판단시에는 도소매업으로 분류하며, 욕탕업도 기장의무는 2번 업종이나 성실신고는 3번 업종으로 분류합니다.</li>
+    </ol>
+
+    <h4>기장의무에 따른 세법의 적용</h4>
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th colspan="2">구분</th>
+          <th>기장 의무</th>
+          <th>추계유형</th>
+          <th colspan="4">신고 유형</th>
+        </tr>
+        <tr>
+          <th colspan="2"></th>
+          <th></th>
+          <th></th>
+          <th>복식부기</th>
+          <th>간편장부</th>
+          <th>기준경비</th>
+          <th>단순경비</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="6">전기 수입금액 있음</td>
+          <td>당기수입금액기준 복식부기의무자</td>
+          <td>복식 간편</td>
+          <td>기준경비율대상 아래※1 참조</td>
+          <td>당연. 기장세액</td>
+          <td>무기장 가산세</td>
+          <td>무기장 가산세</td>
+          <td>적용불가</td>
+        </tr>
+        <tr>
+          <td>전기수입금액기준 복식부기의무자</td>
+          <td>복식 부기</td>
+          <td>기준경비율대상</td>
+          <td>당연</td>
+          <td>무기장 가산세</td>
+          <td>무기장 가산세</td>
+          <td>적용불가</td>
+        </tr>
+        <tr>
+          <td rowspan="2">전기수입금액기준 간편장부대상자</td>
+          <td rowspan="2">간편 장부</td>
+          <td>기준경비율대상</td>
+          <td>기장 세액공제</td>
+          <td>당연</td>
+          <td>무기장 가산세</td>
+          <td>적용불가</td>
+        </tr>
+        <tr>
+          <td>기준경비율대상 중 소규모사업자</td>
+          <td>기장 세액공제</td>
+          <td>당연</td>
+          <td>가산세 없음</td>
+          <td>적용불가</td>
+        </tr>
+        <tr>
+          <td rowspan="2">전기수입금액기준 간편장부대상자</td>
+          <td rowspan="2">간편 장부</td>
+          <td>단순경비율대상</td>
+          <td>기장 세액공제</td>
+          <td>당연</td>
+          <td>무기장 가산세</td>
+          <td>무기장 가산세</td>
+        </tr>
+        <tr>
+          <td>단순경비율대상 중 소규모사업자</td>
+          <td>기장 세액공제</td>
+          <td>당연</td>
+          <td>가산세 없음</td>
+          <td>가산세 없음</td>
+        </tr>
+        <tr>
+          <td rowspan="2">전기 수입금액 없음</td>
+          <td>당기수입금액기준 복식부기의무자</td>
+          <td rowspan="2">간편 장부</td>
+          <td>기준경비율대상</td>
+          <td>기장 세액공제</td>
+          <td>당연</td>
+          <td>가산세 없음</td>
+          <td>적용불가</td>
+        </tr>
+        <tr>
+          <td>당기수입금액기준 간편장부대상자</td>
+          <td>단순경비율대상</td>
+          <td>기장 세액공제</td>
+          <td>당연</td>
+          <td>가산세 없음</td>
+          <td>가산세 없음</td>
+        </tr>
+        <tr>
+          <td colspan="2">전문직사업자</td>
+          <td>복식 부기</td>
+          <td>기준경비율대상</td>
+          <td>당연</td>
+          <td>무기장 가산세</td>
+          <td>무기장 가산세</td>
+          <td>적용불가</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul class="content-list">
+      <li>※1. 직전연도 수입금액의 여부와 관계없이 당기 수입금액이 복식부기의무 기준에 해당하면 기장의무와 무관하게 2019년부터 기준경비율 적용대상에 해당한다.</li>
+      <li>복식부기의무자는 기준경비율 적용시 기준경비율은 1/2을 적용한다.</li>
+      <li>소규모 사업자란? 전기 수입금액 4,800만원 이하자, 당해연도 신규개업자, 간편장부대상 보험모집인, 사업소득 연말 정산한 방문판매원을 말한다.</li>
+      <li>단순경비는 추계신고시 단순경비율과 기준경비율 중 선택이 가능하며 기준경비율 대상자는 기준경비율과 단순경비율의 일정배율 (2.8 또는 3.4)중 선택이 가능하다.</li>
+    </ul>
+
+    <h4>(2) 외부조정 대상자 (복식부기의무 대상자 중)</h4>
+    <p>다만 다음의 사업자의 경우에는 수입금액을 기준으로 내부조정계산서 첨부대상이라 하더라도 외부조정계산서를 첨부하여야 한다. 또한 외부조정대상자에 해당함에도 내부조정한 경우에는 무신고자로 간주하므로 각종 감면이 배제되고, 무신고가산세 해당됨에 주의하여야한다.</p>
+
+    <div class="highlight-box">
+      <strong>시행령 제131조의2 제1항 제2호</strong>
+      <ul class="content-list">
+        <li>직전연도 소득에 대한 소득세 과세표준과 세액을 추계결정 또는 추계결정 받은자</li>
+        <li>직전 과세연도 중에 사업을 개시한자. 다만 전문직 사업자로서 직전연도 수입금액이 위의 간편장부대상금액에 해당하는 경우는 제외한다.</li>
+        <li>조세특례제한법의 규정에 의하여 소득세 과세표준과 세액에 대하여 세액공제, 세액감면 또는 소득공제를 받는 사업자. 다만 조세특례제한법 중 중소기업특별세액 감면, 전자신고세액공제, 소기업·소상공인 소득공제를 받은 사업자는 제외한다.</li>
+        <li>기타 세무사가 작성한 조정계산서를 첨부하고자 하는 사업자.</li>
+      </ul>
+    </div>
+
+    <div class="highlight-box">
+      <strong>※ 세무대리인 본인의 소득세 신고시 자체 세무조정 가능한지 여부</strong><br>
+      개인세무사의 경우 본인에 대하여 본인 스스로 외부조정하고 조정반 지정서를 첨부 할 수 있다 (서면1팀-1623 2006. 1. 2) 그러나 성실신고확인서의 제출은 본인 스스로 작성 불가하다<br><br>
+      <strong>※ 확정신고시 착오에 의하여 자기조정으로 기재하였는지?</strong><br>
+      청구인은 종합소득세 신고할 당시 세무대리인이 작성한 외부조정계산서 및 첨부서류를 제출하였음에도, 직원의 실수로 "자기조정"으로 기재한 것에 불과한 것으로 보임 (심사소득2018-7 2018.03.28. 외)
+    </div>
+
+    <h4>(3) 적용상 주의할 점</h4>
+
+    <p><strong>① 기장의무판정, 추계신고시 경비율의 적용, 성실신고대상의 판정</strong></p>
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>판정 기준</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>기장의무 (복식·간편)</td>
+          <td>
+            1. 당해 과세기간 신규로 사업을 개시한 경우 간편장부의무 (전기 수입금액 0)<br>
+            2. 직전 과세기간 수입금액이 있는 경우 직전과세기간 수입금액으로 판정
+          </td>
+        </tr>
+        <tr>
+          <td>추계신고 (단순·기준 경비율)</td>
+          <td>
+            1. 당해 과세기간 신규로 사업을개시한 경우 당해과세기간 수입금액으로 판정<br>
+            2. 직전 과세기간 수입금액이 있는 경우 직전과세기간 수입금액으로 판정<br>
+            3. 전문직등 사업자는 무조건 기준경비율<br>
+            4. 2019귀속부터 당기수입금액이 복식부기대상 기준에 해당되면 무조건 기준경비율 적용대상
+          </td>
+        </tr>
+        <tr>
+          <td>성실신고</td>
+          <td>당해 과세기간 수입금액으로 성실신고확인서 첨부 대상 판정</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>※ 직전연도 수입금액이 있는 당해과세기간 신규 개업자는 기장의무, 추계신고시 경비율의 적용은 직전연도 수입금액기준이 우선적으로 적용된다. 따라서 당해 과세기간 신규로 사업을 개시한 경우란 직전연도 수입금액이 0면 당해과세기간 신규 개업자를 말한다.</p>
+
+    <p><strong>② 직전연도 신규사업자, 폐업자의 기장의무등 판단</strong></p>
+    <p>직전연도 신규사업자 또는 폐업자로서 사업원수가 12개월 미만이라 하더라도 직전연도 수입금액은 연환산 규정이 적용되지 않고 그 자체의 금액으로 판정한다.</p>
+
+    <p><strong>④ 겸업자</strong></p>
+    <p>위의 수입금액 기준이 서로 다른 업종을 겸업하거나, 업종이 다른 사업장이 2이상인 경우에는 다음 산식으로 환산하여 계산한 수입금액을 기준으로 기장의무를 판정한다. 이때 환산시 기장의무 판단시에는 기장의무 수입금액을 기준으로하고 성실신고 관정시에는 성실신고 판정수입금액을 기준으로 한다.</p>
+    <div class="highlight-box">
+      주업종환산수입금액 = 주업종의 수입금액 + 주업종외의 수입금액 × (주업종의 기준금액 / 주업종외의 기준금액)
+    </div>
+
+    <p><strong>⑤ 공동사업자</strong></p>
+    <p>공동사업자는 그자체를 하나의 납세의무자로 보아서 기장의무, 추계신고시 경비율의 적용, 성실신고대상, 접대비 한도액계산등에 있어서 공동 구성원의 다른 단독사업장과 구분하여 별도의 하나의 납세자로 보아 판단하여야 한다.</p>
+
+    <p><strong>⑥ 부동산 임대업자의 기장의무 판정시 수입금액은?</strong></p>
+    <p>부동산 임대업자의 기장의무 판정시 적용하는 수입금액은 소득세법상 총수입금액을 대상으로 한다. 즉 건설비 상당액을 공제시는 공제후의 금액으로 그리고 건설비상당액을 공제하지 않았을 때는 공제전의 금액을 기준으로 기장의무를 판정한다.</p>
+
+    <p><strong>⑦ 상속 받은 사업 (사업의 양수도 포함)의 경우 기장의무는?</strong></p>
+    <p>상속을 받은 경우 상속 받은 연도는 수입금액의 크기에 상관없이 기장세액공제가 된다. 즉 사업상속의 경우 사업자 등록은 정정사항 이지만 기장의무 판정은 신규사업자와 동일하게 판정하는 것으로 보이며, 소득세 신고시 상속인 명의로 피상속인의 소득을 신고하지만 상속인의 소득과 피상속인의 소득을 합산하여 과세하지 않는다. (소득 46011-3189. 1996. 11. 15)</p>
+
+    <p><strong>⑧ 경정 결정으로 기장 의무 변동시 기장의무 및 가산세 적용 (시행령 제147조의5)</strong></p>
+    <p>사업자가 경정 또는 수정신고로 인하여 수입금액이 증가함으로써 간편장부대상자에 해당되지 아니하게 되는 경우에는 법 제70조 제4항 후단 (무신고가산세)및 제160조의5 제3항을 (사용용계좌 미사용가산세)적용 할 때 그 결정·경정 또는 수정신고하는 날이 속하는 과세기간까지는 간편장부대상자로 본다.</p>
+
+    <h4>(4) 소득금액 결정유형</h4>
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>유형</th>
+          <th>납세자 청구</th>
+          <th>과세관청 경정</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>추계신고→실지조사</td>
+          <td>소득금액 계산의 원칙은 실지소득금액 이므로 가능하다</td>
+          <td>소득금액 계산의 원칙은 실지소득금액 이므로 가능하다</td>
+        </tr>
+        <tr>
+          <td>기장신고→추계결정</td>
+          <td>원칙적으로 불가하다 (천재지변등으로 장부멸실시가능)</td>
+          <td>원칙적으로 불가하나 장부·증빙이 미비하거나 허위인 경우 가능하다</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>3. 총수입금액</h3>
+    <div class="highlight-box">
+      사업소득을 계산함에 있어서 총수입금액에 산입되는 것은 다음과 같으며 손익계산서상 반드시 매출로 계상되어야 하는 것은 아니나 영업외수익, 잡수익등으로 반영이 되어야 하며 만약 추계신고의 경우에는 이 전체를 합한 금액을 기준으로 단순/기준경비율을 적용해야 한다.<br>
+      <strong>(총수입금액 = 매출액 + 영업외 손익에 해당하는 수입금액)</strong><br><br>
+      매출액, 수입판매장려금, 관세환급금, 자산수증이익(무환통관자료등), 채무면제이익, 국고보조금, 각종 장려금, 보험차익, 재화의 무상공급(부가세 사업상증여), 개인적인 사용(부가세 개인적공급), 부가가치세세액공제중 일부, 외환차익, 영업손실보상금, 기계장치이전 보상금, 확정급여형 퇴직연금 이익, 업무용승용차 매도가액 (2016년 이후 복식부기자 적용), 사업용유형자산 양도가액 (2018년 이후부터 복식부기의무자에게 적용)
+    </div>
+
+    <h4>(1) 부가가치세 과세표준과의 차이 발생 유형</h4>
+    <ol>
+      <li>부가가치세 세액공제, 고정자산 처분, 면세 수입 (슈퍼, 약국, 우유 대리점, 신문지국, 상가분양, 건설업등 과세면세 겸업자)</li>
+      <li>판매장려금과 매입 할인 (약국, 병원, 대리점 등)</li>
+      <li>수입의 실현시기 차이 (상가 분양, 건설업) - 부가가치세법상 재화 및 용역의 공급시기는 중간지급조건부 공급의 경우 대가의 각부분을 받기로 한때이나 소득세법상 공급시기는 장기공급의 경우 작업진행율 및 완성도 기준에 의하여 수입시기가 결정됨.</li>
+      <li>부동산 임대 보증금의 간주 임대료 수입 - 기장사업자의 경우 간주임대료 총수입금액에 건설비 상당액 공제가능하다</li>
+      <li>법인의 경우 2011사업연도부터 법인세 선택을 한 경우 외화평가손익의 계상이 가능하나 개인의 경우 시행령 97조 개정되지 않았으므로 법인과 달리 외화평가손실 이익이 총수입금액 및 필요경비 계상 대상이 아니다</li>
+      <li>특별소비세 과세 대상 업종 (나이트, 룸 사롱의 경우) - 부가세 과세표준에 특별소비세 와 교육세가 포함 되어있으므로 다음과 같이 계산하여야 소득세법상 수입금액을 산출하여야 한다.<br>
+        (소득세법상 매출액 = 부가가치세 공급대가 ÷ 1.243)<br>
+        (" " = 부가가치세 과세표준 ÷ 1.13)<br>
+        (부가가치세 과세표준 = 본래의 매출액 + 특소세 10% + 교육세, 특소세의 30%)
+      </li>
+    </ol>
+
+    <h4>수입금액에서 누락되기 쉬운 부분</h4>
+    <ul class="content-list">
+      <li><strong>판매장려금:</strong> 기업회계상은 지급자의 경우에는 매출에서 차감하고, 받은자의 경우 매입에서 차감하도록 되어있으나 실무상 사후관리와 세무서 확인을 위하여 영업외 수입으로 처리하는 것을 편리할 것이다. 그러나 소득세법에서는 지급판매장려금의 경우 수입금액에서 차감하는 것이 아니고 필요경비로 산입하게 되어 있으므로 주의를 요합니다.</li>
+      <li><strong>국고보조금:</strong> 법인과 동일하게 국고보조금은 원칙적으로 총수입금액에 산입하되 법인과 동일하게 특정보조금에 대해서는 세무조정으로 필요경비 산입이 가능하다. 국고보조금에 대해 법인과 동일하게 세무조정, 수정신고등이 적용됩니다.</li>
+      <li><strong>전기차, 수소차등의 보조금:</strong> 지급의 직접적인 근거는 "대기환경보전법" 규정에 의하여 지급되며, 이 법률도 "보조금 관리에 관한 법률"의 규정을 적용 받아서 관리되므로 일시상각충당금으로 손금산입이 가능한 것으로 보입니다.</li>
+    </ul>
+
+    <h4>(2) 사업소득 수입금액 사례</h4>
+
+    <p><strong>① 건축업자의 자기거주주택, 증여, 대물변제의 수입금액 산입여부</strong></p>
+    <p>거주자가 공동으로 주택을 신축하여 공동사업자 각자가 거주할 목적으로 소유하는 1주택은 당해 공동사업장의 소득금액계산시 총수입금액에 산입하지 아니하는 것임. 또한 공동 사업이 아닌 경우에도 신축 주택 중 자기가 거주하는 주택은 수입금액에서 제외하며 추후 양도시에는 양도소득세 과세대상으로 보아야한다.</p>
+
+    <p><strong>② 공동으로 신축한 건물의 분할, 지분변동의 경우</strong></p>
+    <p>2인 이상 공동사업자가 판매목적의 신축건물을 미분양등의 사유로 출자지분에 따라 분할등기 하는 경우, 분할 등기 한 주택의 시가상당액을 공동사업장의 총수입금액에 산입하는 것이며, 과세기간 중 공동사업의 구성원 또는 지분의 변동이 발생한 경우에는 변동시마다 공동사업자 손익분배 비율에 따라 각 거주자별로 소득금액을 구분 계산하여 당해 거주자별로 납세의무를 진다.</p>
+
+    <p><strong>③ 영업권</strong></p>
+    <p>병원을 영위하던 개인사업자 "갑"이 당해 사업장의 자산과 영업권을 적정하게 평가하여 "갑"과 "을"을 구성원으로 하는 공동사업에 출자한 경우 공동사업에 출자된 영업권은 공동사업장의 무형고정자산에 해당하는 것입니다. 공동사업장의 지분을 양도하고 지급받은 대가의 소득구분 등: 공동사업자의 구성원 중 1인이 해당 공동사업을 탈퇴하면서 자기지분을 양도하고 받은 영업권상당액은 기타소득에 해당하는 것이며, 해당 영업권은 무형자산에 해당하는 것임 (사전법령해석소득2020-683 . 2020.10.22)</p>
+
+    <p><strong>④ 연체료의 수입금액</strong></p>
+    <p>사업자가 재화 등을 공급하고 (상가, 아파트, 할부 판매 등) 거래상대방이 대가를 지연 지급함에 따라 사업자가 지급받는 연체료등 부가가치세 과세대상이 아니며 즉 재화의 공급가액에 포함하지 않으나 소득세법상 총수입금액에 해당되며 이는 이자소득이 아닌 당해 재화 등의 공급에 따른 사업소득, 부동산 임대소득에 해당된다.</p>
+
+    <p><strong>⑤ 국고보조금·보상금</strong></p>
+    <ul class="content-list">
+      <li>수입금액 산입 사항 (집행기준 24-51-7 참고): 영업손실보상금과 이전 가능한 사업장의 기계이전 보상금, 일자리 안정지원금, 사업장 이전에 대한 비용의 보상금, 상품 이전에 따른 감소의 보상금, 3개월간의 영업손실 보상금 (경매 낙찰자로부터 임차인이 받는 보상금, 공공용지 수용보상금등), 두루누리 지원금 (사회보험료에서 차감된다.)</li>
+      <li>수입금액 불산입 사항: 수용결정에 따라 기계·시설등 이전이 불가능한 사업용 고정자산의 이전 보상금, 이전이 불가능한 자산, 사업용자산이 아닌 가사용 자산등에 대한 지장물 보상금</li>
+    </ul>
+
+    <p><strong>⑥ 의료업자의 본인 부담 경감액, 직원에 대한 무상진료</strong></p>
+    <p>의료업을 영위하는 거주자가 특수관계 없는 자에게 의료용역을 제공하고 당해 환자로부터 수령할 진료수입금액 중 환자 본인 부담금을 경감하여 줌으로써 그 지급받지 아니한 금액은 당해 거주자의 소득금액 계산시 총수입금액에 산입하지 아니하는 것입니다.</p>
+
+    <p><strong>⑦ 추계신고시 수입금액</strong></p>
+    <p>기장에 의한 신고를 할 경우 소득세법상 총수입금액 산입사항으로 되어있는 관세환급금, 판매장려금, 보험차익, 국고보조금, 부가가치세법상 세액공제액등을 잡이익 또는 영업외 수익으로 기장하나, 단순 경비율 및 기준경비율에 의한 추계신고를 할 경우에는 이 금액들을 총수입금액에 가산하여 단순 및 기준경비율을 적용하여야 한다.</p>
+
+    <p><strong>⑰ 사업용유형자산 양도금액 총수입금액 산입 및 손익의 과세</strong></p>
+    <p>개인의 경우 2016년부터 시행되는 업무용 승용차를 제외하고 사업용 유형자산의 양도소득은 과세대상이 아니었다. 그러나 세법 개정으로 2018귀속부터 복식부기의무자의 경우 유형자산 양도손익이 과세대상이므로, 양도가액은 총수입금액에 산입하고, 장부가액 (취득가액 - 감가상각누계액)은 필요경비에 산입하여야한다. 다만 건설기계는 2018년 이후 취득분부터 적용한다. (법 제19조 제1항 20호, 제27조 제1항, 시행령 제55조 제1항 7의2호.)</p>
+
+    <h4>(3) 부동산 임대업 수입금액 계산</h4>
+
+    <p><strong>① 임대료 외 공과금</strong></p>
+    <p>사업자가 부동산을 임대하고 임대료 외에 유지비나 관리비 명목으로 지급 받는 금액이 있을 경우 전기요, 수도료, 등의 납부를 대행하는 공공요금을 제외하고 청소비 난방비 경비원인건비 수선수리비 등은 용역의 공급에 해당하므로 부가가치세 과세대상에 해당되며 소득세법상 수입금액에도 산입하여야 한다.</p>
+
+    <p><strong>③ 임대보증금에 대한 수입금액의 계산</strong></p>
+    <p>임대 보증금에 대한 간주 임대료는 기업회계 상 매출 또는 익금에 해당되지 않는다. 그러나 부가가치세 과세대상인 용역의 공급에 해당되어 법인, 개인 모두 부가가치세 과세 대상에 해당된다. 그리고 소득세법에서는 간주임대료 수입에서 건축비 상당액 또는 그 임대 보증금에서 발생된 수입이자 또는 배당금을 제외하고 총수입금액을 계산하도록 하고 있다. (주택임대의 경우 전세보증금에 대해서는 40% 공제가 있으므로 건설비 공제 제도가 없다. 그러나 보증금 운용수익 공제 제도는 있다)</p>
+
+    <div class="highlight-box">
+      <strong>주택에 대한 간주임대료 수입금액 계산</strong><br>
+      간주임대료 수입금액 = (임대보증금 - 300,000,000) × 임대일수 × 60/100 × 3.5% × 1 / 365<br><br>
+      3억원: 보증금등을 받은 주택이 2주택 이상인 경우에는 보증금등의 적수가 가장 큰 주택의 보증금등부터 순서대로 뺀다
+    </div>
+
+    <div class="highlight-box">
+      <strong>연도별 간주임대료 이자율 변천</strong>
+      <table class="content-table">
+        <thead><tr><th>고시 일자</th><th>이자율</th><th>적용 기간</th></tr></thead>
+        <tbody>
+          <tr><td>19. 1. 1. ~ 19. 12. 31.</td><td>2.1%</td><td>2019년 1월 1일부터</td></tr>
+          <tr><td>20. 1. 1. ~ 20. 12. 31</td><td>1.8%</td><td>2020년 1월 1일부터</td></tr>
+          <tr><td>21. 1. 1. ~ 22. 12. 31</td><td>1.2%</td><td>2021년 1월 1일부터</td></tr>
+          <tr><td>23. 1. 1. ~ 23. 12. 31</td><td>2.9%</td><td>2023년 1월 1일부터</td></tr>
+          <tr><td>24. 1. 1. ~ 24. 12. 31</td><td>3.5%</td><td>2024년 1월 1일부터</td></tr>
+          <tr><td>2025. 1. 1. ~</td><td>3.1%</td><td>2025년 1월 1일부터</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>④ 부동산 전대업자, 전전세의 경우 수입금액</strong></p>
+    <p>과세기간중 지급받은 월세의 합계 + 보증금에 대한 간주임대료</p>
+    <p>보증금등에 산입할 금액 = [전전세 또는 전대하고 받은 보증금등의 적수 - (전세 또는 임차받기 위하여 지급한 보증금등의 적수 × 전전세 또는 전대한 부분의 면적이 전세 또는 임차받은 부동산의 면적에서 차지하는 비율(사업시설을 포함하여 전전세 또는 전대한 경우 그 가액의 비율))] × 1/365 (결국 소득세 수입금액은 부가가치세 과세표준과 일치합니다.)</p>
+
+    <h3>4. 총수입금액 수입시기</h3>
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>수입 시기</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>(1) 상품·제품 또는 기타 생산품(상품 등)의 판매</td>
+          <td>그 상품 등을 인도한 날(단, 주택신축판매업의 주택과 부동산 매매업의 부동산은 제외한다)</td>
+        </tr>
+        <tr>
+          <td>(2) 상품 등의 시용판매</td>
+          <td>상대방의 구입의사를 표시한 날(단, 일정기간 내에 반송하거나 거절의 의사를 표시하지 아니하는 한 특약 또는 관습에 의하여 그 판매가 확정되는 경우에는 그 기간의 만료일로 한다)</td>
+        </tr>
+        <tr>
+          <td>(3) 위탁판매</td>
+          <td>수탁자가 그 위탁품을 판매한 날</td>
+        </tr>
+        <tr>
+          <td>(4) 장기할부조건에 의한 상품판매 (인도일부터 최종 잔금지급일까지 1년 이상이고 부불금 2회 이상)</td>
+          <td>(1) 원칙: 상품 등을 인도한 날 - 현재가치평가에 의한 회계처리도 수용<br>(2) 예외: 회수기일도래기준에 의한 회계처리도 수용</td>
+        </tr>
+        <tr>
+          <td>(5) 건설·제조 기타 용역(도급공사 및 예약매출을 포함한다)</td>
+          <td>(1) 단기건설등: 용역제공을 완료한 날 (또는 목적물을 인도한 날) 또는 작업 진행율<br>(2) 장기건설등: 작업진행률에 의하여 인식(진행기준)</td>
+        </tr>
+        <tr>
+          <td>(6) 무인판매기에 의한 판매</td>
+          <td>무인판매기에서 현금을 인출하는 때</td>
+        </tr>
+        <tr>
+          <td>(7) 인적용역 제공</td>
+          <td>약정에 의한 용역대가를 지급받기로 한날 또는 용역의 제공을 완료한 날 중 빠른 날. (2008 귀속 이후부터 운동선수·연예인의 경우 다년의 일시전속계약금을 받는 경우 계약기간에 안분하여 수입시기를 결정하며, 계약기간 개시일이 1개월 미만이면 1월로 하고, 종료일이 1개월 미만이면 이를 제외한다.)</td>
+        </tr>
+        <tr>
+          <td>(8) 부동산 임대</td>
+          <td>- 계약등에 의해 지급일이 정하여진 경우 그 정해진날<br>- 지급일이 정해지지 않은 경우 그 지급받은 날<br>- 관결등 쟁송의 경우 판결·화해 등이 있은날</td>
+        </tr>
+        <tr>
+          <td>(9) 부동산 (주택, 상가, 오피스텔등) - 사업용자산으로서 부동산을 양도시</td>
+          <td>대금을 청산한날, 소유권 이전등기일, 인도일, 사용수익일 중 빠른날을 기준으로 한다.</td>
+        </tr>
+        <tr>
+          <td>(9) 부동산 - 매매용 부동산을 양도한 경우 (단기 계약)</td>
+          <td>대금을 청산한날, 소유권 이전등기일, 인도일, 사용수익일 중 빠른날을 기준으로 한다. (주택, 상가, 오피스텔등의 구분 없음) ★ 개인의 경우 법인과 달리 주택, 상가등 구분없이 장·단기구분없이 진행율이 아니라 완성도 (잔금, 등기접수일, 인도일중 빠른날)를 기준으로 수입시기 판단.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>소득의 귀속시기 관련 주요 예규</h4>
+    <ul class="content-list">
+      <li><strong>병원, 약국의 의료보험 수입금액의 귀속시기:</strong> 약사법에 규정하는 약사가 의약품 조제 용역을 제공한 경우, 당해 조제용역에 대한 총수입금액의 수입시기는 의료보험조합에 조제용역에 대한 비용을 청구하는 시기와는 상관없이 조제 용역의 제공을 완료한 날임. 그러므로 병원, 약국의 수입금액 결정시 실제 진료를 한때, 조제를 한때를 기준으로 수입시기를 결정하여야 하며, 의료보험공단의 청구일자, 지급일자와는 관계가 없다.</li>
+      <li><strong>추가납부한 산재보험료, 건강보험료의 필요경비 귀속 연도:</strong> 산업재해 보상법 규정에 의하여 개산보험료(당해연도 3월)를 납부한 후 다음연도에 확정보험료와의 차액을 추가로 납부하는 보험료의 필요경비 귀속연도는 이를 추가로 납부할 금액이 확정된 날 (대개 다음연도 1월)이 속하는 과세기간으로 한다. (소득세법 기본통칙 39-12)</li>
+      <li><strong>세무사, 변호사등의 불복청구용역 수입시기:</strong> 인적용역에 대한 사업소득의 수입시기는 부가세법상 세금계산서 교부시기와 관계없이 시행령 제48조 제8호 규정에 의하여 용역의 대가를 지급 받기로 한날 또는 용역의 제공을 완료한 날 중 빠른 날로 보도록 규정하고 있다.</li>
+      <li><strong>인적용역 (운동선수, 연예인등)의 사업소득 수입시기:</strong> 용역대가를 지급받기로 한 날 또는 용역의 제공을 완료한 날 중 빠른 날. 다만, 연예인 및 직업운동선수 등이 계약기간 1년을 초과하는 일시전속계약에 대한 대가를 일시에 받는 경우에는 계약기간에 따라 안분하여 각 과세기간의 종료일을 수입시기로 하며.</li>
+      <li><strong>체육관 등에서 받은 입회금의 처리 (통칙 39-3):</strong> 체육관, 헬스클럽, 정구장, 수영장, 골프장, 탁구장, 기원 등을 영위하는 사업자가 그 회원으로부터 수입한 입회금은 이를 받은 과세기간의 총수입금액에 산입한다. 다만, 규약 등에서 당해 회원이 탈퇴할 때에 반환할 것을 명백히 규정하고 있는 때에는 그러하지 아니한다.</li>
+      <li><strong>법원 판결에 의하여 지급되는 손해배상금 등의 귀속연도:</strong> 법원의 판결에 의하여 지급하거나 지급받는 손해배상금 등의 귀속연도는 법원의 판결이 확정된 날이 속하는 과세기간으로 한다.</li>
+    </ul>
+
+    <h3>5. 공동사업자</h3>
+
+    <h4>(1) 공동사업자의 유형</h4>
+    <p>공동사업자는 공동사업의 형태(개인+개인 개인+법인)에 상관없이 사업자등록, 부가가치세법 적용, 소득금액의 계산 및 안분시 개인사업자로서 인정되며, 공동사업하는 법인의 경우에는 소득세법에 의하여 계산된 분배받은 소득금액을 법인세법에 의해서 다시 조정하여야 한다.</p>
+
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>공동사업장 (개인과 개인)</th>
+          <th>공동사업장 (법인과 개인)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>업무집행공동사업자</td>
+          <td>사업소득</td>
+          <td>사업소득</td>
+        </tr>
+        <tr>
+          <td>출자공동사업자</td>
+          <td>배당소득 (당연종합과세 대상으로 25% 원천징수후, 14%와 비교과세)</td>
+          <td>이자소득 (비영업대금의 이익으로 당연종합과세 대상 25% 원천징수후, 25%와 비교과세)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>(2) 기장의무의 판정</h4>
+    <ul class="content-list">
+      <li>공동사업장의 기장의무, 추계신고시 기준경비율 또는 단순경비율 적용기준 및 접대비 한도액 계산시 공동사업장만의 수입금액을 기준으로 기장의무를 판정하는 것이고, 단독으로 경영하는 다른사업장은 공동사업장의 수입금액과 상관없이 단독사업장만의 수입금액을 기준으로 적용하는 것임</li>
+      <li>사업자가 구성원이 동일한 공동사업장이(각 사업장별 구성원의 지분이 상이한 경우도 포함) 여러개인 경우 각 공동사업장의 직전연도 수입금액 합계액으로 기장의무, 성실신고 대상여부를 판단하는 것이며, 구성원이 다른 공동사업장은 각각 별개의 사업자로 보아 기장의무, 성실신고대상 여부 등을 판정한다. (법령해석 소득-408 2020.04.27. )</li>
+    </ul>
+
+    <h4>(10) 공동사업자의 소득금액 세액계산 특례</h4>
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>소득금액</td>
+          <td>사업장 전체소득을 각자 지분에 따라 안분후 개인의 다른소득과 합산 신고</td>
+        </tr>
+        <tr>
+          <td>결손금</td>
+          <td>사업장 전체 결손금을 각자 지분에 따라 안분후 개인의 다른소득과 합산 신고 및 이월 (사업장 별로 이월하여 관리하지 않음)</td>
+        </tr>
+        <tr>
+          <td>원천세액</td>
+          <td>사업장을 기준으로 원천징수된 세액 (병원등)은 각 구성원별로 안분계산</td>
+        </tr>
+        <tr>
+          <td>가산세</td>
+          <td>사업장을 기준으로 과세되는 지급명세서미제출가산세, 계산서 및 세금계산서 미교부 미제출가산세, 증빙불비 가산세, 원천징수납부불성실가산세, 사업용계좌, 신용카드거부, 현금영수증 미가입 및 거부관련 가산세, 공동사업자등록 관련 가산세는 사업장전체에서 계산후 각 지분비율에 따라 배분하여 과세</td>
+        </tr>
+        <tr>
+          <td rowspan="3">세액공제 세액감면</td>
+          <td>기장세액공제: 각자의 산출세액에서 20%를 적용하여 각자 한도 100만원을 적용한다 (성실신고세액공제도 동일한 방법으로)</td>
+        </tr>
+        <tr>
+          <td>조특법세액공제: 투자세액공제등 합계금액에 대한 세액공제를 계산후 각자 지분별로 공제.</td>
+        </tr>
+        <tr>
+          <td>고용증대세액공제: 고용증감인원을 각자 지분별로 배분하여 각자의 다른 사업장 인원과 합산하여 개인별로 증감인원을 계산하여 세액공제 또는 사후관리 (추가공제 및 추가납부)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>전문직사업자에 대한 제재</h4>
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>제목</th>
+          <th>내용</th>
+          <th>전문직 범위</th>
+          <th>관련법령</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1. 복식부기의무 부여</td>
+          <td>2007년 귀속부터 전문직사업자에 대하여는 직전연도수입금액 및 신규개업여부에 관계없이 복식부기의무부여 (기장세액공제 없음) (사업용계좌개설 다음연도 5월까지)</td>
+          <td>세무사, 법무사, 회계사, 변호사등 전문자격사(부가령74조2항7호) 의료보건용역((의사, 약사, 수의사등)(소령147조의3)</td>
+          <td>소령 208조5항</td>
+        </tr>
+        <tr>
+          <td>2. 현금영수증 가맹의무화</td>
+          <td>직전연도 연간 수입금액 2400만원 이상 소비자상대업종은 현금영수증 가맹점 가입의무화 되었으며, 전문직 사업자는 연간 수입금액 관계없이 가맹의무화 (개업일로부터 3개월 이내 가입)</td>
+          <td>위와 동일함</td>
+          <td>소법162의3, 소령210조의3</td>
+        </tr>
+        <tr>
+          <td>3. 단순경비율 적용배제</td>
+          <td>직전연도수입금액이 기준금액 이하자는 추계신고시 단순경비율 적용되나 전문직사업자는 이와 관계없이 추계신고시 기준경비율 적용</td>
+          <td>위와 동일함</td>
+          <td>소령 143조7항</td>
+        </tr>
+        <tr>
+          <td>4. 사업장현황 신고 불이행 가산세 적용</td>
+          <td>면세사업자의 사업장현황신고는 원칙으로 무신고, 신고불성실가산세 없으나 의료업자의 경우 수입금액 0.5% 가산세 적용</td>
+          <td>의사, 약사, 수의사</td>
+          <td>소법81조6항, 소령147조의3</td>
+        </tr>
+        <tr>
+          <td>5. 간이과세배제</td>
+          <td>수입금액에 관계없이 전문직사업자는 부가가치세 간이과세제도 배제</td>
+          <td>세무사, 법무사, 회계사, 변호사등 전문자격사(부가령74조2항7호)</td>
+          <td>부가령 74조2항</td>
+        </tr>
+        <tr>
+          <td>6. 승용차 업무 전용보험 가입</td>
+          <td>2021귀속부터 사업장별 1대를제외한 승용차에 대하여 업무전용 보험에 가입하여야 한다.</td>
+          <td>위와 동일함</td>
+          <td>소법 33조의2</td>
+        </tr>
+        <tr>
+          <td>7. 현금매출명세서 미제출가산세</td>
+          <td>부가세 과세사업자가 예정·확정신고시 현금매출명세서 미제출, 누락금액의 1%(2010부터) 기준경비율 가산세 적용</td>
+          <td>위와 동일함. (다만 약국은 제외)</td>
+          <td>부가법22조, 령67의2</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      위와 같으므로 전문직사업자는 사업자등록 직후 신용카드가입, 현금영수증가입, 사업용계좌 개설 신고하고 기장은 복식부기에 의하여 신고하여야 합니다.
+    </div>
+
+    <h4>상속의 경우 소득세법 적용</h4>
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>사업자 등록</td>
+          <td>상속의 경우 사업자등록은 정정으로 (상속재산은 부가세 과세대상 아님), 증여의 경우는 신규 사업자로 신청 (증여재산은 부가세 과세대상 임)</td>
+        </tr>
+        <tr>
+          <td>피상속인소득세 확정신고기한</td>
+          <td>상속개시일의 말일로부터 6개월 이내 피상속인 또는 상속인 주소지 관할세무서에 확정신고기한 (확정신고기한이 도래하지 않은 경우도 확정신고 준용한다)</td>
+        </tr>
+        <tr>
+          <td>소득금액</td>
+          <td>피상속인의 소득은 상속인 명의로 신고하되 상속인의 소득과 합산하지 않음 (다만 연금소득의 경우 피상속인의 소득은 상속인의 소득으로 본다)</td>
+        </tr>
+        <tr>
+          <td>결손금</td>
+          <td>피상속인 사업장의 결손금은 상속인에게 승계되지 않음 (중소기업이라면 결손금소공제가 가능한 것으로 보임)</td>
+        </tr>
+        <tr>
+          <td>이월세액공제</td>
+          <td>피상속인 사업장의 이월대상 세액공제는 상속인에게 승계되지 않음 (법인전환의 경우는 승계하여 공제받을 수 있음)</td>
+        </tr>
+        <tr>
+          <td>기장의무</td>
+          <td>승계받은 상속인은 신규사업자와 동일하게 취급</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="memo-wrap">
+    <div class="memo-label">메모</div>
+    <textarea class="memo-box" id="memo-sec-filing-type" placeholder="메모를 입력하세요..."></textarea>
+    <button class="memo-clear" onclick="clearMemo('memo-sec-filing-type')">지우기</button>
+  </div>
+</section>
+<section id="sec-interest-div" class="section-card">
+  <div class="section-header">
+    <h2>제03장 이자소득 &amp; 배당소득</h2>
+    <span class="src-tag">원천: 이자배당소득_2025.pdf</span>
+  </div>
+  <div class="section-body">
+
+    <h3>1. 이자소득</h3>
+
+    <h4>(1) 이자소득의 종류</h4>
+    <ul class="content-list">
+      <li>국가, 지방자치단체, 내국법인, 외국법인, 외국법인의 국내 지점·영업소에서 발행한 채권·증권의 이자와 할인액</li>
+      <li>국내 또는 국외에서 지급받는 예금의 이자와 할인액. 상호신용금고법에 의한 상호신용금 또는 신용부금으로 인한 이익</li>
+      <li>내국법인·국외에서 받는 공채 및 사채 외의 증권투자신탁을 제외한 신탁의 이익</li>
+      <li>채권·증권의 환매조건부 매매차익</li>
+      <li>저축성 보험의 보험차익 (10년 이상의 저축성보험차익과, 2013.2.15 이후는 계약자 1명당 2억원 이하이고 10년 이상의 저축성 보험차익은 비과세)</li>
+      <li>직장공제회 초과 반환금</li>
+      <li><strong>비영업 대금의 이익</strong> (금융업을 하지 않는 자가 금전을 대여하고 받는 사채이자 등) — 원천징수 25%</li>
+      <li>유사 이자 소득 (열거주의에 의한 소득세법의 예외적인 규정임)</li>
+    </ul>
+
+    <h4>투자 신탁의 이익 구분</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>소득의 구분</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>일반 신탁의 이익</td><td>이자소득으로 과세</td></tr>
+        <tr><td rowspan="2">증권투자신탁 이익</td><td>공채·사채형의 증권투자신탁의 이익 : 이자소득</td></tr>
+        <tr><td>주식형 증권투자신탁의 이익 : 배당소득</td></tr>
+      </tbody>
+    </table>
+
+    <h4>사채업자의 이자수입 과세</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th></th><th>이자소득</th><th>사업소득 (금융업 중 대금업)</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>구분</td>
+          <td>비영업 대금의 이익 (사업적이 아니 일시적인금전의 대여 이익) / 원천징수 대상 25%</td>
+          <td>대금업의 이익 (사업적으로 금전을 대여하는 대부업등록자·사채업자 등) / 지급받는 이자는 원천징수 대상 아님</td>
+        </tr>
+        <tr>
+          <td>과세 방법</td>
+          <td>이자소득으로 필요경비 없이 수입금액이 소득금액으로 결정</td>
+          <td>사업소득에 해당되기 때문에 총수입금액에서 필요경비를 공제한 후 금액이 소득금액으로 결정 (기장의무 및 경비율 적용)</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul class="content-list">
+      <li>대금업을 하는 거주자임을 대외적으로 (신문·전단지·전화번호부 등)으로 표방하고 계속적으로 불특정 다수인을 상대로 금전을 대여하는 사업의 경우 사업소득 중 금융업으로 본다.</li>
+      <li>다만 대외적으로 대금업임을 표방하지 않은 거주자의 금전대여는 비영업대금의 이익으로 이자소득으로 과세된다.</li>
+      <li>계속적·사업적으로 자금의 대여시에는 대부업법에 의하여 대부업등록하여야 하며 이경우는 사업소득으로 금융업에 해당한다. 대부업법에 의한 등록자는 사업소득으로 과세되어야 할 것이며, 대부업자는 교육세 (수입금액의 0.5%) 과세대상이다.</li>
+    </ul>
+
+    <h4>회수 불능인 경우 이자소득 과세 여부 (시행령 제51조 제7항)</h4>
+    <div class="highlight-box">
+      비영업대금의 이익의 총수입금액을 계산할 때 해당 과세기간에 발생한 비영업대금의 이익에 대하여 법 제70조에 따른 과세표준확정신고 전에 해당 비영업대금이 채무자의 파산·강제집행·형의 집행·사업의 폐지·사망·실종 또는 행방불명으로 회수할 수 없는 채권에 해당하여 채무자 또는 제3자로부터 원금 및 이자의 전부 또는 일부를 회수할 수 없는 경우에는 회수한 금액에서 원금을 먼저 차감하여 계산한다. 이 경우 회수한 금액이 원금에 미달하는 때에는 총수입금액은 이를 없는 것으로 한다. (2014년 이후 확정신고하는 분부터 적용, 조심2023부73412 2023.08.29)
+    </div>
+
+    <h4>손해배상금·지연손해금에 대한 법정이자의 소득구분</h4>
+    <ul class="content-list">
+      <li>법원의 관결 및 화해로 인하여 지급받은 손해배상금에 대한 법정이자는 이자소득으로 보지 아니한다. 위약 해약을 원인으로 법원의 판결에 의하여 지급받는 손해배상금에 대한 법정이자는 <strong>기타소득에 해당</strong>한다. 단, 피보험자의 사망·상해 보험사고로 인하여 보험금 지급의무가 발생한 보험회사가 그 보험금의 지급을 지연하여 추가로 지급하는 지연손해금은 기타소득이 아니다. (기획재정부소득-27 2019.01.03.)</li>
+      <li>금전채무불이행으로 인하여 채무자인 법인이 금융업자가 아닌 채권자(개인)에게 지급하는 금액 중 당초 채무발생일로부터 법원의 원심판결선고일까지의 약정이자는 비영업대금의 이익으로서, 원심판결선고일 다음날부터 완제일까지의 법정이자(지연손해금)는 기타소득으로서, 당해 소득금액에 대하여 각각 소득세를 원천징수하여 납부하는 것임. (법인 46013-631 1998.03.14)</li>
+    </ul>
+
+    <h4>각종 분양계약의 위약금 또는 지체상금의 소득구분</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>항목</th><th>소득구분</th><th>비고</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>부동산 매매계약시 위약금·해약금</td><td>기타소득 / 사업소득</td><td>일반적인 경우 필요경비 없음 / 부동산 매매업의 경우</td></tr>
+        <tr><td>계약금등을 반환시 약정이자</td><td>이자소득</td><td></td></tr>
+        <tr><td>입주지체상금 (입주 지연 등)</td><td>기타소득</td><td>주택: 필요경비 80% 공제 후 원천징수 / 상가 등: 필요경비 없이 전액 소득금액</td></tr>
+        <tr><td>분양업자가 받는 중도금의 연체료</td><td>사업소득</td><td>분양사업자의 면세 사업소득에 해당</td></tr>
+        <tr><td>부동산 임대업자가 받는 임대차계약 불이행등에 대한 위약금</td><td>사업소득</td><td>부동산 임대사업자의 임대사업소득</td></tr>
+      </tbody>
+    </table>
+    <p>(위 금액은 전부 부가가치세 과세대상이 아니며, 이자와 기타소득의 경우 원천징수대상이다)</p>
+
+    <h4>자금을 대여하고 사업이익금의 명목으로 받는 금액</h4>
+    <p>거주자가 법인에 자금을 투자하고 일정기간 경과 후 원금과 투자수익 명목으로 사전에 확정된 금액 또는 사업이익금의 일부를 지급 받기로 한 경우 당해 확정된 금액 또는 사업이익금은 소득세법 제16조 규정에 의한 이자소득에 해당하는 것임. (소득-479 : 2011.06.07)</p>
+    <p>출자공동사업의 경우 이를 익명조합의 공동구성원으로 보아 이자소득이 아닌 배당소득으로서 과세되며, 25% 세율로 원천징수 후 이를 당연종합과세대상소득에 포함하여 금융소득 종합과세하되 14%의 세율과 비교과세되나 이는 개인과 개인의 공동사업에만 적용된다.</p>
+
+    <h4>부동산개발에 자금을 투자하고 수익금으로 받는 금액</h4>
+    <p>청구인이 공동사업자의 지위를 가진 것으로 볼수 없으므로 사업소득으로 보기 어려운 점, 청구인의 참여도나 기여도 자체도 불분명한 이상, 쟁점소득을 기타소득으로 구분하기는 어려운 점 등에 비추어, 투자금액 이상으로 받은 금액은 비영업대금의 이익으로 이자소득이다. (조심2022서5915 2022.10.21.)</p>
+
+    <h4>(2) 이자소득의 수입시기</h4>
+    <p>이자소득의 수입시기는 아래와 같으며 이자소득은 전부가 원천징수 대상으로서 지급하는 때에 원천징수하며 동업기업이 배분하는 소득은 지급시기 의제가 적용된다.</p>
+    <table class="content-table">
+      <thead>
+        <tr><th>종류</th><th>수입시기</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>무기명 공사채, 기명의 공사채 이자·할인액</td><td>그 지급을 받은 날 / 약정에 의한 지급일</td></tr>
+        <tr><td>채권·어음의 이자와 할인액</td><td>약정에 의한 상환일. 다만 기일전 상환하는 때에는 그 상환일</td></tr>
+        <tr><td>각종 예금</td><td>실제로 이자를 지급받는 날 / 원본에 전입하는 특약이 있는 이자는 그 원본에 전입하는 날 / 해약으로 인하여 지급하는 이자는 그 해약일 / 계약기간을 연장하는 경우에는 그 연장하는 날 / 개인연금저축이자는 중도해약일 또는 연금외의 형태로 지급받는 날 / 정기예금연결 정기적금의 정기예금이자는 정기예금 또는 정기적금이 해약되거나 정기적금의 저축기간이 만료되는 날 / 통지예금의 경우 인출일</td></tr>
+        <tr><td>채권·증권의 환매조건부 매매차익</td><td>약정에 의한 채권·증권의 환매수일 또는 환매도일. 다만 기일전 환매수도는 환매도하는 경우 그 환매수일 또는 환매도일</td></tr>
+        <tr><td>비영업대금의 이익</td><td>약정에 의한 이자지급일. 다만 약정이 없거나 약정일 전에 이자를 지급받는 경우 또는 회수불능으로 인하여 총수입금액에 제외된 이자를 지급받는 경우에는 그 이자지급일</td></tr>
+        <tr><td>채권 등의 보유기간 이자상당액</td><td>해당 채권 등의 매도일 또는 이자 등의 지급일</td></tr>
+        <tr><td>이자소득이 발생하는 재산이 상속되거나 증여되는 때</td><td>상속개시일 또는 증여일</td></tr>
+        <tr><td>동업기업으로부터 배분받은 이자</td><td>해당 동업기업의 과세연도 종료일 / 동업기업이 배분하는 소득으로서 해당 동업기업의 과세기간 종료 후 3개월이 되는날까지 지급하지 아니한 경우 과세기간 종료 후 3개월이 되는날을 지급시기로 본다</td></tr>
+      </tbody>
+    </table>
+
+    <h4>(3) 이자소득의 원천징수 세율</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>세율</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1. 장기채권·장기저축의 이자와 할인액으로 분리과세신청한경우</td><td>100분의 30</td></tr>
+        <tr><td>2. 지급시기까지 실지명의가 확인되지 않은 경우 (2023년 이후 지급분부터 최고세율 45% 적용한다)</td><td>100분의 42 / 100분의 45</td></tr>
+        <tr><td>3. 실명에 의하지 아니하고 거래한 비실명금융자산 이자</td><td>100분의 90</td></tr>
+        <tr><td>4. 비영업대금의 이익 (금융업·대부업이 아닌 자금대여)</td><td>100분의 25</td></tr>
+        <tr><td>5. 세금우대 종합저축·개인종합자산관리계좌</td><td>100분의 9</td></tr>
+        <tr><td>6. 직장 공제회 초과 반환금</td><td>기본 세율</td></tr>
+        <tr><td>7. 농·축·수협등 조합원의 3천만원 이하의 예탁금 2015년까지 / 2016년 / 2017년 이후</td><td>비과세 / 100분의 5 / 100분의 9</td></tr>
+        <tr><td>8. 기타의 이자 소득 (금융기관·사회기반시설채권·경락대금이자 등) 적격p2p 투자이익은 현재 25% 원천징수하나 2020년부터 14%로 개정</td><td>100분의 14</td></tr>
+      </tbody>
+    </table>
+
+    <h4>(4) 이자소득 과세방법</h4>
+    <ul class="content-list">
+      <li>이자소득은 필요경비가 인정되지 않는 금융소득으로서 설령 경매집행비용·채권회수비용이 발생하였다 하더라도 이는 사업소득이 아닌 이자소득인 경우 필요경비가 인정되지 않는다.</li>
+      <li>원천징수되지 않는 이자소득은 국내·국외 지급받은 부분에 상관없이 당연종합과세 대상이자 소득이다. 또한 2011귀속부터는 원천징수대상이나 실질적으로 원천징수되지 않은 비영업대금의 이자 등에 대해서는 2천만원이하의 경우에도 종합과세하며 이경우에도 25% 또는 14%와 비교과세하게 된다.</li>
+      <li>이의의 이자소득은 배당소득과 합하여 2천만원 초과하는 경우에는 종합과세세대상이다 (자세한 내역은 뒷부분 금융소득 종합과세에서 설명)</li>
+    </ul>
+
+    <div class="highlight-box">
+      <strong>16-26…1 [비영업대금의 이익과 금융업의 구분]</strong><br>
+      ① 대금업을 하는 거주자임을 대외적으로 표방하고 불특정 다수인을 상대로 금전을 대여하는 사업을 하는 경우에는 사업소득 중 금융업으로 본다. 다만, 대외적으로 대금업을 표방하지 아니한 거주자의 금전대여는 법 제16조제1항제11호에 규정하는 비영업대금의 이익으로 본다.<br>
+      ② 일시적으로 사용하는 전화번호만을 신문지상에 공개하는 것은 대금업의 대외적인 표방으로 보지 아니한다.
+    </div>
+
+    <p>담보부동산의 경매로 대여금 채권의 일부만 회수하고 나머지는 회수하지 못하게 되었더라도 회수불능사유 발생 전에 선이자로 받은 비영업대금이익은 소득세 과세대상에 해당한다. (조심 2012전3740 : 2013.02.12)</p>
+
+    <hr>
+
+    <h3>2. 배당소득</h3>
+
+    <h4>(1) 배당소득의 종류</h4>
+    <ol>
+      <li><strong>일반적인 배당</strong>: 외국법인·내국법인·법인으로 보는 단체로부터 받는 이익이나 잉여금의 배당 또는 분배금, 건설이자의 배당 (법인으로 등기되지 않았지만 주무관청으로부터 허가·인가를 받아서 설립한 법인으로 보는 단체로부터 받는 배당이나 분배금도 배당소득에 해당된다)</li>
+      <li><strong>인정 배당</strong> (익금산입 및 손금불산입 중 주주의 이익으로서 배당으로 처분된 금액): 법인세법에 의하여 배당으로 처분된 금액</li>
+      <li>잉여금의 자본전입 과 주식의 소각·자본의 감자·합자 합명회사 출자자의 퇴사·탈퇴·법인의 해산·합병·분할로 인하여 받는 재산가액이 당초 취득가액을 초과하는 경우 그 초과 금액</li>
+      <li><strong>배당부 투자신탁수익의 분배금</strong>: 내국법인으로부터 받는 증권투자신탁 (공채 및 사채투자 신탁을 제외)수익의 분배금 / 국내 또는 국외에서 받는 대통령령으로 정하는 집합투자기구로부터의 이익</li>
+      <li>소득세법 제43조 규정에 따른 경영에 참여하지 않는 출자공동사업자의 손익분배비율에 해당하는 금액</li>
+      <li>위의 규정에 따른 소득과 유사한 소득으로서 수익분배의 성격이 있는 것 — 파생금융상품·신종펀드의 배당 등</li>
+      <li>위의 규정 중 어느 하나에 해당하는 소득을 발생시키는 거래 또는 행위와 파생상품이 시행령 제26조의3 제3항 규정에 의하여 결합된 경우 해당 파생상품의 거래 또는 행위로부터의 이익</li>
+    </ol>
+
+    <h4>(2) 배당소득 원천징수 세율</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>세율</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1. 출자공동사업자의 배당소득 (소법 17조, 43조, 62조, 129조)</td><td>100분의 25</td></tr>
+        <tr><td>2. 지급시기까지 실지명의가 확인되지 않은 배당 (2023년부터 45%)</td><td>100분의 42, 45</td></tr>
+        <tr><td>3. 실명에 의하지 아니하고 거래한 비실명금융자산 배당</td><td>100분의 90</td></tr>
+        <tr><td>5. 세금우대 종합저축·개인종합 자산관리계좌 배당</td><td>100분의 9</td></tr>
+        <tr><td>6. 영농·영어조합법인 — 법인세 면제되는 작물재배업 소득은 전액, 그외 면제소득은 연도별 1인당 1,200만원: 100% 면제 / 위 배당소득 면제를 제외한 배당(분리과세): 100분의 5</td><td>100% 면제 / 100분의 5</td></tr>
+        <tr><td>7. 농업회사 법인 — 농업소득 중 식량작물재배업(법인세 면제): 면제 / 농업외소득 중(농축수산물유통 등 부대사업): 14% 분리과세 / 그 외 소득: 14% 종합과세</td><td>면제 / 14% 분리과세 / 14% 종합과세</td></tr>
+        <tr><td>8. 기타 일반적인 배당소득</td><td>100분의 14</td></tr>
+      </tbody>
+    </table>
+    <p>※ 배당확정사업연도의 직전사업연도의 총소득금액에서 해당 소득금액이 차지하는 비율에 의하여 면제되는 배당소득 및 분리과세 배당소득을 구분한다. (조특법 시행령 제63조 제3항)</p>
+
+    <h4>(3) 배당소득의 수입시기</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>종류</th><th>수입시기</th><th>원천징수시기 (간주지급시기·지급시기의제)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="7">실지배당</td><td>무기명주식의 이익·배당</td><td>그 지급을 받은 날</td><td>그 지급을 받은 날</td></tr>
+        <tr><td>잉여금 처분에 의한 배당</td><td>당해 법인의 잉여금처분 결의일</td><td>결의일로부터 3개월 / 11-12월 결정은 다음연도 2월</td></tr>
+        <tr><td>건설이자의 배당</td><td>당해 법인의 건설이자 배당 결의일</td><td>건설이자 배당 결의일</td></tr>
+        <tr><td>집합투자기구로부터 이익</td><td>그 이익을 지급받은 날 / 원본에 전입 특약의 경우 원본 전입 되는날</td><td>그 이익을 지급받은 날 / 원본 전입 특약의 경우 원본 전입 되는날</td></tr>
+        <tr><td>출자공동사업자의 배당</td><td>그 과세기간 종료일</td><td>과세기간 종료후 3개월</td></tr>
+        <tr><td>유사배당(수익배분성격)</td><td>그 지급을 받은 날</td><td></td></tr>
+        <tr><td>동업기업으로부터의 배분 금액</td><td>그 과세연도 종료일</td><td>과세기간 종료후 3개월</td></tr>
+        <tr><td rowspan="4">의제배당</td><td>감자·탈퇴·퇴사로 인한 배당</td><td>감자결의일, 퇴사·탈퇴일</td><td>감자결의일, 퇴사·탈퇴일</td></tr>
+        <tr><td>법인의 해산으로 인한 배당</td><td>잔여재산가액 확정일</td><td>잔여재산가액 확정일</td></tr>
+        <tr><td>법인의 합병·분할로 인한 배당</td><td>합병등기일·분할등기일</td><td>합병등기일·분할등기일</td></tr>
+        <tr><td>잉여금의 자본전입으로 인한 배당</td><td>자본 전입 결의일</td><td>자본 전입 결의일 또는 이사회 결의일</td></tr>
+        <tr><td>인정배당</td><td>법인세법에 의하여 배당으로 처분된 금액</td><td>당해 사업연도 결산확정일</td><td>소득금액변동통지서 받은날 / 정기분 또는 수정신고일</td></tr>
+      </tbody>
+    </table>
+
+    <h4>의제배당 상세</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>내용</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>감자·탈퇴·퇴사</td><td>주식의 소각이나 자본의 감소로 인하여 주주가 취득하는 금전 등의 재산가액 합계가 당해 주식을 당초 취득하기 위해서 소요된 금액을 초과하는 경우 그 금액</td></tr>
+        <tr>
+          <td rowspan="2">잉여금의 자본전입</td>
+          <td>
+            <strong>의제배당 해당되는 경우:</strong> 이익잉여금의 자본전입 / 합병차익·분할차익: 적격합병으로 피합병법인으로부터 승계한 잉여금 중 자본조정·과세된 자본잉여금·이익잉여금이 주식발행초과금으로 전환되어 자본전입하는 경우 (2012.2.2 이후 전입분부터) / 1%세울이 적용된 토지의 재평가적립금 / 주식소각일로부터 2년이내에 자본에 전입하는 자기주식 소각이익 / 자기주식 소각시점의 시가가 취득가액을 초과하는 경우 소각이익 / 기타 의제배당에서 제외하는 잉여금외의 잉여금 전부<br>
+            <strong>의제배당 해당되지 않는 경우:</strong> 자본잉여금에 해당하는 주발초과금·감자차익·합병차익·분할차익 / 재평가 적립금 / 소각일로부터 2년 경과후 자본에 전입하는 자기주식 소각이익 / 자본금의 150%를 초과하는 자본준비금을 감액하여 배당하는 경우(2014이후)
+          </td>
+        </tr>
+        <tr><td></td></tr>
+        <tr><td>자기주식 있는 법인의 자본준비금 전입액</td><td>자기주식을 보유한 상태에서 의제배당이 아닌 자본준비금, 재평가 가액을 자본전입할에 따라 당해 법인외의 주주 등의 지분비율이 증가한 경우 증가지분에 해당하는 주식 가액</td></tr>
+        <tr><td>해산, 합병, 분할</td><td>해산·합병·분할로 인하여 취득하는 주식의 가액이 당해 주식을 취득하기 위하여 소요된 금액을 초과하는 경우 그 초과금액</td></tr>
+      </tbody>
+    </table>
+
+    <h4>이익잉여금의 자본전입이 배당수입으로 과세되는 경우</h4>
+    <p>당해 잉여금이 법인세과세대상이면 즉, 해당 법인의 세무조정시 익금산입대상이면 이를 재원으로한 자본전입의 경우 출자자에 대하여는 배당수입 중 의제배당으로 법인세 또는 종합소득세 과세대상이 된다.</p>
+    <p>이익소각의 경우 배당소득 여부 (서이46013-11898 2003.10.31): 상장기업이 이익소각(자본감소는 없음)을 목적으로 해당 연도 이익잉여금의 한도(배당가능) 내에서 주식소각을 목적으로 자기주식을 취득하여 소각하는 경우, 주주가 취득하는 금전 등의 가액이 그 주식의 취득가액을 초과하는 경우 그 금액은 배당소득(의제배당)에 해당</p>
+
+    <h4>(4) 배당소득 과세방법</h4>
+    <h4>① 과세방법 구분</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>당연종합과세대상</th><th>조건부종합과세대상</th><th>분리과세대상</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>국내에서 지급받은 원천징수되지 않는 이자·배당소득 / 국외에서지급받은 국내 원천 징수 수지 않는 이자·배당소득 / 출자공동사업자 분배금</td>
+          <td>2천만원초과 금융소득 / 상장·비상장, 대주주·소액주주 구분없이 국내·국외에서 지급받는 분리과세·비과세 대상이 아닌 모든 배당소득 / 원천징수된 이자소득 / 동업기업에서 배분받은 소득</td>
+          <td>영농·영어조합법인 분리과세 대상 배당 / 분리과세되는 비실명배당소득 / 세금우대종합저축·선박투자회사 배당 / 배당소득증대세제 배당으로 25% 원천징수 분리과세를 선택한 경우 (세액공제 전환되었으나 2018년 폐지) / 2천만원이하이면서 원천징수된 금융소득</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>※ 2011귀속부터는 원천징수대상이나 원천징수되지 않은 비영업대금의 이자 등에 대해서는 2천만원이하의 경우에도 종합과세하며 이경우에도 25% 또는 14%와 비교 과세한다.</p>
+
+    <h4>② 총수입금액계산 특례 (배당가산제도 gross-up)</h4>
+    <p>현금배당 외에도 위의 의제배당 등의 경우도 배당소득으로 과세를 하고 있으나 본래 법인세가 과세된 이익이 주주에게 배당하는 과정에서 개인주주에게는 배당소득세가 법인주주에게는 법인세가 다시 한번 부과되는 이중과세를 조정하기 위하여 개인에게는 배당가산 및 배당세액공제, 법인에게는 일정액의 익금불산입제도를 두고 있다.</p>
+    <div class="highlight-box">
+      1. 배당가산금액 (gross-up): 배당가산대상 배당소득금액과 기준금액 2천만원을 초과하는 금융소득 중 적은 금액<br>
+      2. 배당소득금액 = 배당소득총수입금액 + (금융소득중 2천만원을 초과하는 금액중 배당수입금액) × 10% (2023년 이전 지급분은 11%)
+    </div>
+    <p>개인이 2천만원(금융소득 합계기준)을 초과하는 경우 2,000만원 넘는 금액 중 배당가산 대상분에 대하여 10%를 가산하여 종합소득세 신고한다.</p>
+
+    <h4>③ 배당가산 및 배당소득세액공제 제외 배당소득</h4>
+    <p>이제도는 법인세 과세와 배당소득세 과세의 이중과세를 조정하기 위한 제도이므로 당초부터 법인세가 과세되지 않는 소득에 대해서도 이 혜택을 주는 것은 모순이다. 그러므로 아래와 같이 법인세 과세대상이 아닌 배당소득, 법인세를 전액 면제받는 소득은 배당가산 및 세액공제를 적용하지 않는다. (자세한 내역은 소득세법 제17조 제3항 단서 참조)</p>
+    <ul class="content-list">
+      <li>자기주식소각이익의 자본전입으로 인하여 발생하는 의제배당</li>
+      <li>자본준비금과 토지의 재평가차액 (재평가세율 1% 적용)을 자본에 전입함에 따른 의제배당</li>
+      <li>의제배당 중 법인이 자기주식 또는 자기출자지분을 보유한 상태에서 자본준비금·재평가가적립금을 자본전입 함에 따라 그 법인 외의 주주 등의 지분비율이 증가한 경우 증가한 지분비율에 상당하는 주식 등의 가액에 해당하는 의제배당</li>
+      <li>국내에서 받는 투자신탁수익의 분배금 (증권투자신탁은 발행회사의 주주가 아니기 때문임)</li>
+      <li>외국법인으로부터 받는 배당 및 분배금과 외국의 법률에 의한 건설이자의 배당 등</li>
+      <li>증권투자회사(mutual-fund)와 자산유동화전문회사(SPC)로부터 받는 배당</li>
+      <li>법인세가 과세되지 않는 동업기업에서 배당받은 동업자 및 출자공동사업자의 손익분배금액</li>
+      <li>조특법 규정에 의해 최저한세가 적용되지 않는 법인세의 비과세·면제·감면·소득공제를 받는 법인으로부터 배당소득이 있는 경우 당해 배당에 대해 일정율을 곱하여 산출한 금액</li>
+    </ul>
+
+    <h4>④ 배당가산제도 적용대상 금액</h4>
+    <div class="highlight-box">
+      배당가산제도 적용대상 금액은 금융소득종합과세대상 금액을 말하므로 당연종합과세 대상 금액인 원천징수수 않은 배당소득과 조건부 금융소득의 경우 <strong>2천만원 초과되는 부분에만 배당가산제도 및 배당소득세액공제가 적용</strong>된다.
+    </div>
+    <p>따라서: 내국법인으로부터 받은 이익이나 잉여금의 배당·분배금과 건설이자의 배당 / 법인으로 보는 단체로부터 받은 배당·분배금 / 의제배당 (일부 배당가산이 적용되지 않는 의제배당 있음) / 법인세법에 의하여 배당으로 처분된 금액은 원칙적으로 배당가산이 적용된다</p>
+
+    <div class="highlight-box">
+      <strong>기준금액 2천만원은 다음의 순서대로 계산한다</strong><br>
+      ① 이자소득 → ② 배당가산이 적용되지 않는 배당소득 → ③ 배당가산이 적용되는 배당소득
+    </div>
+
+    <div class="highlight-box">
+      <strong>계산사례:</strong><br>
+      이자소득 15,000,000 / 배당소득 중 외국인 투자법인으로부터 받은 법인세 면제된 배당소득 21,000,000원 / 비상장법인으로부터 받은 배당 23,000,000원 있을 때 배당가산 대상 배당 소득금액 계산?<br><br>
+      합계 금융소득 59,000,000 - 기준금액 20,000,000 = 39,000,000과 배당가산 대상 배당소득 23,000,000원중 적은 금액인 23,000,000<br>
+      배당가산액 및 배당세액공제 대상액 = 23,000,000 × 10% = 2,300,000
+    </div>
+
+    <h4>(5) 배당소득세 세액공제</h4>
+    <div class="highlight-box">
+      <strong>① 배당세액 공제금액</strong><br>
+      배당세액공제 = 배당가산 대상 배당소득 × 10% = 배당가산금액 (GROSS-UP 금액)<br>
+      (2024년 이후 지급분부터 법인세율의 인하로 인하여 종전11%에서 10%로 정정 되었다)
+    </div>
+
+    <h4>② 배당세액공제 적용시 결정세액의 계산</h4>
+    <p>종전의 배당세액공제 한도액의 규정은 2004년 이후 폐지되고 다음과 같이 배당세액공제를 적용 받을 경우 종합소득세 결정세액을 계산하여 배당세액공제 한도액을 계산하며 이는 결국 금융소득종합과세로 인하여 추가되는 산출세액을 한도로 배당세액공제를 해주는 취지로 보이며 배당세액공제 신청서의 별도 작성은 폐지되고 세액계산서에 기재만 하면된다.</p>
+    <div class="highlight-box">
+      배당세액공제 한도액 = 금융소득종합과세방식 산출세액 - 금융소득분리과세방식 산출세액<br><br>
+      아래의 가와 나중에서 큰금액을 결정세액으로 한다.<br>
+      (가) 금융소득종합과세방법(배당가산방법) = 종합소득산출세액 - 배당세액공제<br>
+      (나) 금융소득분리과세방법 = (다른 종합소득 - 소득공제) × 기본세율 + (금융소득금액 × 원천징수세율 14% 또는 25%)
+    </div>
+
+    <h4>(6) 익명조합출자금의 이익배분 (출자공동사업자)</h4>
+    <ol>
+      <li>사업자이 자신의 영업을 위하여 다른 개인들과 상법 제78조에 해당하는 익명조합계약을 체결하고 익명조합원으로부터 출자 받은 금액에 대하여 같은법 제82조의 규정에 따라 그 영업으로 인한 이익을 분배한 경우 동 이익분배를 받은 익명조합원의 입장에서는 이자소득으로 보았으나</li>
+      <li>그러나 2007년 소득세법의 개정으로 개인과 개인의 공동사업의 경우, 경영에 참여하는 업무집행공동사업자는 종전과 같이 사업소득의 분배로 보아 사업소득으로 과세하고, 경영에 참여하지 않은 출자공동사업자(익명의 조합출자자)는 소득의 분배를 배당소득으로 보아 25% 세율로 원천징수하되 금융소득당연 종합과세에 해당되며 이때는 14%와 비교과세한다. 법인 출자공동사업자는 배당소득이 아니고 이자소득으로 보아 원천징수하여야한다.</li>
+      <li>출자공동사업자란 다음의 어느 하나에 해당하지 아니하는 자로서 공동사업의 경영에 참여하지 아니하고 출자만 하는 자를 말한다: 공동사업에 성명 또는 상호를 사용하게 한 자 / 공동사업에서 발생한 채무에 대하여 무한책임을 부담하기로 약정한 자</li>
+      <li>따라서 2007년부터 출자공동사업자의 경우에도 업무집행공동사업자와 구분하여 공동사업으로 사업자등록을 하여야 이를 위반시는 무신고 및 허위신고시 수입금액의 0.5% 변동내역에 대한 무신고 허위 신고시 수입금액의 0.1%가 공동사업장 등록불성실 가산세로서 부과된다.</li>
+    </ol>
+    <div class="highlight-box">
+      투자자들과의 공동사업계약이 익명조합약정에 해당하는지 여부: 법인의 사업에 개인이 투자를 한 경우라 할지라도 그 영업에서 이익이 난 여부를 따지지 않고 상대방이 정기적으로 일정한 금액을 지급하기로 약정한 경우는 가령 이익이라는 명칭을 사용하였다 하더라도 익명조합약정이라 할 수 없음 (이자소득이 아닌 사업소득·배당소득에 해당한다는 뜻입니다) (서울행법2021구합88265 2023.02.10.)
+    </div>
+
+    <hr>
+
+    <h3>3. 금융소득 종합과세</h3>
+
+    <h4>(1) 과세대상 (법 제14조 제3항 제3 ~ 6호)</h4>
+    <p>금융소득은 이자와 배당소득을 말하며 과세방법은 3가지로 분류하여 비과세·분리과세되는 금융소득은 원천징수로서 납세의무가 종결되며, 당연종합과세 대상 금융소득은 금액과 상관없이 종합과세되며, 그 의 금융소득은 <strong>개별 금융소득 2천만원 초과분에 대하여 종합과세</strong>된다.</p>
+    <p>금융소득종합과세는 원칙적으로 거주자인 개인에게 적용되므로 수익을 구성원에게 배분하지 않는 단체 (종중·상가 아파트 관리사무소·법인이 아닌 종교단체·동창회 등)로서 단체명을 표기하여 금융거래를 하는 이자소득 및 배당소득에 대해서는 「소득세법」제14조 제3항 제3호의2에 따라 소득세를 분리과세하도록 규정하고 있으므로 금융소득종합과세 해당되지 않는다.</p>
+    <p>비거주자는 분리과세가 원칙이지만 예외적으로 국내 사업장 또는 부동산임대소득과 실질적으로 관련되거나 귀속되는 경우에는 거주자와 동일하게 원천징수하고 금융소득종합과세대상이 된다.</p>
+
+    <table class="content-table">
+      <thead>
+        <tr><th>당연종합과세대상 (금액에 관계없이 합산신고)</th><th>조건부종합과세대상 (2천만원 초과시 합산신고)</th><th>분리과세대상 (원천징수로 납세의무 종결)</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>국내에서지급받은 원천징수 되지않는 이자·배당소득 / 국외에서지급받은 국내원천징수되지않는 이자·배당소득 / 출자공동사업자 분배금</td>
+          <td>상장및비상장, 대주주와 소액주주 구분없이 국내·국외에서 지급받는 분리과세·비과세 대상이 아닌 모든 배당소득 / 원천징수된 이자소득 / 동업기업에서 배분받은소득</td>
+          <td>영농·영어조합법인 분리과세 배당 / 분리과세되는 비실명배당소득 / 세금우대종합저축·선박투자회사 배당 / 2천만원 이하로서 원천징수된 금융소득</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>(2) 과세 방법</h4>
+    <ul class="content-list">
+      <li>금융소득중 2천만원까지는 원천징수세율(14%, 25%)을 적용하여 계산하고 2천만원을 초과하는 금융소득에는 기본세율(6-45%)을 적용하여 계산한 세액을 합계하여 산출세액으로 하고, 금융소득에 대하여 원천징수된 세액전부를 기납부세액으로 하여 납부할 세액을 계산한다. 따라서 2천만원 이내의 금액은 실질적으로 분리과세와 동일한 효과가 발생한다.</li>
+      <li>소득세 세율구조가 6%-45%의 누진세율로 되어있어 종합과세기준금액을 초과하여 종합과세되는 금융소득의 산출세액이 오히려 원천징수세액(14%, 25%) 보다도 적어질 수가 있으므로 금융소득에 대하여는 최소한 원천징수세율보다 더 많은 세부담이 되도록 하기위하여 세액계산의 특례 (비교과세, 결손금 이월결손금·기부금 불공제 제도)를 두고 있다.</li>
+      <li>기준초과금액 2천만원 초과여부를 판단시는 배당소득에 배당가산액(gross-up)을 하지 않으나 금융소득 종합과세 대상이 된다면, 금융소득 수입금액 계산시 2천만원 초과 부분에 대하여 배당가산액(gross-up) 10% (2023년 이전 11%)를 적용하여 계산한다.</li>
+    </ul>
+
+    <h4>(3) 세액의 계산</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>금융소득이 2천만원 초과할 때</th><th>금융소득이 2천만원 이하인 경우</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            다음 ① ② 중 큰 금액<br>
+            ① 합산과세방식 산출세액: (2천만원 × 14%) + (다른종합소득 + 기준초과금융소득 - 소득공제) × 기본세율 / 기준초과금융소득 = 배당가산한 금액<br>
+            ② 분리과세방식 산출세액: (비영업대금 × 25% + 다른금융소득 × 14%) + (다른종합소득 - 소득공제) × 기본세율 / 다른금융소득 = 배당가산 하기전 금액
+          </td>
+          <td>
+            ① 분리과세방식 산출세액: (비영업대금 × 25% + 다른금융소득 × 14%) + (다른종합소득 - 소득공제) × 기본세율 / 다른금융소득 = 배당가산 하기전 금액 / 원천징수되지 아니한 소득에 대하여 비영업대금은 25% 그외는 14% 적용
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>(4) 금융소득 종합과세의 이해</h4>
+    <div class="highlight-box">
+      <strong>금융소득 종합과세에서 금융소득으로서 원천징수된 세액은 환급되지 않는다.</strong><br>
+      2000만원 초과 고액 금융소득에 대한 추가과세의 취지를 살리고, 실질적으로 결손금 등의 공제효과가 없는 납세자의 결손금 공제등 불이익을 막기 위해서.<br><br>
+      원천징수세율(14%, 25%)을 적용 받는 이자·배당소득에 대하여는 결손금·이월결손금·공제가 되지 않고, 종합소득세율(기본세율)을 적용받는 경우 납세자의 선택에 의하여 결손금·이월결손금 공제가 가능하다. (법 제45조 제5항)
+    </div>
+    <p>또한 소득세법상 특별세액공제 (연금저축·기부금 세액공제등) 해외납부세액공제 등 각종 세액공제의 경우에도 "원천징수 세율을 적용받는 이자·배당소득에 대한 산출세액은 제외"라고 규정하여 환급세액이 발생하는 것을 방지하고 있다 (법 제62조 령 제119조의 3)</p>
+    <p>따라서 실무적으로는 금융소득 종합소득세신고서 작성시 원천징수된 이자·배당소득이 환급 나오지 않는 과세표준까지 결손금 등의 공제를 받거나, 세액공제를 받고 나머지 금액은 이월하면 될 것으로 보인다.</p>
+
+    <h4>해외주식투자 (해외투자 펀드 등)</h4>
+    <p><strong>간접투자:</strong> (배당소득을 국내운용사를 통하여 수령) 해외에서 제한 세율에 의하여 원천징수(10-15%)된 금액을 14% 범위내에서 국세청이 운용사에 선납세금으로 보아 환급해주고, 운용사는 투자자에게 지급시 지급금액 (해외실수령액+국세청환급세액)의 14%를 원천징수한다. 이배당소득은 조건부종합과세 (2000만원 초과시 합산과세) 대상이며 배당세액공제 대상이 아니고 원천징수된 세액 14%는 기납부세액으로 공제한다.</p>
+    <p><strong>직접투자:</strong> (배당소득을 의국법인으로부터 직접수령)는 금액에 관계없이 당연종합과세에 해당하며 신고시에 해외에서 제한 세율에 의하여 원천징수된 세액은 해외납부세액 공제를 적용한다.</p>
+
+    <h4>금융소득 종합과세 계산 사례</h4>
+    <div class="highlight-box">
+      <strong>사례 조건:</strong><br>
+      1. 이자소득 중 금융기관 원천징수된 이자소득 18,000,000원(원천징수 됨)<br>
+      2. 사채이자 15,000,000원 (원천징수된 이자소득. 이 경우 비영업대금의 이익에 기재)<br>
+      3. 국외에서 지급받은 이자 5,000,000 (외국에서는 원천징수 되었으나 국내에서 원천징수 안됨)<br>
+      4. 단독 세대주로서 사업소득 80,000,000원 있음
+    </div>
+
+    <h4>이자소득명세서 작성방법</h4>
+    <ul class="content-list">
+      <li>소득세법·조세특례제한법에 따라 비과세 또는 분리과세되는 이자소득은 이 서식의 작성대상에서 제외되며, 개인별 금융소득(이자·배당소득의 합계액)이 2천만원을 초과하는 경우로서 이자소득이 있는 때에 작성하여야 합니다.</li>
+      <li>소득구분 코드: 11(비영업대금 이익 원천징수), 12(소득세법 127조 원천징수되지 않은 이자소득), 13(그 밖의 이자소득 원천징수), 15(국내에서 원천징수 되지 않는 국외 이자), 16(동업기업에서 배분받은 이자소득), 17(127조 원천징수되지 않은 비영업대금 이익)</li>
+    </ul>
+
+    <h4>배당소득명세서 작성방법</h4>
+    <ul class="content-list">
+      <li>비과세 또는 분리과세되는 배당소득은 작성대상에서 제외되며, 개인별 금융소득(이자·배당소득의 합계액)이 2천만원을 초과하는 경우로서 배당소득이 있는 때에 작성하여야 합니다.</li>
+      <li>소득구분 코드: 21(기준금액 2천만원 초과분에 대하여 배당가산(Gross-Up) 하는 배당소득), 22(배당가산(Gross-Up) 하지 아니하는 배당소득), 23(소득세법 127조에 따라 원천징수되지 않은 배당소득), 26(국내에서 원천징수되지 않는 국외 배당소득), 28(소득세법 17조제1항제8호에 따른 출자공동사업자의 배당소득), 29(조세특례제한법 제100조의18에 따라 동업기업에서 배분받은 배당소득)</li>
+      <li>배당가산액(Gross-Up): 배당소득명세서의 '21' 코드 (7) 가산액의 합계액(= (6) 배당가산액(Gross-Up) 대상금액 × 가산율)을 적습니다.</li>
+    </ul>
+
+    <h4>종합소득산출세액계산서(금융소득자용) 작성방법</h4>
+    <ul class="content-list">
+      <li>"금융소득"은 소득세법·조세특례제한법에 따라 비과세 또는 분리과세되는 이자·배당소득 이외에 종합과세되는 이자·배당소득을 말한다.</li>
+      <li>"원천징수되지 않은 이자·배당소득"(②,③,⑦)은 소득세법 제127조에 따라 원천징수되지 않은 이자·배당소득(국외금융소득 등)을 말하고, 그 중 이자소득은 비영업대금이익(③)과 그 외의 이자소득(②)으로 구분한다.</li>
+      <li>"⑫기준초과금액"은 과세대상금융소득에서 종합과세기준금액(2천만원)을 공제한 금액을 말한다. 금융소득 종합과세기준금액: 2천만원(2012귀속까지는 4천만원)</li>
+    </ul>
+
+  </div>
+  <div class="memo-wrap">
+    <div class="memo-label">메모</div>
+    <textarea class="memo-box" id="memo-sec-interest-div" placeholder="메모를 입력하세요..."></textarea>
+    <button class="memo-clear" onclick="clearMemo('memo-sec-interest-div')">지우기</button>
+  </div>
+</section>
+
+<section id="sec-business" class="section-card">
+  <div class="section-header">
+    <h2>제04장 사업소득</h2>
+    <span class="src-tag">원천: 사업소득_2025.pdf</span>
+  </div>
+  <div class="section-body">
+
+    <h3>제2장 종합소득의 종류 — 4. 사업소득</h3>
+
+    <h3>가. 부동산 임대소득</h3>
+    <p>2010년부터 부동산 임대소득의 별도 분류가 폐지되고 사업소득에 포함되었다. 그러나 부동산 임대소득과 사업소득과 차별적으로 적용되는 총수입금액계산, 결손금 및 이월결손금 공제 등 종전의 차별적인 내용은 계속적으로 적용된다.</p>
+
+    <h4>(1) 부동산 임대소득의 종류</h4>
+    <ul class="content-list">
+      <li>① 부동산 또는 부동산상의 권리 대여로 인하여 발생하는 소득</li>
+      <li>② 공장 재단·광업 재단의 대여로 인하여 발생하는 소득 (공장재단이란 공장저당법 규정에 의하여 공장재단으로 설정등기 한 재산을 말한다. 여기에는 토지·건물·기계·공구 등이 전체를 포함한 것을 말하며 공장재단이 아니거나 공장재단에서 분리된 기계장치들을 별도로 임대한 경우는 사업소득에 해당한다.)</li>
+      <li>③ 광업권자·조광권자·덕대가 채굴에 관한 권리를 대여함으로 인하여 발생하는 소득 (채굴할 수 있는 권리와 시설물 광산을 일괄하여 대여하는 경우를 말하며 부분적인 대여에 해당하는 분철료 등은 사업소득에 해당한다.)</li>
+    </ul>
+
+    <div class="highlight-box">
+      <strong>기타소득(지상권)인지 사업소득(부동산임대)인지?</strong><br>
+      토지 위에 송전선로가 통과함에 따라 토지에 대한 구분지상권을 설정하여 주고 송전선로가 존속하는 기간 동안의 공간사용대가(감정평가액 상당액 등 사전합의된 금액)를 구분지상권에 대한 지료 및 사용보상합의금으로 구분하여 일시에 지급받는 경우 기타소득에 해당되는 것입니다. (서면법규-455 2013.04.22.)<br><br>
+      2018년부터 공익사업과 관련 없는 지역권·지상권 설정대여 소득은 사업소득 중 부동산임대업으로 과세하도록 소득세법 제19조 제1항이 개정되었다.
+    </div>
+
+    <div class="highlight-box">
+      <strong>분양을 영위하는 시행사의 임대수익보장제에 따른 임대소득 보전금액</strong><br>
+      분양사업자가 상가를 분양하면서 미분양상가의 분양촉진을 위해 수분양자들에게 소유권이전을 완료한 후 임대권한을 부여받고 일정금액을 임대수익으로 보장하여 지급하는 경우, 수분양자가 보장받는 해당 임대수익 보장금은 부가세 면세되는 법 제19조제1항제12호의 사업소득에 해당하는 것임. (서면부가2017-2776 2018.02.28.)
+    </div>
+
+    <h3>나. 주택 임대소득</h3>
+
+    <h4>(1) 주택 임대소득 종합소득세 과세기준 (법 제25조 제1항 시행령 제53조)</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>과세 기준</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>월세</td>
+          <td>① 2주택 이상 소유자 (부부합산)<br>② 1주택 소유자로 고가주택 (과세기간 종료일·양도일 현재 기준시가 12억원 초과 주택 및 국외에 소재하는 주택의 임대소득)</td>
+        </tr>
+        <tr>
+          <td>보증금 (간주임대료)</td>
+          <td>3주택이상 소유자 (부부합산)로서 보증금 합계 3억원 초과분의 60%에 대해 정기예금 이자율 (2024년 3.5%)을 곱하여 과세한다 (2026부터 기준시가 12억 초과 고가의 2주택은 12억초과 보증금에 대해 간주임대료 계산한다)<br>※보증금 과세제외 : 소형주택(2019년부터 40㎡이하이면서 해당연도 종료일 기준 기준시가가 2억 이하의 주택)은 주택수 산정과 보증금 계산에서 모두 제외한다.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>※ 과세대상 판정을 위한 주택수는 부부합산하여 계산하나, 3억원 공제금액의 계산 및 소득금액의 계산은 각각 개인별로 적용한다.</p>
+    <p>※ 기준시가 2억원이하의 국민주택은 3주택수의 계산에서 제외되므로 다른 주택이 3주택이상이어서 보증금이 과세대상이라 하더라도 2억이하 국민주택은 보증금의 계산에서도 제외되어야 한다. (서면법규-214 2014.3.10)</p>
+    <p>※ 오피스텔을 임차인이 상시 주거용으로 사용한 경우 주택임대소득으로 과세한다.</p>
+
+    <h4>① 주택수의 계산</h4>
+    <ul class="content-list">
+      <li>금융소득종합과세·종합부동산세의 과세표준 계산과 달리 주택임대소득 계산시 주택수의 계산은 본인과 배우자의 주택을 합하여 계산한다. (시행령 제8조의2 제3항)</li>
+      <li>다가구주택은 건물등기부분에 각 동별로 표시되어 있고, 각 호별로 구분 등기되어있지 아니하므로 국민주택규모를 초과하는 각 동을 각각 하나의 주택으로 보아 그 보증금 등에 대해 종합소득세를 과세한 이 건 처분은 잘못이 없음 (조심2016중3116 2016.10.12.)</li>
+      <li>공동소유의 주택은 지분이 가장 큰 자의 소유로 계산하되, 지분이 가장 큰 자가 2인 이상인 경우에는 각각의 소유로 계산한다. 다만, 지분이 가장 큰 자가 2인 이상인 경우로서 그들이 합의하여 그들 중 1인을 당해 주택의 임대수입의 귀속자로 정한 경우에는 그의 소유로 계산한다.</li>
+      <li>2020년 귀속부터 아래중 하나에 해당하면 소수지분자도 주택수에 가산한다: 해당 주택에서 발생하는 임대 수입금액이 연간 600만원 (전체 수입금액에 지분율을 곱한 수입금액을 말한다)인 사람 / 과세기간종료일 또는 양도일 현재 기준시가가 9억원을 초과하는 주택의 30%를 초과하는 공유지분을 소유하는 사람</li>
+      <li>임차 또는 전세받은 주택을 전대하거나 전전세하는 경우에는 당해 임차 또는 전세받은 주택을 임차인 또는 전세받은 자의 주택으로 계산한다.</li>
+    </ul>
+
+    <h4>② 고가주택</h4>
+    <ul class="content-list">
+      <li>과세기간 종료일 (12.31) 또는 당해 주택의 양도일 현재 국세청 기준시가에 의한 기준시가가 9억원을 초과하는 주택을 말한다 (2023년부터 12억원)</li>
+      <li>고가 주택은 본인이 거주하더라도 일부를 타인에게 임대를 준 경우 그 부분에 대하여 과세대상이 된다.</li>
+      <li>고가 주택 임대와 일반주택의 임대는 추계신고시 단순경비율에서 차이가 있다</li>
+    </ul>
+
+    <h4>(2) 보증금·전세금 등의 총수입금액 계산</h4>
+    <div class="highlight-box">
+      <strong>간주임대료 수입금액 = (임대보증금 - 300,000,000) × 임대일수 × 60/100 × 3.5% / 365</strong>
+    </div>
+    <ul class="content-list">
+      <li>3억원: 보증금을 받은 주택이 2주택 이상인 경우에는 보증금 등의 적수가 가장 큰 주택의 보증금 등부터 순서대로 뺀다 (보증금 과세대상 3주택 이상의 계산시 주택수의 계산은 부부합산하지만 수입금액계산은 각각 개별적으로 한다. 즉 3억원의 공제금액은 각각 계산한다. 또한 공동사업 주택 임대의 경우는 사업장을 기준으로 3억원을 공제한다)</li>
+      <li>기장신고시: 위의 산식에 의하여 계산한 금액에 보증금운용수익 (해당 임대사업부분에서 발생한 수입이자와 할인로 및 배당금으로서 비치·기장한 장부나 증빙서류에 의하여 당해 임대보증금 등으로 취득한 것이 확인되는 금융자산으로부터 발생한 것에 한한다)을 차감한다.</li>
+    </ul>
+    <p>※ 주택의 전세보증금이 과세대상이 되는 경우 일반상가 등의 전세보증금에서 공제하는 건설비 상당액공제는 없으며 다만 전세보증금 총액에서 3억원을 공제하고 잔액에 대하여 60%를 과세대상으로 한다.</p>
+
+    <h4>(3) 주택임대소득 계산 (법12조, 14조3항, 64의2조, 70조2항, 45조2항)</h4>
+    <ul class="content-list">
+      <li>① 주택임대소득 총수입금액 2천만원이하는 2014-2018까지 비과세하였다. 비과세대상이 아닌 과세대상 주택임대소득이라 하더라도 거주자별 합계 주택임대 수입금액기준으로 2천만원 이하의 임대소득은 종합소득세를 2014-2018까지 비과세하였다.</li>
+      <li>② 주택임대소득 총수입금액 2천만원이하는 2019년 귀속부터 선택적 분리과세한다. 2019년 이후 발생되는 총수입금액 2천만원 이하의 주택임대소득은 분리과세와 종합과세를 선택할 수 있으며 이때 과세 방법은 다음과 같다. (비거주자도 적용. 국조2020-3106 2020.11.05)</li>
+    </ul>
+    <div class="highlight-box">
+      종합과세: (주택임대소득 + 종합과세대상 다른 소득) × 누진세율(6~45%)<br>
+      분리과세: 주택임대소득 × 14% + 종합과세대상 다른 소득 × 누진세율(6~45%)
+    </div>
+
+    <h4>③ 분리과세 세액계산 방법</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th colspan="2">분리과세 (수입금액 2000만원이하)</th><th>종합과세</th></tr>
+      </thead>
+      <tbody>
+        <tr><td></td><td>등록 임대주택</td><td>미등록 임대주택</td><td></td></tr>
+        <tr><td>수입금액</td><td>월세 + 간주임대료</td><td>월세 + 간주임대료</td><td>월세 + 간주임대료</td></tr>
+        <tr><td>필요경비</td><td>수입금액 × 60%</td><td>수입금액 × 50%</td><td>추계: 경비율을 / 기장: 실제필요경비</td></tr>
+        <tr><td>소득금액</td><td>수입금액 - 필요경비</td><td>수입금액 - 필요경비</td><td>수입금액 - 필요경비</td></tr>
+        <tr><td>과세표준</td><td>소득금액 - 4백만원</td><td>소득금액 - 2백만원</td><td>소득금액 - 소득공제</td></tr>
+        <tr><td>산출세액</td><td>과세표준 × 14%</td><td>과세표준 × 14%</td><td>과세표준 × 기본세율 (6~45%)</td></tr>
+        <tr><td>공제·감면</td><td colspan="2">주택임대감면30%, 75%</td><td>주택임대감면30%, 75%</td></tr>
+        <tr><td>결정세액</td><td colspan="2"></td><td></td></tr>
+      </tbody>
+    </table>
+    <p>※ 분리과세 기본공제 4백만원·2백만원은 주택임대소득과 다른 종합소득금액 2천만원 이하인 경우에만 적용한다.</p>
+
+    <h4>2024귀속 주택임대 경비율 (분리과세 아닌 종합과세 대상으로 추계신고시 적용)</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>CODE</th><th>세세분류</th><th>단순경비율(%)</th><th>기준경비율(%)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>701101</td><td>주거용건물임대업 (기준시가 12억초과)</td><td>37.4</td><td>9.1</td></tr>
+        <tr><td>701102</td><td>주거용건물임대업 (기준시가 9억이하)</td><td>42.6</td><td>15.5</td></tr>
+        <tr><td>701103</td><td>주거용건물임대업 (국민주택 5호 이상을 5년 이상 장기임대하는 공동·단독주택)</td><td>61.6</td><td>20.1</td></tr>
+        <tr><td>701104</td><td>주거용건물임대업 (국민주택 5호 이상을 5년 이상 장기임대 다가구주택)</td><td>59.2</td><td>17.2</td></tr>
+      </tbody>
+    </table>
+
+    <h4>등록 임대주택의 요건</h4>
+    <ul class="content-list">
+      <li>임대주택등록사업자 (단기민간임대·장기일반민간임대·공공지원민간임대)</li>
+      <li>소득세법에 따른 사업자등록 (세무서와 지방자치단체 모두 등록하여야 한다)</li>
+      <li>임대료·임대보증금 증가율을 5% 초과하지 않을 것. 임대계약체결 또는 임대료 증액후 1년이내 재증액 불가. 임대보증금과 월 임대료 전환은 민간임대주택법을 준용한다.</li>
+    </ul>
+
+    <h4>③ 소형주택 (85㎡ 이하) 임대사업자 세액감면 (조특법 제96조)</h4>
+    <p>소득세법 및 법인세법 규정에 의하여 사업자등록하고 임대주택법에 의하여 임대사업자등록을 한 임대개시일 현재 기준시가 6억원이하의 소형주택 1호이상을 건설임대주택·매입임대주택은 4년이상 임대를 조건으로 30%, 장기일반민간인 임대주택 및 공공지원민간임대주택은 8년이상 임대를 조건으로 75%의 소득세 또는 법인세를 감면하며, 2019년 이후 주택임대소득 수입금액이 2천만원 이하로서 분리과세를 선택한 경우에도 적용한다.</p>
+
+    <h4>④ 주택임대에서 발생한 결손금 및 이월결손금 공제범위 확대</h4>
+    <p>사업소득에서 발생한 결손금 및 이월결손금은 다른 종합소득에서 공제가 가능하지만 부동산임대에서 발생한 결손금·이월결손금은 부동산임대소득에서만 공제가 가능한데, 주택임대에서 발생한 결손금은 2014년 귀속부터 다른 종합소득에서도 공제가 가능하다. 그러나 주택임대를 제외한 부동산임대에서 발생된 결손금은 주택임대소득에서 공제가 안되는 것으로 보고 있다. 따라서 결손금공제에 있어서 주택임대소득은 부동산임대가 아닌 사업소득으로 보아야 한다. (법령해석과-3330 2021.09.28.)</p>
+
+    <p>주택임대소득에 대하여 필요경비로 감가상각비·재세공과금 (재산세 등) 수선수리비 등으로 결손금이 발생시 다른 사업소득에서 공제가 가능하고, 주택임대소득(비과세 소득인 경우 제외)에 대하여 보증금·전세금만을 받는 경우에도 동 주택에 대한 감가상각비 등 비용은 필요경비에 산입할 수 있다 (서면1팀-986 2007.7.11.)</p>
+
+    <h4>⑤ 주택임대소득은 소득세법에 의한 사업자등록 하여야 한다</h4>
+    <p>2019년 부터는 주택임대사업자는 소득세법에 의한 사업자등록을 하여야하며 2019.1.1.이전에 미등록사업자는 2019.12.31.까지 주택임대사업자등록을 하여야한다. 이때 임대주택 소재지·주택종류·전용면적 등이 기재된 임대주택명세서를 같이 제출하여야 한다.</p>
+    <p>또한 면세사업자의 경우 사업자등록 미등록가산세가 없었으나 주택임대사업자의 경우 미등록의 경우 사업 개시일부터 등록을 신청한 날의 직전일까지의 주택임대수입금액의 1천분의 2에 해당하는 가산세가 적용된다. (법 제81조 제15항 신설. 2020.1.1. 이후부터 적용)</p>
+
+    <h4>⑥ 주택 임대료 대하여 계산서를 발행하여야 하는지?</h4>
+    <p>주택 임대법인이 비사업자인 개인에게 주택임대 용역을 제공하는 경우 법인세법 시행령 제164조 및 소득세법 시행령 제211조 규정에 따라 영수증을 교부할 수 있는 것이나 주택임대 용역을 제공 받는자가 법인인 경우에는 계산서를 교부하여야 합니다 (서면2팀-240 2004.02.18)</p>
+
+    <h4>사례 1. 공동으로 주택을 임대하는 경우 수입금액 계산 사례</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>보증금</th><th>월세</th><th>소유현황</th><th>간주임대료 계산</th><th>간주임대료수입</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>A주택</td><td>400,000,000</td><td>1,200,000</td><td>남편 단독</td><td>(4억-3억)×60%×2.9%</td><td>1,740,000</td></tr>
+        <tr><td>B주택</td><td>500,000,000</td><td></td><td>남편:부인 50:50</td><td>(5억-3억)×60%×2.9%</td><td>3,480,000</td></tr>
+        <tr><td>C주택</td><td>30,000,000</td><td>1,300,000</td><td>남편:부인 30:70</td><td>3천×60%×2.9%</td><td>522,000</td></tr>
+        <tr><td>D주택</td><td>170,000,000</td><td></td><td>남편:부인 10:90</td><td>1억7천×60%×2.9%</td><td>2,958,000</td></tr>
+        <tr><td>합계</td><td>1,100,000,000</td><td></td><td></td><td></td><td>8,700,000</td></tr>
+      </tbody>
+    </table>
+
+    <h4>사례 2. 보증금 합계액이 변동하는 경우 간주임대료 수입금액 계산</h4>
+    <p>사업연도중에 보증금 합계액이 변동하는 경우 보증금 등의 합계액이 변동하는 구간별로 보증금 등의 적수가 가장 큰 주택의 보증금 등부터 순서대로 3억원 차감하여 각 기간별로 계산한다.</p>
+
+    <div class="highlight-box">
+      <strong>분리과세 소득 결정세액 계산서 (주요 내용)</strong><br>
+      소득세법에 따라 분리과세되는 주택임대소득 및 기타소득(가상자산소득·계약금이 위약금·배상금으로 대체되는 경우)과 2023년 1월 1일 이후 발생한 연금소득 중 분리과세 연금소득 외의 연금소득이 있는 경우에는 이 서식을 작성해야 한다.
+    </div>
+
+    <h3>다. 사업소득</h3>
+
+    <h4>(1) 사업소득의 종류</h4>
+    <div class="highlight-box">
+      1. 농업(작물재배업은 제외), 임업 및 어업 2. 광업 3. 제조업 4. 전기·가스·증기 및 수도사업 5. 하수·폐기물처리·원료재생 및 환경복원업 6. 건설업 7. 도매업 및 소매업 8. 운수업 9. 숙박 및 음식점업 10. 출판·영상·방송통신 및 정보서비스업 11. 금융 및 보험업 12. 부동산업 및 임대업 (다만, 지역권 등 대통령령으로 정하는 권리를 대여함으로써 발생하는 소득은 제외) 13. 전문·과학 및 기술서비스업(대통령령으로 정하는 연구개발업은 제외) 14. 사업시설관리 및 사업지원서비스업 15. 교육서비스업(대통령령으로 정하는 교육기관은 제외) 16. 보건업 및 사회복지서비스업(「사회복지사업법」 제2조 제1호에 따른 사회복지사업 및 노인장기요양법에 의한 장기요양사업은 제외) 17. 예술·스포츠 및 여가 관련 서비스업 18. 협회및 단체(대통령령으로 정하는 협회 및 단체는 제외)·수리 및 기타 개인서비스업 19. 가구내 고용활동에서 발생하는 소득<br>
+      20. 제1호부터 제19호까지의 규정에 따른 소득과 유사한 소득으로서 영리를 목적으로 자기의 계산과 책임하에 계속적·반복적으로 행하는 활동을 통하여 얻는 소득.
+    </div>
+
+    <h4>(2) 작물재배업</h4>
+    <ul class="content-list">
+      <li>한국표준산업분류상의 농업소득 중 작물재배업은 「소득세법」 제19조 제1항 제1호의 규정에 따라 사업소득을 과세하지 아니한다. 그러나 농지에서 생산한 작물을 현장 또는 시장에서 파는 것은 과세소득이 아니나 판매장을 특설하여 판매하므로 인한 추가소득은 도소매업에서 발생한 소득으로 본다.</li>
+      <li>거주자가 지방세법 제197조 제1호에서 규정하는 농지에서 화훼류를 재배하여 판매하고 얻은 소득에 대하여는 소득세를 과세하지 아니하는 것이나, 당해 화훼류를 농지에서 직접 재배하지 아니하고 화분 등에서 재배하여 판매하고 얻은 소득에 대하여는 소득세법 제19조 제1항 제7호의 규정에 의하여 사업(도매업 또는 소매업)소득으로 소득세를 과세하는 것임. (소득 46011-1362, 1996.05.07)</li>
+    </ul>
+
+    <h4>(3) 신축판매업 (주택 및 상가 등)</h4>
+    <p>소득세법상 주택신축판매는 건설업으로, 부동산매매업은 주택의 건물 신축분양과 구입한 건물(주택·상가 불문)을 재판매하는 경우를 말한다. 따라서 소득세법상 신축판매는 건설업으로, 구입후 신축 없이 재판매하거나 신축 이후 임대로 전환하거나 하는 경우는 부동산매매업이다.</p>
+    <p>개발공급업: 직접 건설활동을 수행하지 않고 전체 건물건설공사를 일괄 도급하여 건물을 건설하고, 이를 분양·판매하는 산업활동을 말한다. 구입한 건물을 재판매하는 경우도 포함.</p>
+
+    <h4>(4) 연구 개발업</h4>
+    <ul class="content-list">
+      <li>거주자가 고용관계 없이 독립된 자격으로 계속·반복적으로 연구용역을 제공하고 받은 대가는 사업소득에 해당하는 것임. 다만, 일시적으로 연구용역을 제공하고 대가를 지급받는 경우에는 기타소득에 해당하는 것임. (소득-537 : 2010.05.04)</li>
+      <li>교수등 개인이 연구주체가 되어서 직접 계약을 맺어 수행하는 연구용역의 연구비는 사업소득에 해당되나, 대학이 자체 연구관리비 규정에 따라 대학에서 연구비를 관리하는 경우에 교수가 제공하는 연구용역은 기타소득에 해당된다. 그러나 교수등 기타 전문지식인이 독립된 자격으로 자기 책임하에 비상업적인 연구용역을 제공하고 지급받는 연구비는 소득세가 과세되지 않는다. (시행령 제41조13항)</li>
+    </ul>
+
+    <h4>(5) 도매업 과 소매업의 구분 (경비율의 적용, 부가세법 적용)</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>내용</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>도매업</td><td>구입한 상품을 가공하거나 변형하지 않고 다른 도·소매업자·산업·상업사용자단체·기관·전문사용자에게 재판매하는 산업활동 (무역업 포함)</td></tr>
+        <tr><td>소매업</td><td>구입한 상품을 가공하거나 변형하지 않고 개인·가정·소비자를 대상으로 재판매하는 산업활동</td></tr>
+      </tbody>
+    </table>
+
+    <h4>(6) 임가공의 제조업 여부</h4>
+    <ul class="content-list">
+      <li>한국표준산업분류에서는 특정 제품을 생산하는 기술과 제조시설을 갖추고 고객으로부터 주문을 받아 생산하여 주문자에게 제공하는 주문생산·일반 계약생산 및 수수료 계약 생산을 제품의 생산(제조)으로 분류하고 있음. 따라서 이러한 주문생산은 소득세법 제19조 제4호의 제조업에 해당하는 것입니다.</li>
+      <li>위탁생산의 제조업 여부 (OEM 생산): 자기가 제품을 직접 제조하지 아니하고 제조업체에 의뢰하여 제조하는 경우로서 다음 각 호의 요건을 모두 충족하는 경우에는 법 제19조 제1항 제3호에 따른 제조업으로 본다. 1. 생산할 제품을 직접 기획(고안 및 디자인·견본제작 등을 포함한다)할 것 2. 그 제품을 자기명의로 제조할 것 3. 그 제품을 인수하여 자기 책임하에 직접 판매할 것</li>
+    </ul>
+
+    <h4>(7) 자문료·고문료의 소득분류</h4>
+    <ul class="content-list">
+      <li><strong>퇴직임원에게 지급하는 경영자문료:</strong> 거주자가 고용관계나 이와 유사한 계약에 의하여 그 계약에 의한 직무를 수행하고 지급받는 보수는 근로소득에 해당하는 것이며, 고용관계 없이 독립된 자격으로 계속적으로 경영자문용역을 제공하고 지급받는 대가는 사업소득에 해당하는 것임. (소득-1144 2009.07.22.)</li>
+      <li><strong>세무사등 전문자격사의 경영자문 용역:</strong> 전문직 또는 컨설팅등을 전문으로 하는 사업자가 독립적인 지위에서 사업상 또는 부수적인 용역인 경영자문용역을 계속적 또는 일시적으로 제공하고 얻는 소득은 사업소득으로, 이의의 소득으로서 고용관계없이 일시적으로 경영자문용역을 제공하고 얻는 소득은 기타소득으로 구분함. (재소득 46073-136 : 2000.08.18)</li>
+      <li><strong>사외이사가 이사회 참석 및 자문등의 용역:</strong> 거주자인 사외이사가 고용관계나 이와 유사한 계약에 의하여 이사로서의 직무를 수행하고 받는 보수는 근로소득에 해당하고, 독립된 자격으로 이사로서의 직무 외의 용역을 계속·반복하여 제공하고 지급받는 대가는 사업소득에 해당하는 것으로, 사실관계를 종합하여 판단할 사항임.</li>
+      <li><strong>강연료 등의 소득구분:</strong> 장기간 계속·반복적으로 자문용역 제공 및 강연을 하고 있으며, 그에 대한 대가를 3년동안 정기적으로 지급받은 점 등에 비추어 쟁점소득을 사업소득으로 보아 청구인에게 종합소득세를 과세한 처분은 잘못이 없음 (조심2014광5746 2014.12.22) / 전문적 지식을 활용하여 독립적으로 자문용역을 계속·반복적으로 수행하였다고 봄이 타당하므로 사업소득에 해당.</li>
+    </ul>
+
+    <div class="highlight-box">
+      ※ 위에서 보듯이 전문자격자·대학교수 등의 경우 자문·고문·컨설팅 비용 등은 계속적이건·일시적이건 대부분 사업소득에 해당하는 것으로 보아야 합니다.
+    </div>
+
+    <h4>(8) 신축분양·부동산 매매업의 분류</h4>
+    <p>건물의 신축양도시 양도자의 사업성여부·판매목적여부·반복적인지 여부등에 따라서 종합소득세 과세 또는 양도소득세 과세여부가 결정된다. 이는 납세자의 세부담에 많은 차이를 가져오며 세무상 의사결정에 있어서 중요한 부분임. 특히 다가구 주택의 신축판매·상가건물의 신축 분양이 아닌 일괄 판매의 경우에 주의를 요하며, 이 경우 사업성 유무는 세무서의 사실 판단에 의하여 결정됨.</p>
+
+    <h4>① 건설업·매매업·양도소득세 구분</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th colspan="2">종합소득세 (사업소득)</th><th>양도소득세</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td>건설업</td>
+          <td>부동산 매매업</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>의의</td>
+          <td>사업상 판매를 목적으로 주택을 신축 판매하는 경우 (자영·도급 불문)</td>
+          <td>사업상 판매를 목적으로 주택외의 건물을 신축·판매하는 경우 / 주택·상가 등을 구입하여 재판매하는 사업</td>
+          <td>사업상 판매목적 없이 일시적·비반복적으로 건물을 신축판매하거나, 구입 후 재판매하는 경우</td>
+        </tr>
+        <tr>
+          <td>사례</td>
+          <td>다세대·연립주택·아파트는 1채를 지어도 건설업에 해당됨 / 다가구·단독주택을 판매 목적으로 신축한 경우</td>
+          <td>상가 신축 분양 / 오피스텔 신축 분양 / 직접신축하지 않은 주택을 구입하여 분양 또는 매매시</td>
+          <td>임대주택법에 의한 건설임대주택을 신축후 5년 이후에 분양시 / 신축분양업의 폐업후 재고주택 임대로 전환 후 보유하다 양도시</td>
+        </tr>
+        <tr>
+          <td>기장의무</td>
+          <td>사업소득이므로 기장의무 / 직접건축한 경우 조특법상건설업에 해당함</td>
+          <td>사업소득이므로 기장의무 / 직접건축한 경우 조특법상 건설업인 경우 부동산업으로</td>
+          <td>실지거래 금액에 의하여 양도소득세로 과세</td>
+        </tr>
+        <tr>
+          <td>소득세 신고</td>
+          <td>종합소득세 확정신고</td>
+          <td>부동산매매업자 매매차익 예정신고 / 종합소득세 확정신고</td>
+          <td>양도소득과세표준 예정신고·확정신고</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>라. 비과세 사업소득</h3>
+    <ul class="content-list">
+      <li>가. 논·밭을 작물 생산에 이용하게 함으로써 발생하는 소득 (농지 임대소득)</li>
+      <li>나. 1개의 주택을 소유하는 자의 주택임대소득 (기준시가 9억초과 및 해외 주택은 제외한다)</li>
+      <li>다. 농어가부업소득 (1인당 연 3천만원)</li>
+      <li>라. 어로어업·양식어업(2024년 이후부터)에서 발생하는 소득으로 소득금액 5천만원 이하 (종전에는 농가부업소득에 포함되었으며, 2020년 이후 소득분부터 적용한다)</li>
+      <li>마. 전통주의 제조로서 수도권밖 읍면에서 발생하는 소득으로 연 1200만원 이하인 것</li>
+      <li>바. 조림기간 5년 이상인 임지(林地)의 임목(林木)의 벌채 또는 양도로 발생하는 소득으로서 연 600만원 이하의 금액</li>
+      <li>사. 작물재배업 (곡물·채소·과일·화초·버섯·종묘·종자·묘목·콩나물 등의 재배) (2015 귀속부터 쌀·보리·콩 식량작물재배업은 계속 비과세하고 그외 과일·화초·종묘·종자·버섯·콩나물 등 기타작물재배업은 수입금액 10억까지만 비과세한다)</li>
+      <li>아. 사회복지사업법에 따른 사회복지사업 (아동복지법·노인복지법·장애인복지법·영유아복지법) 노인장기요양법에 따른 장기요양사업 (관련법에 따른 요양원 등)</li>
+    </ul>
+
+    <h4>(1) 농가부업소득</h4>
+    <p>농어민이 부업으로 영위하는 축산·연근해어업·내수면어업·양어(양식어업)·고공품 제조·민박(객실 7일 이하)·음식물판매·특산물제조·전통차 제조·전통주 제조 및 기타 이와 유사한 활동에서 발생하는 하는 소득의 합계액이 농가부업규모 이하인 경우와 그외의 농가부업 소득으로서 연간 3,000만원 (어로어업은 2020년부터, 양식업은 2024년부터 5000천만원) 소득까지 비과세 한다.</p>
+
+    <h4>① 농가부업 축산 기준</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>기준연도</th><th>젖소</th><th>소</th><th>돼지</th><th>산양</th><th>면양</th><th>토끼</th><th>닭·오리</th><th>양봉</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2012이후</td><td>50</td><td>50</td><td>700</td><td>300</td><td>300</td><td>5,000</td><td>15,000</td><td>100군</td></tr>
+        <tr><td>2011이전</td><td>30</td><td>30</td><td>500</td><td>300</td><td>300</td><td>5,000</td><td>15,000</td><td>100군</td></tr>
+      </tbody>
+    </table>
+    <ul class="content-list">
+      <li>성축 (돼지의 경우 60KG이상)을 기준으로 하며 육성우의 경우에는 2마리를 1마리로 본다. 어린가축은 마리수 계산에서 제외한다.</li>
+      <li>사육두수는 매월말 현일 평균 사육두수로 한다.</li>
+      <li>농가부업규모는 가축별로 적용하며, 공동사업장은 각 사업자의 지분을 기준으로 적용한다.</li>
+      <li>사업자등록 유무에 관계 없으며, 농민의 경우 축산 전업의 경우에도 해당된다.</li>
+    </ul>
+
+    <div class="highlight-box">
+      <strong>축산업은 두수 기준으로 비과세한 후 다시 소득금액을 기준으로 3천만원을 비과세한다.</strong><br>
+      시행규칙 제6조 제2호가 농가부업규모를 초과하여 축산업을 영위하더라도 농가부업규모의 축산에서 발생한 소득과 농가부업규모를 초과한 소득 중 3천만원까지의 금액을 합산한 소득은 비과세대상 소득으로 규정하고 있다.
+    </div>
+
+    <h4>소득의 종류 구분 (학원 강사·시간강사 등의 경우)</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>소득구분</th><th>내용</th><th>과세방법</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>근로소득</td>
+          <td>고용관계나 이와 유사한 계약에 의하여 근로를 제공하는 경우 고용기간에 불구하고 지급받는 대가는 근로소득에 해당됨</td>
+          <td>근로소득으로 원천징수 후 연말정산 / 4대 공적보험 가입대상임</td>
+        </tr>
+        <tr>
+          <td>사업소득 (자유직업)</td>
+          <td>고용관계없이 독립된 자격으로 계속적으로 용역을 제공하고 일정액으로 지급받는 수당 등은 사업소득 중 자유직업에 해당함</td>
+          <td>지급시 3%, 20% 원천징수 후 종합소득세 확정신고 의무 / 기장의무 있는 사업자임</td>
+        </tr>
+        <tr>
+          <td>기타소득</td>
+          <td>일시적·우발적으로 용역을 제공하고 이에 대한 대가로서 지급받는 금액은 기타소득에 해당 (이 경우의 기타소득은 기장의무 없이 별도 증빙 없어도 60% 필요경비 인정됨)</td>
+          <td>지급시 소득금액 20% 원천징수 (지급금액의 4% 원천징수) / 종합소득세 확정신고 의무없음 (소득금액 300만원 미만시 선택적 종합소득세 신고)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>소득의 종류 구분 (상가 분양시 지급수수료 등)</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>구체적인 내용</th><th>과세 방법</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>사업소득 (부동산중개)</td>
+          <td>인적·물적설비를 갖춘 부동산 분양대행업자의 경우 사업소득 중 부동산중개업으로 과세됨</td>
+          <td>부가가치세과세되므로 세금계산서 교부대상</td>
+        </tr>
+        <tr>
+          <td>사업소득 (자유직업)</td>
+          <td>인적·물적설비 없이 개인이 독립된 자격으로 판매대행하고 일정액의 수수료를 받는 경우</td>
+          <td>부가가치세 면세인 자유직업소득으로 3% 원천징수대상</td>
+        </tr>
+        <tr>
+          <td>기타소득</td>
+          <td>사업자가 아닌 개인이 일시적으로 제공하는 알선수수료의 경우 사업소득이 아니고 기타소득임</td>
+          <td>기타소득금액의 20%를 원천징수하고 당해 소득자는 실제 필요경비 공제하여 소득세 신고</td>
+        </tr>
+        <tr>
+          <td>근로소득</td>
+          <td>당해 사업자에게 고용된 근로자가 일시적으로 판매대행을 하고 회사로부터 받는 수당·수수료 등은 근로소득에 해당함</td>
+          <td>근로소득으로 원천징수함</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>유튜버 등의 소득 (1인미디어 창작자)</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>내용</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1인미디어 창작자(유튜버)</td>
+          <td>보조인력을 고용하거나 전문 촬영장소가 있는 경우 부가세 과세대상이며 사업자등록을 하여야 한다. 또한 정보통신업에 해당되며 창업면제가 가능하다. 그러나 보조인력도 없고 집에서 전용스튜디오가 없이 개인으로 집에서 활동하는 경우 면세사업자에 해당하며 개인서비스업 중 기타자영업에 해당한다. CODE 과세 (921505) 면세 (940306)</td>
+        </tr>
+        <tr>
+          <td>SNS마켓사업자 (통신판매)</td>
+          <td>부가가치세 과세사업자로 등록하여야하며, 통신판매업 등록 대상여부와 상관 없다. 다만 개인적·일시적인 판매는 과세대상이 아니다. 업종 CODE 525104</td>
+        </tr>
+        <tr>
+          <td>공유숙박사업자 (빈방대여)</td>
+          <td>관광객에게 유상으로 빈방을 제공하는 경우 숙박업으로 부가세 과세사업자에 해당한다. 다만 연수입 500만원 이하의 경우 기타소득(필요경비 60%) 분리과세 방법으로 신고할 수 있다. 업종 CODE 551007</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>연예인·운동선수 등 종합소득세 신고</h4>
+    <p>연예인의 경우 종합소득세 신고시 일정금액 (대략 5억원)을 초과하면 장부에 의한 필요경비 입증이 쉽지가 않아서 부득이 추계신고하는 경우가 있는데 이때의 기장과 추계신고의 유불리를 계산해 보면 다음과 같다.</p>
+
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>수입금액</th><th>필요경비</th><th>과세표준</th><th>산출세액</th><th>가산세·공제</th><th>총결정세액</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>추계신고 (기준경비율)</td>
+          <td>5억원</td>
+          <td>29백만원 (기준경비율)</td>
+          <td>471백만원</td>
+          <td>163백만원</td>
+          <td>40백만원</td>
+          <td>203백만원</td>
+        </tr>
+        <tr>
+          <td>기장신고 (필요경비 0)</td>
+          <td>5억원</td>
+          <td>0</td>
+          <td>5억원</td>
+          <td>174백만원</td>
+          <td></td>
+          <td>174백만원</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>위의 표에서 보듯이 기장이 불가하여 추계신고하는 경우에 무기장가산세 20% 및 성실신고대상자에 해당한다면 5%추가하여 25%의 가산세가 해당되며, 복식부기의무자는 기준경비율을 1/2만 공제되므로 오히려 필요경비를 0으로 하여 기장에 의한 신고를 하는 것이 더 유리하다.</p>
+
+    <div class="highlight-box">
+      운동선수·연예인이 수입중 소속사 전속계약금·광고전속계약금 등 일체의 수입이 전부 기타소득이 아닌 사업소득에 해당되는 것으로 보아야 하고, 조특법상 중소기업에 해당하는 것으로 보이나 현재 과세관청은 중소기업으로 보지 않고 있다. 소득세법 적용시 (기장의무, 성실신고대상판단)에는 기타 개인서비스업에 해당한다.<br><br>
+      2019년 지급분부터 계약기간 2년 미만의 외국인직업운동선수에 대하여 사업소득 원천징수 세율이 3%가 아니고 20%로 변경되었고, 2025년 지급분부터 모든 외국인 프로선수들은 계약기간에 관계없이 20% 원천징수하여야 한다.
+    </div>
+
+  </div>
+  <div class="memo-wrap">
+    <div class="memo-label">메모</div>
+    <textarea class="memo-box" id="memo-sec-business" placeholder="메모를 입력하세요..."></textarea>
+    <button class="memo-clear" onclick="clearMemo('memo-sec-business')">지우기</button>
+  </div>
+</section>
+
+<!-- =====================================================
+     SEC: 근로소득 (미작성 — 원천 PDF 추가 후 보완 필요)
+===================================================== -->
+<section id="sec-earned" class="section-card">
+  <div class="section-header">
+    <h2>제05장 근로소득</h2>
+    <span class="src-tag">원천: 미작성 — 근로소득 PDF 추가 후 보완 필요</span>
+  </div>
+  <div class="section-body">
+    <div class="highlight-box">
+      이 섹션은 아직 작성되지 않았습니다.<br>
+      근로소득 관련 PDF 원천 자료를 <code>소득세검토</code> 폴더에 추가한 후 세무사 검수를 거쳐 내용을 보완하세요.
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  _part_C.html  |  Part C: 연금소득 · 기타소득 · 결산및세무조정
+  원천 PDF: 연금소득_2025.pdf / 기타소득_2025.pdf / 결산및세무조정_2025.pdf
+  작성: 2026-05-04  |  세무법인한영 신우지점
+  경고: 이 파일은 PDF 원천을 기준으로 작성되었습니다.
+        세법 개정 시 반드시 PDF와 대조 후 갱신하십시오.
+============================================================ -->
+
+<!-- ======================== SECTION 1: 연금소득 ======================== -->
+<section id="sec-pension" class="section-card">
+  <div class="section-header">
+    <h2>제06장 연금소득</h2>
+    <span class="src-tag">원천: 연금소득_2025.pdf</span>
+  </div>
+  <div class="section-body">
+
+    <div class="highlight-box">
+      종합소득세가 과세되는 연금소득이란 국민연금, 공무원연금, 연금저축에 의한 연금 수령, 근로자퇴직급여보장법에 의한 퇴직금을 과세이연하여 연금형태로 지급받는 것을 말하며, 이를 만기 또는 해약으로 인하여 일시금으로 지급받는 경우에는 퇴직연금의 경우 퇴직소득으로, 연금저축의 경우 기타소득으로 과세된다. (법§14 법§ 64조의4)
+    </div>
+
+    <h3>연금소득 핵심 정리</h3>
+
+    <h4>① 종합합산되는 연금소득</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>종합합산 여부</th><th>실무 판단 기준</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>공적연금</td>
+          <td>다른 종합소득이 있으면 합산신고</td>
+          <td>국민연금·공무원연금 등은 지급자가 연말정산하므로 연금소득만 있으면 신고의무가 종결된다. 다만 타소득이 있거나 연말정산 누락·오류가 있으면 확정신고한다.</td>
+        </tr>
+        <tr>
+          <td>사적연금</td>
+          <td>분리과세 대상 외에는 원칙적으로 종합합산</td>
+          <td>연금저축·퇴직연금 등은 지급 시 3~5%로 예납적 원천징수하고 연말정산이 없으므로, 무조건 분리과세 또는 선택적 분리과세를 적용하지 않는 금액은 확정신고 대상이다.</td>
+        </tr>
+        <tr>
+          <td>분리과세 연금소득</td>
+          <td>종합합산 제외</td>
+          <td>무조건 분리과세 사유 또는 납세자가 선택한 저율·고율 분리과세 사적연금은 종합소득 합산에서 제외한다.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>② 연금소득공제</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>총연금액</th><th>연금소득공제액</th><th>비고</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>350만원 이하</td><td>총연금액 전액</td><td rowspan="4">분리과세 연금은 제외하고 공제한다. 공제액은 900만원을 한도로 한다.</td></tr>
+        <tr><td>350만원 초과 700만원 이하</td><td>350만원 + 350만원 초과액의 40%</td></tr>
+        <tr><td>700만원 초과 1,400만원 이하</td><td>490만원 + 700만원 초과액의 20%</td></tr>
+        <tr><td>1,400만원 초과</td><td>630만원 + 1,400만원 초과액의 10%</td></tr>
+      </tbody>
+    </table>
+
+    <h4>③ 선택적 분리과세</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>대상</th><th>선택 가능한 과세 방식</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>저율 선택적 분리과세</td>
+          <td>무조건 분리과세를 제외한 사적연금 총연금액이 연 1,500만원 이하인 경우</td>
+          <td>나이에 따른 원천징수세율 3·4·5% 분리과세 또는 종합과세 중 선택</td>
+        </tr>
+        <tr>
+          <td>고율 선택적 분리과세</td>
+          <td>2024년 이후 수령분 중 사적연금 총연금액이 연 1,500만원을 초과하는 경우</td>
+          <td>15% 분리과세 또는 종합과세 중 선택</td>
+        </tr>
+        <tr>
+          <td>무조건 분리과세</td>
+          <td>2012년 이전 퇴직으로 이연된 퇴직소득을 연금으로 수령하거나, 의료목적·가입자 사망 등 부득이한 사유로 수령한 경우</td>
+          <td>납세자 선택 없이 분리과세</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>④ 연금 과세체계</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>불입 시</th><th>연금 수령 시</th><th>일시금·해지 수령 시</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>공적연금</td>
+          <td>연금보험료 소득공제</td>
+          <td>간이세액표로 원천징수 후 연말정산. 타소득이 있으면 종합소득 합산신고</td>
+          <td>퇴직소득 등 해당 소득으로 과세</td>
+        </tr>
+        <tr>
+          <td>퇴직연금</td>
+          <td>본인 추가부담분 세액공제</td>
+          <td>3·4·5% 원천징수 후 종합과세가 원칙. 요건 충족 시 분리과세 선택 가능</td>
+          <td>퇴직소득</td>
+        </tr>
+        <tr>
+          <td>연금저축</td>
+          <td>연금저축 세액공제</td>
+          <td>3·4·5% 원천징수 후 종합과세가 원칙. 요건 충족 시 분리과세 선택 가능</td>
+          <td>기타소득. 중도해지 시 소득공제·세액공제 받은 부분은 15% 분리과세</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>(1) 과세대상 연금소득</h3>
+    <p>과세대상 연금소득은 국민연금등 공적연금은 2002년 이후의 불입분부터, 개인연금은 2001년 이후 불입이 시작된 연금저축부터 과세대상된다. 따라서 연금 불입시에는 종합소득에서 전액 소득공제하고 그 후 공제받은 금액에 대한 연금수령시 연금소득으로 종합소득세를 과세한다.</p>
+
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>종류</th><th>불입시 공제</th><th>과세대상 연금</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2">공적연금소득</td>
+          <td>국민연금 (국민연금법에 의한 연금)</td>
+          <td>국민연금 소득공제 (연간 불입액 전액)</td>
+          <td>2002년 이후 불입된 연금·기여금</td>
+        </tr>
+        <tr>
+          <td>특수직연금 (공무원, 군인, 교직원 연금)</td>
+          <td>국민연금 소득공제 (연간 불입액 전액)</td>
+          <td>2002년 이후 불입된 연금·기여금</td>
+        </tr>
+        <tr>
+          <td rowspan="2">사적연금소득</td>
+          <td>연금저축 (연금보험, 연금저축)</td>
+          <td>연금저축 세액공제 (연간 불입액 전액, 한도 900만원)</td>
+          <td>2001년 이후 불입된 연금저축소득공제 받은 부분의 연금</td>
+        </tr>
+        <tr>
+          <td>퇴직연금등 (확정기여, 확정급여형연금)</td>
+          <td>연금저축 세액공제 (연간 불입액 전액, 한도 900만원)</td>
+          <td>2001년 이후 불입된 연금저축소득공제 받은 부분의 연금</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      <strong>퇴직연금·연금저축 불입공제 한도:</strong> 퇴직연금(확정기여형 연금으로 근로자 추가 불입분)과 연금저축은 종합소득의 소득공제에서 둘을 합하여 연간 900만원을 한도로 불입금액에 대하여 종합소득금액 4,500만원 이하자는 15%, 4,500만원 초과자는 12% 연금저축세액공제 된다. (2022년 이전 700만원 한도로 종합소득금액 4,000만원 이하자 15% 초과자는 12% 세액공제하였다)
+    </div>
+    <p>또한 연금불입시 소득공제 받은 부분에 대해 추후 연금으로 수령시 과세대상 연금소득이고 소득공제를 받지 않은 연금불입부분에 대한 연금 수령액은 과세대상 연금소득이 아니다.</p>
+
+    <h3>(2) 연금소득 과세체계</h3>
+    <table class="content-table">
+      <thead>
+        <tr><th>단계</th><th>계산 방법</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1. 총수입금액</td><td>해당과세기간 연금소득 총액 – (과세제외 연금소득 + 비과세연금소득)</td></tr>
+        <tr><td>2. 연금소득금액</td><td>총수입금액 – 연금소득공제 (350만원이하 전액, 초과부분 40, 20, 10% 공제)</td></tr>
+        <tr><td>3. 과세표준</td><td>연금소득금액 – 기본공제 및 추가공제</td></tr>
+        <tr><td>4. 산출세액</td><td>연금소득 과세표준 × 종합소득 기본세율</td></tr>
+        <tr><td>5. 결정세액</td><td>산출세액 – 자녀세액공제 및 표준세액공제</td></tr>
+        <tr><td>6. 납부할 세액</td><td>결정세액 – 연금소득 원천징수세액</td></tr>
+      </tbody>
+    </table>
+
+    <h3>(4) 연금소득 총수입금액</h3>
+
+    <h4>① 국민연금</h4>
+    <div class="highlight-box">
+      과세대상 연금소득 = 총수령액 × (2002년 1월 1일 이후 불입기간 동안의 환산소득의 누계액 ÷ 총불입기간 동안의 환산소득의 누계액) × {1 – [수급권자가 실제 소득공제 받은 부분을 초과하여 불입한 연금보험료 누계액(해당 수급권자가 제출한 증빙에 의하여 확인되는 금액에 한한다) ÷ 2002년 1월 1일 이후 불입기간 동안 불입한 연금보험료 누계액]}
+    </div>
+
+    <h4>② 특수직연금</h4>
+    <div class="highlight-box">
+      과세대상 연금소득 = 총수령액 × (2002년 1월 1일 이후 기여금 불입월수 ÷ 총기여금 불입월수)
+    </div>
+
+    <h4>③ 퇴직연금</h4>
+    <div class="highlight-box">
+      과세대상 연금소득 = 총수령액 × (1 – 근로자가 실제소득공제 받은 금액을 불입한 금액의 누계액 ÷ 연금지급개시일 현재의 원리금 합계액)
+    </div>
+
+    <h4>④ 연금저축</h4>
+    <div class="highlight-box">
+      과세대상 연금소득 = 연금수령액 × [1 – (실제 소득공제받은 금액을 초과하여 납입한 금액의 누계액 ÷ 총 연금지급액 또는 예상액)]
+    </div>
+
+    <h3>(5) 연금소득공제</h3>
+    <p>연금소득이 있는 거주자에 대하여 분리과세연금을 제외하고 다음의 금액을 소득공제한다. 공제액이 900만원을 초과하는 경우 900만원(총연금액 4,100만원 이상을)을 한도로 공제한다.</p>
+    <table class="content-table">
+      <thead>
+        <tr><th>총연금액</th><th>공제액</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>350만원 이하</td><td>총 연금액</td></tr>
+        <tr><td>350만원 초과 700만원 이하</td><td>350만원 + 350만원 초과액의 40%</td></tr>
+        <tr><td>700만원 초과 1,400만원 이하</td><td>490만원 + 700만원 초과액의 20%</td></tr>
+        <tr><td>1,400만원 초과</td><td>630만원 + 1,400만원 초과액의 10%</td></tr>
+      </tbody>
+    </table>
+
+    <h3>(6) 연금소득 원천징수</h3>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>종류</th><th>원천징수세율</th><th>기타</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2">공적연금소득</td>
+          <td>국민연금</td>
+          <td>연금소득 간이세액표 세율</td>
+          <td rowspan="2">지급시 간이세액표에 의하여 원천징수 후 다음연도 1월분 연금지급시 연금소득 연말정산한다.</td>
+        </tr>
+        <tr>
+          <td>특수직연금</td>
+          <td>연금소득 간이세액표 세율</td>
+        </tr>
+        <tr>
+          <td rowspan="2">사적연금소득</td>
+          <td>연금저축</td>
+          <td>총지급액의 5% 4% 3%</td>
+          <td rowspan="2">지급자가 총연금 지급액의 3~5% 예납적 원천징수하며 별도 연말정산은 없다. 다만 일부의 경우 분리과세 원천징수에 해당한다.</td>
+        </tr>
+        <tr>
+          <td>퇴직연금등</td>
+          <td>총지급액의 5% 4% 3%</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>※ 사적연금 원천징수세율: 연금수령일 현재 70세미만 5%, 70세이상 80세미만 4%, 80세이상 3%. 사망할 때 까지 연금을 수령하면서 중도해제 할 수 없는 종신계약에 따라 받는 연금소득은 4%세율로 원천징수 한다.</p>
+
+    <h3>(7) 종합소득세 확정신고</h3>
+
+    <h4>① 공적연금</h4>
+    <p>공적연금은 지급자가 지급시 간이세액표에 의하여 매월 원천징수하고 다음연도 1월분 연금 지급시 소득세 기본세율에 의하여 연말정산하고 납세의무가 종결된다. 그러나 소득공제, 세액공제(기부금세액공제등)의 누락·오류가 있을때에는 확정신고에 의한 정정이 가능하며, 근로소득 연말정산과 마찬가지로 연말정산 연금소득외에 타소득이 있는 경우 전체의 종합소득을 합산하여 종합소득세 확정신고하여야 한다.</p>
+
+    <h4>② 사적연금</h4>
+    <p>사적연금은 지급자가 지급시 5%, 4%, 3%의 세율로 원천징수하고 연금소득에 대한 연말정산은 하지 않으므로 연금소득자는 아래의 분리과세를 제외하고 종합소득세 확정신고하는 것이 원칙이다.</p>
+
+    <ul class="content-list">
+      <li><strong>무조건 분리과세:</strong> 법 제146조제2항(2012년 이전퇴직으로 소득이연 퇴직소득)에 따라 원천징수되지 아니한 퇴직소득을 연금으로 수령하거나, 의료목적, 가입자의 사망등 부득이한 사유로 인하여 수령한 경우.</li>
+      <li><strong>선택적 분리과세:</strong> 무조건 분리과세를 제외한 사적연금은 연도별 총연금액 1,500만원 이하인 경우 납세자의 선택에 의하여 저율분리과세(5,4,3%) 또는 종합과세를 선택할 수 있다.</li>
+    </ul>
+
+    <p>2024년 이후 수령분부터는 수입금액 1,500만원 초과의 경우에 고율분리과세(15%)와 종합과세를 선택할 수 있다. (2023년은 1,200만원 기준) 즉 다음의 1과 2중에서 선택가능하다.</p>
+    <ul class="content-list">
+      <li>① (연금수입금액 × 15%) + 다른 종합소득금액 × 소득세율</li>
+      <li>② (연금소득금액 + 다른 종합소득금액) × 소득세율</li>
+    </ul>
+    <p>(연금소득과 타소득금액 합산한 과세표준이 5,800만원 이상인 경우 15% 분리과세 선택이 유리한 것으로 보인다)</p>
+
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>확정신고대상 여부</th><th>확정신고 요령</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>공적연금</td>
+          <td>타소득있을 때, 연말정산 오류있을때</td>
+          <td>공적연금은 연말정산시 오류나 누락있을 경우 확정신고 할 수 있으며, 타소득이 있을 경우 확정신고하여야한다</td>
+        </tr>
+        <tr>
+          <td rowspan="3">사적연금 (연금저축·퇴직연금)</td>
+          <td>1. 무조건 분리과세</td>
+          <td>1. 제20조의3 제1항 제2호 가목(연금으로 이월된 퇴직소득)에 따라 퇴직소득을 연금수령하는 연금소득과 제20조의3 제1항 제2호 나목 및 다목의 금액을 의료목적, 천재지변등 부득이한 사유로 인출한 연금소득</td>
+        </tr>
+        <tr>
+          <td>2. 저율(3,4,5%원천징수) 선택적분리과세</td>
+          <td>2. 사적연금으로 지급시 나이에 따라 3~5% 예납적 원천징수한 연금소득 1,500만원(2023년 1,200만원) 이하인 경우</td>
+        </tr>
+        <tr>
+          <td>3. 고율(15%) 선택적분리과세</td>
+          <td>3. 사적연금으로 지급시 나이에 따라 3~5% 예납적 원천징수한 연금소득 1,500만원(2023년 1,200만원) 초과인 경우</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>연금 과세 체계 요약</h3>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>연금불입시</th><th>연금으로 수령시 (연금소득 과세)</th><th>일시금 수령</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>공적연금</td><td>연금보험료 소득공제</td><td>간이세액표에 의해 원천징수후 연말정산</td><td>퇴직소득</td></tr>
+        <tr><td>퇴직연금</td><td>본인추가부담 세액공제</td><td>3, 4, 5%로 원천징수후 종합과세</td><td>퇴직소득</td></tr>
+        <tr><td>연금저축</td><td>연금저축 세액공제</td><td>3, 4, 5%로 원천징수후 종합과세</td><td>기타소득</td></tr>
+      </tbody>
+    </table>
+    <p>※ 연금저축은 중도 해약시에 소득공제 받은 부분은 기타소득 (15% 분리과세) 과세된다.</p>
+    <p>※ 종합소득세 확정신고 기본공제 대상자의 소득금액 제한 기준 100만원을 판단시에는 양도소득, 퇴직소득, 그리고 연금소득도 포함하여야 한다.</p>
+
+  </div>
+  <div class="memo-wrap">
+    <div class="memo-label">메모</div>
+    <textarea class="memo-box" id="memo-sec-pension" placeholder="메모를 입력하세요..."></textarea>
+    <button class="memo-clear" onclick="clearMemo('memo-sec-pension')">지우기</button>
+  </div>
+</section>
+
+<!-- ======================== SECTION 2: 기타소득 ======================== -->
+<section id="sec-other" class="section-card">
+  <div class="section-header">
+    <h2>제07장 기타소득</h2>
+    <span class="src-tag">원천: 기타소득_2025.pdf</span>
+  </div>
+  <div class="section-body">
+
+    <div class="highlight-box">
+      기타소득은 이자, 배당, 사업, 근로, 연금소득이외의 소득으로서 다음에 열거하는 것을 말하며 기타소득은 대부분 일시적, 우발적으로 발생한 소득으로서 기타 소득에 해당한다 하더라도 그 소득 사업의 형태를 갖추고 계속적, 반복적으로 발생되는 경우는 사업소득으로 보아야 한다.
+    </div>
+
+    <h3>기타소득 핵심 정리</h3>
+
+    <h4>① 기타소득 필요경비</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>필요경비율</th><th>기타소득의 종류</th><th>실무 포인트</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0% 또는 실제경비</td>
+          <td>알선수수료, 복권·복표 당첨소득, 각종 상금 등</td>
+          <td>실제 필요경비를 공제하거나 0% 필요경비를 적용한다. 아래 열거 항목 외에는 80% 개산공제 제도가 적용되지 않는다.</td>
+        </tr>
+        <tr>
+          <td>60%<br><small>2019년 이후 발생분</small></td>
+          <td>
+            지역권·지상권 설정 또는 대여 대가<br>
+            고용관계 없는 인적용역 대가<br>
+            문예·학술·미술·음악·사진 창작품 원작자 대가<br>
+            광업권·어업권·산업재산권·영업권 등 양도·대여 대가<br>
+            통신판매중개업자를 통한 연수입 500만원 이하 장소 대여
+          </td>
+          <td>2018.3.31. 이전 80%, 2018.4.1.~2018.12.31. 70%, 2019년 이후 60% 적용.</td>
+        </tr>
+        <tr>
+          <td>80%</td>
+          <td>
+            공익법인이 주무관청 승인을 받아 시상하는 상금·부상과 다수 순위경쟁 대회 입상 상금·부상<br>
+            위약금·배상금 중 주택입주 지체 보상금
+          </td>
+          <td>주택 외의 경우는 필요경비 0% 또는 실제 필요경비 적용. 오피스텔은 주택이 아닌 것으로 본다.</td>
+        </tr>
+        <tr>
+          <td>80%~90%<br><small>분리과세</small></td>
+          <td>서화·골동품(국내 생존작가 작품 제외)</td>
+          <td>6천만원 이하 비과세. 매매가액 1억원 이하 90%, 1억원 초과 80%, 10년 이상 보유분 90%.</td>
+        </tr>
+        <tr>
+          <td>80%~20%</td>
+          <td>종교인소득을 기타소득으로 선택한 경우</td>
+          <td>수입금액 구간에 따라 차등 적용한다.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>② 기타소득 과세방법</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>대상 및 계산</th><th>신고 판단</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>원천징수</td>
+          <td>
+            일반적인 경우: 기타소득금액(총수입금액 - 필요경비) × 20%<br>
+            복권당첨소득 중 3억원 초과분: 30%<br>
+            중도해지 연금저축 중 실제 소득공제 받은 금액과 운용수익: 15%(부득이한 경우 12%)
+          </td>
+          <td>승마투표권 등과 복권당첨금을 제외한 일반적인 기타소득은 건당 5만원 이하이면 과세하지 않는다.</td>
+        </tr>
+        <tr>
+          <td>무조건 분리과세</td>
+          <td>
+            복권·승마권·슬러트머신·승자투표권 등의 당첨금<br>
+            연금저축 중 연금외 소득으로 수령한 기타소득<br>
+            서화 및 골동품 기타소득<br>
+            가상자산 기타소득(2027년부터 시행)
+          </td>
+          <td>원천징수로 납세의무가 종결된다.</td>
+        </tr>
+        <tr>
+          <td>선택적 분리과세</td>
+          <td>
+            원천징수된 기타소득금액 연간 합계액이 300만원 이하인 경우<br>
+            원천징수 대상이 아닌 계약금이 대체된 300만원 이하 위약금·배상금(2020년부터)
+          </td>
+          <td>종합과세와 20% 분리과세 중 선택 가능. 2,000만원 이하 주택임대소득처럼 확정신고 시 선택할 수 있다.</td>
+        </tr>
+        <tr>
+          <td>종합과세</td>
+          <td>필요경비 0%, 80% 등을 적용받는 기타소득 중 분리과세 대상이 아닌 소득</td>
+          <td>원천징수된 기타소득금액 300만원 이하라도 합산 신고가 유리하면 종합과세를 선택할 수 있다.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      기타소득금액이 300만원 이하이면 분리과세 선택이 가능하다. 다만 기타소득을 제외한 종합소득금액이 낮아 합산 시 적용세율이 낮은 경우에는 합산신고가 더 유리할 수 있다.
+    </div>
+
+    <h3>가. 기타소득의 종류</h3>
+
+    <h4>(1) 양도 및 대여로 인한 소득</h4>
+    <ul class="content-list">
+      <li>① 저작권 또는 실연자 음반제작자 방송사업자 외의 자가 저작권등의 양도 또는 사용의 대가로 받는 금품. (저작권자 또는 음반제작자 본인의 경우는 사업소득)</li>
+      <li>② 영화필름 라디오 TV 방송용 테이프등의 권리의 양도 또는 그 사용의 대가로 받는 금품</li>
+      <li>③ 광업권·어업권·산업재산권 및 산업정보, 산업상 비밀, 상표권·영업권(점포임차권을 포함), 토사석의 채취허가에 따른 권리, 지하수의 개발·이용권, 그 밖에 이와 유사한 자산이나 권리를 양도하거나 대여하고 그 대가로 받는 금품</li>
+      <li>④ 물품 또는 장소를 일시적으로 대여하고 사용료로서 받는 금품 (2019부터 통신판매중개업자를 통해 대여하는 연수입금액 500만원이하의 물품, 장소의 대여)</li>
+      <li>⑤ 지상권 지역권을 설정 또는 대여하고 받는 금품 (지상권, 지역권은 설정등기하고 받는 경우는 기타소득이나, 설정등기하지 않고 임차권 설정하거나 토지를 대여하였다면 이는 사업소득중 부동산임대소득으로 보아야 한다. 또한 2018 사업연도부터 공익사업과 관련 없는 지역권, 지상권 설정 대여소득은 사업소득중 부동산 임대업으로서 과세한다.)</li>
+      <li>⑥ 서화, 골동품(제작된지 100년 이상)국내생존작가 작품을 제외한 점당 양도가액 6,000만원 이상인 회화, 골동품 (2013년부터 과세하며 분리과세)</li>
+    </ul>
+
+    <h4>(2) 각종 사행성 행위에 의한 당첨소득</h4>
+    <ul class="content-list">
+      <li>① 상금·현상금·포상금·보로금 또는 이에 준하는 금품</li>
+      <li>② 복권·경품권 기타 추첨권에 의하여 받는 당첨금품</li>
+      <li>③ 「사행행위 등 규제 및 처벌특례법」에 규정하는 행위에 참가하여 이은 재산상의 이익 (적법 또는 불법 여부는 고려하지 아니하고, 도박으로 얻은 수입은 기타소득에 해당한다)</li>
+      <li>④ 「한국마사회법」에 따른 승마투표권 「경륜·경정법」에 따른 승자투표권 소싸움경기투표권(이따른 체육진흥투표권)의 구매자가 받는 환급금</li>
+      <li>⑤ 슬러트머신(비디오게임을 포함) 및 투전기 기타 이와 유사한 기구를 이용하는 행위에 참가하여 받는 당첨금품·배당금품 또는 이에 준하는 금품</li>
+    </ul>
+
+    <h4>(3) 기타 다음에 열거하는 사업성이 없는 일시적인 소득</h4>
+    <ul class="content-list">
+      <li>① 계약의 위약, 해약으로 인하여 받는 위약금, 배상금, 부당이득 반환 시 지급받는 이자. (재산권에 관한 계약의 위약 또는 해약으로 받는 손해배상금으로서 그 명목여하에 불구하고 본래의 계약의 내용이 되는 지급 자체에 대한 손해를 넘는 손해에 대하여 배상하는 금전 또는 그 밖의 물품의 가액과 지연손해금은 기타소득에 해당한다. 부동산 매매계약시 잔금 지급의 지연으로 인하여 지연보상금, 지연손해금도 기타소득에 해당된다.)</li>
+      <li>② 유실물의 습득 또는 매장물의 발견으로 인하여 보상금을 받거나 새로 소유권을 취득하는 경우 그 보상금 또는 자산</li>
+      <li>③ 무주물의 점유로 소유권을 취득하는 자산</li>
+      <li>④ 거주자등과 특수관계에 있는 자가 그 특수관계로 인하여 당해 거주자·비거주자 또는 법인으로부터 받는 경제적 이익으로서 급여·배당 또는 증여로 보지 아니하는 금품.</li>
+      <li>⑤ 문예·학술·미술·음악 또는 사진에 속하는 창작품에 대한 원작자로서 받는 소득으로서 원고료, 저작권사용료인 인세·미술·음악 또는 사진에 속하는 창작품에 대하여 받는 대가</li>
+      <li>⑥ 재산권에 관한 알선수수료 (부동산 중개업자가 아닌 일반인이 중개수수료등의 수령시)</li>
+      <li>⑦ 사례금 (분묘이장을 하기로 하고 그 대가를 받는 경우, 이는 사례금에 해당하며, 필요경비 80%가 적용되는 권리의 양도에 해당하지 않는다. 잠점합의금의 지급사유가 향후 소송 등을 제기하지 아니하는 조건 등으로 지급된 사례금으로 보이는 점, 쟁점은행이 쟁점합의금에 대하여 필요경비 없는 기타소득으로 보아 원천징수한 점 등에 비추어 쟁점합의금은 기타소득에 해당하는 사례금에 해당한다)</li>
+      <li>⑧ 소기업·소상공인 공제부금의 해지일시금 (원천징수 세율15%. 분리과세대상 아님) (해지로 인하여 받은 환급금 – 실제 소득공제받은 금액을 초과하여 납입한 금액의 누계액)</li>
+      <li>⑨ 다음의 인적용역을 일시적으로 제공하고 지급받는 대가
+        <ul class="content-list">
+          <li>고용관계 없이 다수인에게 강연을 하고 강연료 등의 대가를 받는 용역</li>
+          <li>라디오·텔레비전방송 등을 통하여 해설·계몽 또는 연기의 심사 등을 하고 보수 또는 이와 유사한 성질의 대가를 받는 용역</li>
+          <li>변호사·공인회계사·세무사·건축사·측량사·변리사 기타 전문적 지식 또는 특별한 기능을 가진 자가 당해 지식 또는 기능을 활용하여 보수 또는 기타 대가를 받고 제공하는 용역</li>
+          <li>기타 고용 관계 없이 수당 또는 이와 유사한 성질의 대가를 받고 제공하는 용역</li>
+        </ul>
+      </li>
+      <li>⑩ 「법인세법」 제67조의 규정(소득처분)에 의하여 기타소득으로 처분된 소득</li>
+      <li>⑪ 법제21조 제1항 제21호 규정에 의하여 연금소득에 해당하는 금액중 연금의 수령한 금액(해지일시금, 해지환급금, 만기환급금 등)는 2015년 이후 소득 발생분부터 금액에 관계없이 15%로 분리과세한다</li>
+      <li>⑫ 퇴직전에 부여받은 주식매수 선택권을 퇴직후에 행사하거나 고용관계 없이 주식매수선택권을 부여받아 이를 행사함으로써 얻는 이익</li>
+      <li>⑬ 너물, 알선수재 및 배임수재에 의하여 받는 금품</li>
+      <li>⑭ 종교인소득 (종교 관련 종사자가 종교의식을 집행하는 등 종교 활동과 관련하여 종교단체로부터 받은 소득으로서 근로소득과 기타소득중 기타소득을 선택한 경우. 2018년부터 시행)</li>
+      <li>⑮ 가상자산(비트코인등)을 양도하거나 대여함으로써 발생하는 소득 (2027년부터 시행예정)</li>
+    </ul>
+
+    <h4>(4) 비과세 기타소득</h4>
+    <ul class="content-list">
+      <li>① 「상훈법」에 의한 훈장과 관련하여 받는 부상 기타 대통령이 정하는 상금과 부상</li>
+      <li>② 종업원 직무와 관련된 우수발명으로 지급되는 보상금 (2017이후 지급분부터 근무중에는 근로소득, 퇴직이후에 지급분은 기타소득으로 과세하되, 2024년이후 발생분 700만원, 2019년 이후 발생분은 연간 한도 500만원까지 비과세 한다.)</li>
+    </ul>
+
+    <h3>나. 기타소득 총수입금액 계산</h3>
+    <p>종전의 일시재산소득에 해당하는 기타소득의 추계결정시의 총수입금액의 계산은 장부 기타 증빙서류에 의하여 계산할 수 없는 경우 그 수입금액은 다음과 같이 한다. (시행령제144조제2항)</p>
+    <ul class="content-list">
+      <li>① 영업권: 상속세법 시행령 제59조 제2항 규정에 의하여 평가한 가액</li>
+      <li>② 점포임차권: 아래의 ㉠ – ㉡을 한 금액
+        <ul class="content-list">
+          <li>㉠ 양도시 임대보증금상당액 + 당해자산을 양도하는 사업자의 영업권 평가액</li>
+          <li>㉡ 취득시 임대보증금상당액 + (㉠에 의하여 계산한 금액 – 취득시임대보증금상당액) × 1/2</li>
+        </ul>
+      </li>
+      <li>③ 기타의 무체재산권 (광업권, 어업권, 산업재산권, 상표권등): 상속세법 시행령 제59조 제4항 내지 제6항 규정에 의하여 평가한 가액</li>
+    </ul>
+
+    <h3>다. 기타소득 필요경비</h3>
+    <table class="content-table">
+      <thead>
+        <tr><th>필요경비율</th><th>기타소득의 종류</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0% 또는 실제경비</td>
+          <td>알선수수료, 복권 복표 당첨소득, 각종 상금등은 필요경비를 실제경비로 계산하거나 0%의 필요경비가 적용된다. 아래의 경우외에는 실제필요경비를 공제하여야 하거나 0%의 필요경비가 적용되며 필요경비를 80%를 개산공제해주는 제도는 적용되지 않는다.</td>
+        </tr>
+        <tr>
+          <td>80% (2018.3.31.이전) / 70% (2018.4.1.~2018.12.31.) / 60% (2019이후 발생분)</td>
+          <td>
+            1. 지역권·지상권(지하 또는 공중에 설정된 권리를 포함한다)을 설정 또는 대여하고 받는 금품.<br>
+            2. 고용관계없는 자의 인적용역 (강연료,연기의심사등 수수료, 세무사등의 보수) (소법21조1항19호)<br>
+            3. 문예·학술·미술·음악 또는 사진에 속하는 창작품에 대한 원작자로서 받는 소득으로서 원고료. 저작권사용료인 인세·미술·음악 또는 사진에 속하는 창작품에 대하여 받는 대가 (소법21조1항15호)<br>
+            4. 광업권·어업권·산업재산권·산업정보, 산업상 비밀, 상표권·영업권(점포임차권 포함), 토사석의 채취허가에 따른 권리, 지하수의 개발·이용권, 그 밖에 이와 유사한 자산이나 권리를 양도 대여하고 받는 대가.<br>
+            5. 통신판매중개업자를 통해 대여하는 연수입금액 500만원이하의 장소의 대여
+          </td>
+        </tr>
+        <tr>
+          <td>80%</td>
+          <td>
+            1. 공익법인이 주무관청의 승인을 얻어 시상하는 상금 및 부상과 다수가 순위 경쟁하는 대회에서 입상자가 받는 상금 및 부상<br>
+            2. 위약금과 배상금 중 주택입주 지체 보상금 (그러나 주택이 아닌 경우의 필요경비는 0%. 오피스텔은 주택이 아닌 것으로 본다.)
+          </td>
+        </tr>
+        <tr>
+          <td>80%~90% (분리과세)</td>
+          <td>6천만원이하 서화,골동품(국내생존작가 작품 제외)으로 매매가액 1억원이하 90%, 1억원초과 80%, 다만 10년이상 보유한 경우에는 필요경비 90%</td>
+        </tr>
+        <tr>
+          <td>80%~20%</td>
+          <td>종교인의 소득을 기타소득으로 선택한 경우 수입금액에 따라서 차등 적용 (2018년부터 시행)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>라. 기타소득 과세방법</h3>
+
+    <h4>(1) 원천징수</h4>
+    <div class="highlight-box">
+      <ul class="content-list">
+        <li>일반적인 경우 기타소득원천징수세액 = 기타소득금액 (총수입금액 – 필요경비) × 20%</li>
+        <li>분리과세되는 복권당첨소득중 3억원을 초과하는 경우 그 초과분은 30%</li>
+        <li>중도해지한 연금저축으로 실제소득공제받은 금액과 운용수익 15% (부득이한 경우 12%)</li>
+      </ul>
+      ※ 과세최저금액: 승마투표권등(10만원이하 또는 건별 200만원이하)이나 복권당첨금(건별 200만원)을 제외한 일반적인 경우 건당 5만원 이하의 경우에는 과세대상이 아니다.
+    </div>
+
+    <h4>(2) 소득세확정신고</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>과세방법</th><th>대상 소득</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>무조건 분리과세 (법14조 3항 8호)</td>
+          <td>
+            ① 복권, 승마권, 슬러트머신, 승자투표권등의 당첨금 기타소득<br>
+            ② 연금저축 중 연금외 소득으로 수령한 기타소득 (15% 원천징수)<br>
+            ③ 서화 및 골동품에 대한 기타소득 (20% 원천징수)<br>
+            ④ 가상자산 (2027부터시행하며 20% 원천징수)
+          </td>
+        </tr>
+        <tr>
+          <td>선택적 분리과세 (종합과세와 분리과세 20%의 선택)</td>
+          <td>
+            ① 원천징수된 기타소득금액 연간 합계액이 300만원 이하인 경우<br>
+            ② 원천징수 대상이 아닌 계약금이 대체된 300만원이하의 위약금, 배상금 (2020년부터)<br>
+            (2000만원 이하의 주택임대소득과 같이 확정신고시 선택가능하다)
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      <strong>실무 판단 기준:</strong> 기타소득금액이 300만원 이하인 경우, 4인가족의 경우 대략 기타소득을 제외한 종합소득금액이 세율 15%가 적용되는 과세표준 기준인 4천6백만원을 기준으로 <strong>5천만원 이하인 경우는 합산신고</strong>하고, <strong>5천만원 초과시는 분리과세를 선택</strong>하여 신고하지 않는 것이 유리할 것으로 보인다.
+    </div>
+
+    <h3>마. 각종 해석 사례</h3>
+
+    <h4>① 판결에 따른 지연이자와 소송비, 위자료의 소득구분 (사전법규소득2024-691 2024.12.18)</h4>
+    <ul class="content-list">
+      <li>법원의 판결에 따라 지급받는 근로소득 등에 대한 지연이자 상당액은 기타소득에 해당하며, 소송의 결과에 따라 승소자가 패소자로부터 지급받는 소송비용은 소득세 과세대상에 해당하지 아니하는 것입니다.</li>
+      <li>합의에 따라 지급받는 위자료는 그 명칭 여하에 불구하고 사례금에 해당하는 경우 기타소득으로 과세하고, 물적·정신적 피해등의 손해에 대한 위자료에 해당하는 경우에는 소득세를 과세하지 아니하는 것이나, 귀 질의의 금원이 각각 이에 해당하는지 여부는 당사자 간의 약정 동기와 경위, 위자료의 성격, 지급사유와 조건 등을 종합적으로 고려하여 사실판단 할 사항입니다.</li>
+    </ul>
+
+    <h4>② 배임수재 사례금</h4>
+    <ul class="content-list">
+      <li>배임수재, 뇌물, 사례금등에 대하여 관련법률에 의하여 처벌을 받았거나 벌과금이 부과되었더라도 소득세법에 의한 기타소득의 과세는 이와 별개이므로 이중과세에 해당하지 않으며 기타소득의 과세는 정당하다. (그러나 사기, 편취금액은 과세대상소득이 아니다)</li>
+      <li>그러나 소득세의 과세 처분 이전에 배임수재에 해당하는 금액을 원귀속자에게 반환하는 경우에는 과세대상 기타소득금액이 없다 할 것이므로 소득세 과세는 할수 없다</li>
+    </ul>
+
+    <h4>③ 계약의 해지에 따른 위약금, 손해배상금</h4>
+    <div class="highlight-box">
+      매매계약체결후 매매계약을 해제하고 계약내용에 따라 수령하는 위약금 해약금의 경우, 아파트 건설업체가 주상복합건물등을 신축 분양하면서 계약조건과 같이 시공하지 아니하여 손해 배상금을 지불하거나, 약정된 기간내에 준공하지 못하여 지체보상금을 지불하는 경우, 분묘 이전비, 보상비, 임대보증금 반환지연에 따라 법원의 판결에 의하여 임차인에게 지급하는 법정이자(지연이자)는 기타소득에 해당한다.
+    </div>
+
+    <h4>④ 점포권리금 (세금계산서 발행 가능 – 현재는 구매자에게 – 기타소득·영입권)</h4>
+    <ul class="content-list">
+      <li>기타소득에 해당하는 점포임차권 양도에 따른 소득금액 계산은 당해 연도 총수입금액에서 이에 소요된 필요경비를 공제한 금액으로 하는 것이며 이때 당해 점포를 임차하기위하여 지불한 권리금은 필요경비에 해당하나 당해 사업장에 대한 시설물등 고정자산 등 고정자산의 가액은 필요경비에 해당되지 않으며 실제의 필요경비가 확인되지 아니하는 경우에는 수입금액의 60%를 필요경비로 개산공제 함</li>
+      <li>점포권리금은 부가가치세 과세대상 사업자의 경우 이는 재화 및 용역의 공급에 해당하므로 부가가치세가 과세대상이 되므로 세금계산서를 발행하고 부가세 신고서상 수입금액명세란에 수입금액외로 기재하고 사업소득등과 관계없이 별도로 기타소득으로 종합소득세 신고하며,</li>
+      <li>건물과 함께 양도하면서 점포권리금(영업권)을 계상한 경우 이는 양도가액에 포함되어 양도소득세 과세대상이고 별도로 기타소득세 과세대상이 아니므로 주의하여야 한다.</li>
+    </ul>
+
+    <h4>⑤ 건물신축공사시 피해보상금</h4>
+    <ul class="content-list">
+      <li>건축물 신축공사시 이와 관련한 소음, 분진, 진동, 일조권, 조망권 등의 침해에 따른 피해에 대하여 손해배상금을 지급되는 금액은 과세대상소득에 해당되지 않으나 권리 등이 침해되지 않을 정도의 일상생활을 불편하게 한 데 대한 사례의 성격이거나 건축허가와 관련된 합의금등의 경우 사례금으로서 기타소득에 해당된다.</li>
+    </ul>
+
+    <h4>⑥ 그린벨트내의 주택 이축권</h4>
+    <p>이축권은 양도소득세 과세대상인 부동산을 취득할 수 있는 권리가 아니며, 이를 양도하는 경우 기타소득에 해당한다. 그러나 2020년 이후 양도분 부터는 양도소득으로 과세한다. 다만, 이축권 가액을 건물가액과 별도로 평가하여 구분 신고하는 경우에는 기타소득으로 과세한다.</p>
+
+    <h4>⑦ 전문적, 전문적지식 또는 특별한 기능을 가진자의 자문, 고문 용역</h4>
+    <ul class="content-list">
+      <li><strong>경영자문 용역의 경우:</strong> 거주자가 고용관계 없이 독립된 자격으로 특정회사에 계속적 반복적으로 경영자문용역을 제공하고 그 대가를 지급받는 경우에는 사업소득에 해당하는 것이고 일시적으로 경영자문용역을 제공하고 지급받는 대가는 기타소득에 해당하며 계속적 반복적인지 일시적인지 여부는 사실판단에 의한다.</li>
+      <li><strong>대학교수의 연구용역, 자문등의 경우:</strong> 대학교수가 법률사무소 등에 자문을 하는 행위가 교수직과는 별도로 수익을 목적으로 한 사업행위로 보기 어렵고 전속자문이 아닌 사안에 따라 자문을 제공한 것이므로 기타소득에 해당함 (국심 2005중668 : 2005.07.19)</li>
+    </ul>
+
+    <h4>⑧ 기타소득에 해당하는 위약금과 배상금의 범위 (집행기준 21-41-2)</h4>
+    <ul class="content-list">
+      <li>1. 주택, 상가등 분양시 사업자가 승인한 내에 입주 시키지 못하여 입주자가 받는 지체상금</li>
+      <li>2. 채권자가 채무자의 금전채무불이행에 대하여 손해배상금청구의 소를 제기하고 그 손해를 배상받게 되는 경우의 지연배상금, 퇴직금 지급지연 손해배상금.</li>
+      <li>3. 부동산매매계약후 계약불이행으로 인하여 일방 당사자가 받은 위약금 또는 해약금</li>
+      <li>4. 임기가 정하여진 법인의 임원이 임기만료 전에 정당한 이유없이 해임됨으로써 상법에 따른 손해배상을 청구하여 퇴직금과 별도로 손해배상을 지급받는 경우 동 손해배상금. 다만, 신분 및 인격에 대한 손해배상금은 제외한다.</li>
+      <li>5. 상행위에서 발생한 클레임(Claim)에 대한 배상으로서 현실적으로 발생한 손해의 보전 또는 원상회복을 초과하는 배상금</li>
+      <li>6. 임대차기간 만료 이후 임대인이 임대보증금을 늦게 반환함으로써 법원의 판결에 따라 임차인이 지급받는 법정이자</li>
+      <li>7. 퇴직금 지급청구소송을 제기하여 퇴직금과 지급지연 손해배상금을 받는 경우에 있어서 해당 지급지연 손해배상금</li>
+    </ul>
+
+    <h4>⑨ 미술품에 대한 과세 (법인은 개인 레탈비용은)</h4>
+    <ul class="content-list">
+      <li>서화, 골동품(제작된지 100년 이상)에 대해서는 그동안 과세를 유보해 오다가 2013년 이후 거래분부터 국내생존작가 작품을 제외한 점당 양도가액 6,000만원 이상인 회화, 골동품에 대하여 기타소득으로서 필요경비는 양도가액 1억원이하 90%, 1억원 초과 부분 80%, 다만 10년 이상 보유한 경우에는 필요경비 90%를 공제한 후 (실제 소요된 경비가 그 이상이면 실제의 필요경비) 소득금액의 20%를 원천징수한다.</li>
+      <li>미술품의 양도시 기타소득은 필요경비를 공제후 소득금액의 20%를 원천징수하여야 하며, 합산과세되지 않고 원천징수분 분리과세로 납세의무가 종결된다. 이때 양수자가 외국인등으로 원천징수가 곤란할 때 양도자 본인이 원천징수상당액을 신고, 납부하여야 한다.</li>
+    </ul>
+
+    <h4>⑩ 영업권, 특허권등의 양도시 과세 구분</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>양도의 경우</th><th>대여의 경우 (일시적)</th><th>대여의 경우 (계속, 반복적)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>건물과 함께 양도하는 영업권</td><td>양도소득</td><td>기타소득</td><td>사업소득</td></tr>
+        <tr><td>단독으로 양도하는 영업권</td><td>기타소득</td><td>기타소득</td><td>사업소득</td></tr>
+        <tr><td>산업재산권 (특허권, 상표권등)</td><td>기타소득</td><td>기타소득</td><td>사업소득</td></tr>
+      </tbody>
+    </table>
+
+    <h4>⑪ 종교인소득</h4>
+    <p>종교인(목사 전도사, 신부 수녀 수사, 스님 원불교 교무 등)의 소득세 과세가 2018년부터 시행되며, 기타소득중 종교인소득으로 신고하거나 근로소득으로 선택하여 신고납부가 가능하며, 종교인이 퇴직함에 따라 지급받는 소득은 퇴직소득에 해당한다.</p>
+
+    <div class="highlight-box">
+      <strong>&lt;종교인소득 기타소득으로 과세 방법&gt;</strong>
+      <ol>
+        <li>대상소득: 종교단체로부터 종교활동과 관련하여 받는 생활비, 상여금, 격려금, 매월 또는 정기적으로 받는 수당 및 공과금 의료비등 가사 관련 비용 보조금 등.</li>
+        <li>비과세: 종교관련 본인의 학자금, 월 10만원 이하의 식사대, 숙직료, 여비 및 종교의식에 착용하는 의복, 종교단체로부터 제공받는 사택제공이익 종교활동비 등.</li>
+        <li>필요경비: 아래의 수입금액 수준에 따라 필요경비를 공제한다
+          <ul class="content-list">
+            <li>2천만원이하: 소득의 80%</li>
+            <li>2천만원 초과 – 4천만원이하: 1,600만원 + 2천만원 초과분의 50%</li>
+            <li>4천만원 초과 – 6천만원이하: 2,600만원 + 4천만원 초과분의 30%</li>
+            <li>6천만원초과: 3,200만원 + 6천만원 초과분의 20%</li>
+          </ul>
+        </li>
+        <li>원천징수: 총지급액에서 비과세소득을 제외한 금액에 부양가족을 감안하여 "종교인소득 간이세액표"에 의하여 지급일의 다음달 10일 까지 원천징수한다.</li>
+        <li>반기납부: 종교단체는 상시고용인원과 관계없이 신청에 의하여 반기별 납부를 적용받을 수 있다 (상반기는 전년 12월까지 하반기는 6월까지 신청)</li>
+        <li>연말정산: 다음연도 2월까지 연말정산하되, 종교인소득의 연말정산은 선택사항으로서 2018.12.31. 까지 연말정산 신청(포기)서를 제출하여야 한다. 또한 3.10까지 지급명세서를 제출하여야 한다. (미제출시 가산세 1% 해당하며, 2020.1.1.이후 소득 발생분 부터 적용한다)</li>
+        <li>확정신고: 종교인소득 원천징수 하지 않았거나, 연말정산을 하지 않은 경우, 종교인 소득외에 타소득이 있는 경우 과세표준 확정신고를 하여야 한다.</li>
+        <li>퇴직소득: 종교인이 현실적인 퇴직을 원인으로 종교단체로부터 지급받는 소득은 퇴직소득에 해당하여 퇴직소득으로 원천징수되어야 한다.</li>
+      </ol>
+    </div>
+
+    <h4>⑫ 기타의 사례</h4>
+    <ul class="content-list">
+      <li>컴퓨터프로그램저작권을 양도하거나 사용하게 하고 받는 소득은 사업소득이나 저작자 이외의 자가 양도하거나 사용하게 하고 받는 소득은 기타소득이다. (소득46011-2856 97.11.5)</li>
+      <li>상금, 사례금, 포상금등의 건당 수령액이 5만원 이상인 경우 기타소득으로 과세대상이 되나, 즉 쓰레기투기 신고보상금등 파파라치가 일시적으로 신고하고 받는 보상금은 기타소득이나 이를 사업적으로 하는 경우에는 사업소득으로 과세된다.</li>
+      <li>정리해고가 정당하다는 법원판결에 의하여 고용관계가 종료된 근로자에게 분쟁행위를 하지 않는다는 조건으로 지급하는 합의금, 임기만료전 사임하는 임원에게 그퇴임과 관련하여 체결된 계약(겸업금지, 영업비밀유지, 직무소송포기 등)에 따라 지급하는 금액은 기타소득으로서 필요경비 의제가 적용되지 않는다. (원천-550 2011.9.2. 소득-771 2010.7.5.)</li>
+      <li>특허법 및 실용실안법에 규정하는 직무발명에 대하여 사용자로부터 지급받는 보상금에 대하여는 2017년 이후 300만원 한도로 소득세를 비과세하고, 종업원의 특별한 공로에 대하여 경진·경영·전략회 등에서 우수한 자에게 지급하는 상금은 기타소득에 해당하는 것임</li>
+      <li>예금반환청구소송, 보험금지급지연배상금, 임대보증금반환지연에 따른 법정이자, 소송에 의하여 근로자의 퇴직금 및 급여를 일시에 지급받으면서 이와 관련한 지연손해배상금은 기타소득에 해당하는 것임 (해석편람 21-2-1, 21-2-4, 21-2-8, 소득46011-860 1993. 4. 3.)</li>
+    </ul>
+
+  </div>
+  <div class="memo-wrap">
+    <div class="memo-label">메모</div>
+    <textarea class="memo-box" id="memo-sec-other" placeholder="메모를 입력하세요..."></textarea>
+    <button class="memo-clear" onclick="clearMemo('memo-sec-other')">지우기</button>
+  </div>
+</section>
+
+<!-- ======================== SECTION 3: 결산 및 세무조정 ======================== -->
+<section id="sec-closing" class="section-card">
+  <div class="section-header">
+    <h2>제08장 결산 및 세무조정</h2>
+    <span class="src-tag">원천: 결산및세무조정_2025.pdf</span>
+  </div>
+  <div class="section-body">
+
+    <div class="highlight-box">
+      결산이란 한 회계기간이 종료된 후 그 기간의 경영성과와 재무상태를 파악하기 위하여 각 계정의 잔액을 정리하고 재무제표를 작성하는 것이다. 세무조정이란 기업의 회계처리 기준과 세법이 다른 경우, 세법에서 인정하는 방식으로 소득을 조정하는 과정이다.
+    </div>
+
+    <h3>1. 결산 개요</h3>
+
+    <h4>(1) 회계결산과 세무조정</h4>
+    <ul class="content-list">
+      <li>사업연도 중의 거래를 장부에 기록하여 기말에 재무제표를 작성하는 것이 결산이다.</li>
+      <li>기업회계 기준에 의하여 작성된 재무제표상의 순이익을 출발점으로 하여 세법에 따라 조정함으로써 과세소득을 산정하는 과정이 세무조정이다.</li>
+      <li>개인사업자도 복식부기의무자는 기업회계 기준에 의한 결산과 세무조정이 적용된다.</li>
+    </ul>
+
+    <h3>2. 고정자산 감가상각</h3>
+
+    <h4>(1) 감가상각의 기본 개념</h4>
+    <ul class="content-list">
+      <li>감가상각이란 고정자산의 취득원가를 그 자산의 내용연수에 걸쳐 체계적으로 배분하는 절차이다.</li>
+      <li>세법상 감가상각은 결산조정사항으로 법인세에서는 감가상각비를 손금에 산입하려면 결산시 감가상각비를 계상하여야 하나, 소득세에서는 필요경비불산입이 아닌 한 기장한 금액 내에서 신고조정도 가능하다.</li>
+    </ul>
+
+    <h4>(2) 감가상각 방법</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>자산의 종류</th><th>상각방법</th><th>비고</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>건축물, 무형고정자산</td><td>정액법</td><td>건축물은 정액법만 허용</td></tr>
+        <tr><td>건축물 외 유형고정자산</td><td>정률법 또는 정액법</td><td>신고에 의해 선택, 무신고시 정률법</td></tr>
+        <tr><td>광업용 유형고정자산, 광업권</td><td>생산량비례법 또는 정액법</td><td></td></tr>
+      </tbody>
+    </table>
+
+    <h4>(3) 내용연수 (별표 2, 3, 5, 6)</h4>
+    <ul class="content-list">
+      <li><strong>별표 2:</strong> 건축물의 기준내용연수 및 내용연수범위 – 철근콘크리트 40년, 철골 40년, 벽돌 20년, 목조 20년 등</li>
+      <li><strong>별표 3:</strong> 업종별 자산의 기준내용연수 및 내용연수범위 – 업종에 따라 5년~20년 등 다양</li>
+      <li><strong>별표 5:</strong> 기타의 유형고정자산 내용연수 – 차량 5년, 공구·기구·비품 5년 등</li>
+      <li><strong>별표 6:</strong> 무형고정자산의 내용연수 – 특허권 10년, 실용신안권 5년, 디자인권 5년, 상표권 10년, 영업권 5년 등</li>
+    </ul>
+
+    <h4>(4) 감가상각비 세무조정</h4>
+    <div class="highlight-box">
+      감가상각비 세무조정의 핵심: 세법상 상각한도액과 회사계상액을 비교하여,<br>
+      &bull; 회사계상액 &gt; 한도액 → 초과액 손금불산입 (유보)<br>
+      &bull; 회사계상액 &lt; 한도액 → 부족액은 다음연도로 이월하여 추가상각 가능<br>
+      (법인세: 결산조정 원칙, 소득세: 신고조정 허용)
+    </div>
+    <p>감가상각 세무조정 명세서(별지 제20호 서식)를 작성하여 신고서에 첨부한다.</p>
+
+    <h3>3. 영업권 · 무형자산의 양도</h3>
+    <ul class="content-list">
+      <li>개인사업자가 영업권을 양도하는 경우에는 원칙적으로 기타소득으로 과세된다.</li>
+      <li>영업권을 건물과 함께 양도하는 경우에는 양도소득세 과세대상이므로 주의한다.</li>
+      <li>영업권의 취득시에는 무형자산으로 계상하고 5년간 정액법으로 상각한다.</li>
+      <li>영업권 등 무형자산의 양도시 양도가액과 장부금액(취득가액 – 상각누계액)의 차이는 소득으로 처리한다.</li>
+    </ul>
+
+    <h3>4. 주요 통칙 · 예규</h3>
+    <ul class="content-list">
+      <li>소득세 기본통칙 및 집행기준에 따라 각종 거래에 대한 처리기준이 제시된다.</li>
+      <li>예규는 법령 해석의 기준이 되므로 실무에서 중요한 참고자료이다.</li>
+      <li>세법 개정에 따라 통칙·예규도 변경될 수 있으므로 최신본을 확인한다.</li>
+    </ul>
+
+    <h3>5. 기부금</h3>
+
+    <h4>(1) 기부금의 종류</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>종류</th><th>한도</th><th>이월공제</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>법정기부금 (특례기부금)</td>
+          <td>국가·지방자치단체에 기부, 국방헌금, 천재지변 구호금품, 특별재난지역 자원봉사용역 가액 등</td>
+          <td>소득금액의 100%</td>
+          <td>10년</td>
+        </tr>
+        <tr>
+          <td>지정기부금</td>
+          <td>사회복지법인, 의료법인, 교육기관, 종교단체(10%) 등</td>
+          <td>소득금액의 30% (종교단체 10%)</td>
+          <td>10년</td>
+        </tr>
+        <tr>
+          <td>불인정 기부금</td>
+          <td>위 외의 기부금, 정치헌금 등</td>
+          <td>전액 손금불산입</td>
+          <td>-</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>(2) 이월공제</h4>
+    <ul class="content-list">
+      <li>기부금 한도초과액은 10년간 이월공제 가능하다.</li>
+      <li>이월공제시 당해연도 기부금을 먼저 공제하고 이후 이월분을 공제한다.</li>
+      <li>기부금 관련 명세서(별지 제45호의2 서식)를 작성하여 제출한다.</li>
+    </ul>
+
+    <h3>6. 지급이자</h3>
+
+    <h4>(1) 건설자금이자</h4>
+    <ul class="content-list">
+      <li>사업용 자산의 건설·제조를 위하여 차입한 자금에 대한 이자는 당해 자산의 취득원가에 산입하여야 한다. (자본화 의무)</li>
+      <li>건설이 완료되기 전의 기간에 발생한 이자를 건설자금이자로 자본화하고, 완료 후에는 비용처리한다.</li>
+    </ul>
+
+    <h4>(2) 초과인출금</h4>
+    <div class="highlight-box">
+      초과인출금 = 가계 등에 인출한 금액 – 사업에 투입한 금액<br>
+      초과인출금에 대한 지급이자는 필요경비 불산입하며 총수입금액에도 산입하지 않는다.
+    </div>
+    <p>초과인출금 계산은 매일의 대출잔액을 기준으로 일별로 계산하며, 연중 부동산 등 취득이 있는 경우 취득가액을 차감하여 계산한다.</p>
+
+    <h4>(3) 공동사업 출자금에 대한 지급이자</h4>
+    <ul class="content-list">
+      <li>공동사업장에 출자한 자금을 차입한 경우 그 차입이자는 해당 공동사업의 필요경비로 인정된다.</li>
+      <li>다만 출자금을 초과하는 차입금에 대한 이자는 초과인출금 규정을 준용한다.</li>
+    </ul>
+
+    <h3>7. 세금과 공과금</h3>
+    <ul class="content-list">
+      <li>사업과 관련하여 납부하는 세금과 공과금은 원칙적으로 필요경비에 산입한다.</li>
+      <li>필요경비 불산입 세금: 법인세·소득세, 가산세, 벌금·과태료, 선납세금 등</li>
+      <li>필요경비 산입 세금: 부가가치세 불공제분, 취득세(취득원가 산입), 재산세, 지방소득세(사업소득분) 등</li>
+      <li>부가가치세 매입세액 중 불공제분은 해당 자산의 취득원가 또는 비용에 산입한다.</li>
+    </ul>
+
+    <h3>8. 대손상각</h3>
+
+    <h4>(1) 대손사유 및 대손확정일</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>대손사유</th><th>대손확정일</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>상법에 의한 소멸시효(3년 또는 5년) 완성된 채권</td><td>소멸시효 완성일</td></tr>
+        <tr><td>민법에 의한 소멸시효(10년) 완성된 채권</td><td>소멸시효 완성일</td></tr>
+        <tr><td>파산선고에 의해 회수불능된 채권</td><td>파산선고일</td></tr>
+        <tr><td>강제집행 불능으로 회수불능된 채권</td><td>강제집행 불능확인일</td></tr>
+        <tr><td>채무자의 사망·실종으로 회수불능된 채권</td><td>사망·실종선고일</td></tr>
+        <tr><td>부도 후 6개월 이상 경과한 수표·어음 (중소기업, 부동산임대소득자 제외)</td><td>6개월 경과일</td></tr>
+        <tr><td>회수기일이 6개월 이상 지난 30만원 이하 소액채권</td><td>회수기일 6개월 경과일</td></tr>
+      </tbody>
+    </table>
+
+    <h4>(2) 대손충당금</h4>
+    <ul class="content-list">
+      <li>대손충당금 설정한도: 채권 잔액 × 1% (또는 대손실적률 중 큰 금액)</li>
+      <li>대손충당금 설정 대상: 외상매출금, 받을어음, 미수금, 대여금 등 채권</li>
+      <li>대손충당금 명세서(별지 제22호 서식)를 작성하여 첨부한다.</li>
+    </ul>
+
+    <h4>(3) 회계처리</h4>
+    <ul class="content-list">
+      <li>대손발생시: (차) 대손충당금 / (대) 매출채권 등</li>
+      <li>충당금 부족시: (차) 대손상각비 / (대) 매출채권 등</li>
+      <li>대손회수시: (차) 현금 / (대) 대손충당금환입</li>
+    </ul>
+
+    <h3>9. 퇴직급여</h3>
+
+    <h4>(1) 퇴직금 지급 기준</h4>
+    <div class="highlight-box">
+      퇴직금 = 1일 평균임금 × 30일 × (총 재직일수 ÷ 365일)<br>
+      ※ 1년 이상 근무한 근로자에게 적용
+    </div>
+
+    <h4>(2) 중간정산</h4>
+    <ul class="content-list">
+      <li>근로자가 다음 사유에 해당하는 경우 퇴직하기 전에 퇴직금을 미리 정산·지급받을 수 있다.</li>
+      <li>무주택자인 근로자가 주택을 구입하는 경우</li>
+      <li>근로자 또는 부양가족이 6개월 이상 요양이 필요한 경우</li>
+      <li>중간정산 후에는 그 정산한 날부터 퇴직금 산정기간이 새로 시작된다.</li>
+    </ul>
+
+    <h4>(3) 법인전환시 퇴직금 처리</h4>
+    <ul class="content-list">
+      <li>개인사업자가 법인으로 전환하는 경우 해당 직원들에 대한 퇴직금 처리 방법:</li>
+      <li>법인전환시 퇴직금을 실제 지급하는 경우: 퇴직소득으로 처리</li>
+      <li>법인전환시 퇴직금을 승계하는 경우: 법인에서 계속 누적하여 실제 퇴직시 지급</li>
+    </ul>
+
+    <h4>(4) 퇴직연금 (DC형 / DB형 / IRP)</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>DC형 (확정기여)</th><th>DB형 (확정급여)</th><th>IRP (개인형 퇴직연금)</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>특징</td>
+          <td>사용자가 연간 부담금을 개인 계좌에 납입, 운용결과에 따라 퇴직급여가 결정</td>
+          <td>퇴직급여 수준이 확정, 사용자가 적립금을 운용하여 지급</td>
+          <td>근로자가 이직·퇴직시 개인이 적립·운용하는 계좌</td>
+        </tr>
+        <tr>
+          <td>부담금 납입</td>
+          <td>연간 임금총액의 1/12 이상</td>
+          <td>사용자가 적립금 부족분 보전</td>
+          <td>연간 1,800만원 한도 (세액공제 900만원)</td>
+        </tr>
+        <tr>
+          <td>세무처리</td>
+          <td>납입시 전액 필요경비 (손금) 산입</td>
+          <td>사외적립분 필요경비 산입</td>
+          <td>근로자 세액공제 (연금저축 합산 900만원)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>(5) 퇴직급여충당금 (개인사업자)</h4>
+    <ul class="content-list">
+      <li>개인사업자의 퇴직급여충당금 설정한도: 총급여액의 5% (법인세법과 동일 적용)</li>
+      <li>퇴직급여충당금 명세서(별지 제26호 서식)를 작성하여 첨부한다.</li>
+      <li>퇴직급여충당금을 초과하는 퇴직금 지급액은 지급 연도에 필요경비로 산입한다.</li>
+    </ul>
+
+    <h3>10. 부가가치세와 소득세 결산</h3>
+
+    <h4>(1) 부가가치세 납부세액과 소득세</h4>
+    <ul class="content-list">
+      <li>부가가치세 과세사업자가 납부하는 부가가치세는 소득세 필요경비에 해당하지 않는다. (매출세액은 수입금액에 포함하지 않고, 매입세액은 원가에 포함하지 않음)</li>
+      <li>단, 부가가치세 매입세액 중 불공제분(비영업용 소형승용차 관련, 접대비 관련 등)은 해당 자산원가 또는 필요경비에 산입한다.</li>
+    </ul>
+
+    <h4>(2) 매입세액 처리</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>처리방법</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>공제받는 매입세액</td><td>재화·용역의 원가에 포함하지 않음 (별도 환급)</td></tr>
+        <tr><td>불공제 매입세액 (비영업용 승용차)</td><td>해당 차량의 취득원가에 포함</td></tr>
+        <tr><td>불공제 매입세액 (접대비 관련)</td><td>접대비에 포함하여 한도 적용</td></tr>
+        <tr><td>면세사업 관련 매입세액</td><td>해당 재화·용역의 원가에 포함</td></tr>
+      </tbody>
+    </table>
+
+    <h4>(3) 간주공급과 소득세</h4>
+    <ul class="content-list">
+      <li>사업자가 자기 생산·취득한 재화를 자가공급, 개인적 공급, 사업상 증여하는 경우 부가가치세가 과세되고, 이에 상당하는 금액은 소득세 총수입금액에 산입한다.</li>
+    </ul>
+
+    <h4>(4) 세액공제와 분개 사례</h4>
+    <ul class="content-list">
+      <li>전자신고세액공제, 신용카드매출전표 발행세액공제 등은 부가가치세 납부세액에서 공제하고 소득세 계산에 영향을 주지 않는다.</li>
+      <li>부가가치세 확정신고 후 환급받는 금액은 소득세 총수입금액에 포함하지 않는다.</li>
+    </ul>
+
+    <h3>11. 승용차 관련 비용</h3>
+
+    <h4>(1) 업무용 승용차 비용 규제 대상</h4>
+    <ul class="content-list">
+      <li>정원 8인 이하의 비영업용 일반승용차에 적용 (개별소비세 과세 대상)</li>
+      <li>복식부기의무자(법인 포함)에게 적용 (단순경비율 적용 개인사업자 제외)</li>
+      <li>운수업, 자동차판매업, 자동차임대업, 운전학원업, 경비업 등은 규제 제외</li>
+    </ul>
+
+    <h4>(2) 업무사용금액 계산</h4>
+    <div class="highlight-box">
+      업무용 승용차 관련비용 × 업무사용비율 = 필요경비 인정액<br><br>
+      업무사용비율 = 업무용 사용거리 ÷ 총 주행거리<br>
+      (운행기록부 미작성시 연간 1,500만원 한도로 업무용으로 인정)
+    </div>
+
+    <h4>(3) 감가상각비 규제</h4>
+    <ul class="content-list">
+      <li>승용차 1대당 연간 감가상각비 한도: 800만원 (2016년 이후)</li>
+      <li>취득가액의 한도는 없으나, 연간 감가상각비 인정한도가 800만원이므로 고가 차량의 경우 실질 감가상각 기간이 길어진다.</li>
+      <li>감가상각 방법: 정액법, 내용연수 5년 (강제 적용)</li>
+    </ul>
+
+    <h4>(4) 승용차 양도시 처리</h4>
+    <ul class="content-list">
+      <li>업무용 승용차를 양도하는 경우: 양도가액 – 장부금액 = 처분손익</li>
+      <li>처분이익이 발생하면 사업소득 총수입금액에 산입</li>
+      <li>처분손실이 발생하면 연간 800만원 한도로 필요경비 산입, 초과분 이월</li>
+    </ul>
+
+    <h4>(5) 업무용 승용차 관련비용 명세서</h4>
+    <ul class="content-list">
+      <li>업무용 승용차 관련비용 명세서를 작성하여 신고서에 첨부한다.</li>
+      <li>차량별로 취득가액, 감가상각비, 유류비, 보험료, 수선비 등을 구분 기재한다.</li>
+      <li>운행기록부를 작성·보관하여야 하며 미작성시 1,500만원 한도 적용.</li>
+    </ul>
+
+    <h3>12. 기타의 필요경비</h3>
+
+    <h4>(1) 매출 에누리등의 회계처리</h4>
+    <table class="content-table">
+      <thead>
+        <tr><th>구분</th><th>부가가치세</th><th>소득·법인세</th><th>기업회계</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>매출 에누리</td><td>과세표준 불 포함</td><td>수입금액에서 차감</td><td>매출액 차감</td></tr>
+        <tr><td>매출 할인</td><td>세금계산서 발행 대상</td><td>수입금액에서 차감</td><td>매출액 차감</td></tr>
+        <tr><td>지급판매장려금</td><td>금전지급:과세안됨 / 물품지급:과세</td><td>수입금액에서 차감하지 않고 필요경비에 반영 (수입판매장려금은 수입금액에 산입)</td><td>지급자: 매출액 차감, 지급받는자: 매입액 차감</td></tr>
+        <tr><td>매출 환입</td><td>세금계산서 발행 대상</td><td>수입금액에서 차감</td><td>매출액 차감</td></tr>
+      </tbody>
+    </table>
+
+    <h4>(2) 건설, 부동산 매매업 원가 계산</h4>
+    <ul class="content-list">
+      <li><strong>① 일부 분양시 원가 계산:</strong> 건설업, 부동산매매업등의 원가 계산시 미분양 세대분에 대하여는 면적에 안분 계산하여 미분양 부분에 해당하는 원가를 재고 자산으로서 이월시키는 것이 원칙이나, 이 경우 고액으로 분양되는 1, 2층만 먼저 분양됨으로 인하여 당해 연도는 많은 이익이 발생하고 그 이후 연도에는 결손이 발생될 수 있는 불합리한 경우가 발생되므로, 이때는 공정, 타당한 기업회계기준을 준용하여 적용하여 원가 배분을 각 호수별 분양예정가액을 기준으로 배분하는 것도 가능하다. (해석편람 27-1-8 및 27-1-9)</li>
+      <li><strong>② 일시적인 임대의 경우 감가상각:</strong> 부동산 매매업자 또는 건설업자가 판매목적의 부동산을 일시적으로 임대하는 것은 임대소득에 해당되며 임대소득금액 계산상 건물 감가상각비는 필요경비에 계상할 수 있으나 그 이후 매매됨으로 인하여 부동산 매매업의 필요경비 계산시 필요경비로 계상된 감가상각비는 취득가액에서 공제되어야 한다.</li>
+      <li><strong>③ 토지취득가액의 계산:</strong> 단독으로 사업을 할 경우 토지의 필요경비 계산은 당초 취득시 실지취득가액으로 하여야 하며, 원가계산상 토지의 실지취득가액을 모르거나 없는 경우에는 취득 당시의 소득세법상 기준시가에 의하여 계산하는 것이며 상속 증여로 인하여 취득한 경우는 상속세법에 의하여 평가한 가액에 지방세인 취득세 상당액등을 가산한 금액을 취득가액으로서 필요경비 산입한다.</li>
+      <li><strong>④ 철거한 기존 건물, 철거비, 시설물의 필요경비 계산:</strong> 소득세법에서는 기존 부동산임대업등을 하고 있는 개인사업자가 구건물이 낡아서 새로 신축하는 경우에는 기존건물 장부가액과 철거비용은 새로운 건물에 대한 자본적지출로 해석하고 있다. 이때 철거비용에는 철거되는 건축물의 입주자에게 지급하는 철거보상금이 포함되는 것이다. 따라서 철거비용도 부가세 매입세액공제가 가능한 것으로 보인다.</li>
+    </ul>
+
+    <h4>(3) 기타의 필요경비</h4>
+    <ul class="content-list">
+      <li><strong>① 재해 손실:</strong> 재해로 인하여 사업용 재고자산 및 고정자산이 파손되거나 멸실된 경우에는 당해 재해 손실가액을 필요경비로서 산입할 수 있는 것이며, 이와는 별도로 재해로 인하여 자산총액의 20% 이상에 해당하는 자산을 상실한 경우에는 재해손실세액공제도 받을 수 있다.</li>
+      <li><strong>② 시설개체로 인한 폐기시 필요경비 산입:</strong> 거주자의 경우 고정자산 처분, 폐기손실은 원칙적으로 필요경비산입이 안되나 예외적으로 시설의 개체 또는 기술의 낙후로 인하여 생산설비의 일부를 폐기하는 경우에는 장부가액과 처분가액과의 차액을 필요경비에 산입할 수 있다.</li>
+      <li><strong>③ 개인사업자의 외화평가, 외화처분손익 과세:</strong> 개인의 경우 시행령 97조 개정되지 않았으므로 법인과 달리 외화평가손익이 총수입금액 및 필요경비 계상 대상이 아니다. 그러나 외화 자산, 부채의 처분 및 상환시 발생하는 처분 손익은 당연히 총수입금액 및 필요경비 계상 대상이다.</li>
+      <li><strong>④ 벌금·과료 및 과태료의 처리 (집행기준 33-61-1):</strong>
+        <ul class="content-list">
+          <li>필요경비 불산입되는 것: 관세법 위반 벌과금, 업무관련 교통사고 벌과금, 고용보험등 산업재해보상보험료의 가산금, 국민건강보험료의 연체금</li>
+          <li>필요경비 불산입 아닌 것: 사계약상의 의무불이행으로 인하여 과하는 지체상금, 산업재해보상보험료의 연체금 및 보험급여액정수금, 국유지사용료의 납부지연으로 인한 연체료, 전기요금의 납부지연으로 인한 연체가산금</li>
+        </ul>
+      </li>
+      <li><strong>⑤ 병원의 환자 알선수수료 필요경비 산입 여부:</strong> 쟁점수수료는 「의료법」상 금지되는 행위에 따른 대가(라식수술등 환자 알선수수료)로서 쟁점사업장의 총수입금액에 대응하는 일반적으로 용인되는 통상적인 비용이라고 인정하기 어려운 점 등에 비추어 필요경비에 해당하지 않는다. (조심2021서5192 2022.10.20.)</li>
+      <li><strong>⑥ 부동산 임대사업자의 필요경비:</strong> 임대용건물을 경락에 의하여 취득한 법인이 해당건물의 기존세입자들로부터 해당 건물을 조속하게 넘겨받기 위하여 지급의무가 없는 합의금을 지급한 경우 필요경비에 산입하지 못하며 지급받는자는 기타소득에 해당한다.</li>
+      <li><strong>⑦ 보험모집인이 대납한 보험료의 필요경비 인정 여부:</strong> 보험계약의 체결 등에 모집과 관련하여 보험계약자나 피보험자를 위해 보험료를 대납하여 같은 법 제98조제4호를 위반한 경우에 해당 대납한 보험료는 「소득세법」 제27조에 따른 필요경비에 산입할 수 없는 것임</li>
+      <li><strong>⑧ 개인 사업자 본인의 4대보험 필요경비:</strong> 자영사업자, 예술인, 노무제공자등 개인사업자 본인의 4대보험중 국민연금은 소득공제로, 직장 및 지역의료보험료는 필요경비 산입되며, 2024년 지출분부터는 고용보험, 산재보험도 필요경비로 산입한다. (시행령 제55조 제1항 11의4, 11의5)</li>
+      <li><strong>⑨ 출산지원금 필요경비:</strong> 근로자(특수관계에 있는 자는 제외한다) 또는 그 배우자의 출산과 관련하여 자녀의 출생일 이후 2년 이내에 사용자로부터 자녀의 출생일 이후 2년 이내에 첫 번째와 두 번째 지급받는 급여는 전액 필요경비에 산입한다. 또한 출산지원금을 받은 근로자는 근로소득세 비과세한다.</li>
+      <li><strong>⑩ 쟁점 의상비를 필요경비로 인정할 수 있는지 여부:</strong> 쟁점의상비는 청구인이 모델 계약이나 홍보 계약 등을 체결한 브랜드와는 무관하거나 사업 관련성에 대한 자료를 제출하지 못한 의상에 대한 것으로서 수입금액에 대응된다고 보기 어렵다. (조심2023서7593 2023.10.11)</li>
+      <li><strong>⑪ 외국인 불법체류자 고용 인건비:</strong> 쟁점금액을 전액 손금으로 인정하지 않을 경우에는 청구법인의 수입금액 대비 소득금액 비율이 지나치게 높게 나타나는 등 불합리해 보이는 점 등에 비추어 처분청이 쟁점금액을 외국인 근로자들에게 실제 지급되었는지 여부를 재조사하여 그 결과에 따라 과세표준 및 세액을 경정하는 것이 타당한 것으로 판단됨. 불법체류자에게 지급하는 인건비는 여권사본, 수령중 서명, 근무일지등 근거가 필요하다.</li>
+    </ul>
+
+  </div>
+  <div class="memo-wrap">
+    <div class="memo-label">메모</div>
+    <textarea class="memo-box" id="memo-sec-closing" placeholder="메모를 입력하세요..."></textarea>
+    <button class="memo-clear" onclick="clearMemo('memo-sec-closing')">지우기</button>
+  </div>
+</section>
+<!-- ======================================================
+     PART D: 과세표준·세액공제·기타사항·신고·지방소득세·해외·개정
+     원천 PDF:
+       - 과세표준계산_2025.pdf
+       - 세액공제및세액감면_2025.pdf
+       - 성실신고확인서_현금영수증_2025.pdf
+       - 확정신고및중간예납_2025.pdf
+       - 지방소득세_2025.pdf
+       - 해외투자및거래에대한제출서류_2025.pdf
+       - 소득세_개정_2023~2025.pdf
+     생성일: 2026-05-04
+====================================================== -->
+
+<!-- =====================================================
+     SEC 1: 과세표준 계산 (과세표준계산_2025.pdf)
+===================================================== -->
+<section id="sec-tax-base" class="section-card">
+  <div class="section-header">
+    <h2>제09장 과세표준 계산</h2>
+    <span class="pdf-source">원천: 과세표준계산_2025.pdf</span>
+  </div>
+  <div class="section-body">
+
+  <h3>1. 종합소득세 계산구조 (전체 흐름)</h3>
+  <div class="highlight-box">
+    <p>아래 표는 종합소득세 신고 시 각 소득별 계산 순서(NO 1~35)를 나타냅니다.</p>
+  </div>
+  <table class="content-table">
+    <thead>
+      <tr><th>NO</th><th>항목</th><th>설명</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1~6</td><td>각종 소득 총수입금액</td><td>이자·배당·사업·근로·연금·기타소득 각각의 총수입금액</td></tr>
+      <tr><td>7~12</td><td>필요경비 차감</td><td>각 소득별 필요경비(사업소득: 장부 또는 경비율)</td></tr>
+      <tr><td>13~18</td><td>각 소득금액</td><td>총수입금액 - 필요경비 = 각 소득금액</td></tr>
+      <tr><td>19</td><td>종합소득금액</td><td>각 소득금액 합산</td></tr>
+      <tr><td>20</td><td>결손금·이월결손금 공제</td><td>사업소득 결손금 우선 공제</td></tr>
+      <tr><td>21</td><td>종합소득공제</td><td>인적공제, 연금보험료공제, 특별공제 등</td></tr>
+      <tr><td>22</td><td>종합소득 과세표준</td><td>종합소득금액 - 결손금공제 - 종합소득공제</td></tr>
+      <tr><td>23</td><td>세율 적용</td><td>과세표준 × 기본세율 → 산출세액</td></tr>
+      <tr><td>24</td><td>세액감면</td><td>조특법상 감면세액 차감</td></tr>
+      <tr><td>25</td><td>세액공제</td><td>근로소득·자녀·배당·기장·외국납부 세액공제 등</td></tr>
+      <tr><td>26</td><td>결정세액</td><td>산출세액 - 세액감면 - 세액공제</td></tr>
+      <tr><td>27~29</td><td>가산세</td><td>무신고·과소신고·납부지연 가산세</td></tr>
+      <tr><td>30~33</td><td>기납부세액 공제</td><td>중간예납·원천징수·수시부과 기납부세액</td></tr>
+      <tr><td>34</td><td>납부(환급)할 세액</td><td>결정세액 + 가산세 - 기납부세액</td></tr>
+      <tr><td>35</td><td>분납</td><td>1,000만원 초과 시 2개월 이내 분납 가능</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2. 결손금 및 이월결손금 공제</h3>
+  <h4>(1) 결손금 통산 순서 (소득세법 §45)</h4>
+  <ul class="content-list">
+    <li>사업소득 결손금 → 부동산임대소득 → 근로소득 → 연금소득 → 기타소득 → 이자소득 → 배당소득 순으로 공제</li>
+    <li>부동산임대업 결손금은 다른 소득에서 공제 불가 (해당 과세기간 부동산임대소득에서만 공제)</li>
+    <li>이월결손금 공제기간: 15년</li>
+  </ul>
+
+  <h4>(2) 중소기업 결손금 소급공제 (소득세법 §85의2)</h4>
+  <ul class="content-list">
+    <li>대상: 중소기업 사업자</li>
+    <li>직전 과세기간의 종합소득 과세표준에서 당해연도 결손금을 소급 공제하여 환급 가능</li>
+    <li>신청서: 환급신청서(별지 제40호의2서식) 제출</li>
+    <li>환급세액 = 직전연도 세액 × (결손금 / 직전연도 과세표준)</li>
+  </ul>
+
+  <h3>3. 종합소득공제</h3>
+  <h4>(1) 인적공제 (소득세법 §50~§51)</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>구분</th><th>공제액</th><th>요건</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>기본공제 — 본인</td><td>150만원</td><td>제한 없음</td></tr>
+      <tr><td>기본공제 — 배우자</td><td>150만원</td><td>연간 소득금액 100만원 이하(근로소득만 있으면 총급여 500만원 이하)</td></tr>
+      <tr><td>기본공제 — 부양가족</td><td>150만원/인</td><td>연간 소득금액 100만원 이하, 나이 요건 충족</td></tr>
+      <tr><td>추가공제 — 경로우대</td><td>100만원/인</td><td>기본공제 대상자 중 70세 이상</td></tr>
+      <tr><td>추가공제 — 장애인</td><td>200만원/인</td><td>기본공제 대상자 중 장애인</td></tr>
+      <tr><td>추가공제 — 부녀자</td><td>50만원</td><td>근로자인 배우자 있는 여성 또는 기본공제 대상 부양가족 있는 여성 세대주 (종합소득금액 3,000만원 이하)</td></tr>
+      <tr><td>추가공제 — 한부모</td><td>100만원</td><td>배우자 없이 부양자녀 있는 경우 (부녀자공제와 중복 불가, 한부모 우선)</td></tr>
+    </tbody>
+  </table>
+  <div class="highlight-box">
+    <strong>부양가족 나이 요건:</strong> 직계존속 60세 이상, 직계비속(동생 포함) 20세 이하, 형제자매 20세 이하 또는 60세 이상, 위탁아동 18세 미만
+  </div>
+
+  <h4>(2) 연금보험료 공제</h4>
+  <ul class="content-list">
+    <li>공적연금(국민연금 등) 보험료 전액 공제</li>
+    <li>근로자가 부담한 건강보험료·고용보험료: 특별공제(근로소득자만)</li>
+  </ul>
+
+  <h4>(3) 특별공제 종합한도</h4>
+  <div class="highlight-box">
+    근로소득자의 특별소득공제(보험료·주택임차료 등) + 특별세액공제(교육비·의료비·기부금·표준) + 월세 세액공제 합산 한도: <strong>연 2,500만원</strong> (조특법 §132의2)
+  </div>
+
+  <h4>(4) 주요 소득공제 항목</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>항목</th><th>근거</th><th>공제 내용</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>벤처기업 투자출자 소득공제</td><td>조특법 §16</td><td>투자금액의 일정 비율 소득공제, 이월공제 가능</td></tr>
+      <tr><td>소기업소상공인 공제(노란우산)</td><td>조특법 §86의3</td><td>납입액 최대 500만원(사업소득금액 4,000만원 이하: 500만원, 1억원 이하: 300만원, 초과: 200만원)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4. 세율표 (소득세법 §55)</h3>
+  <table class="content-table">
+    <thead>
+      <tr><th>과세표준 구간</th><th>세율</th><th>누진공제</th><th>적용 시점</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1,400만원 이하</td><td>6%</td><td>-</td><td>2023년 귀속 이후</td></tr>
+      <tr><td>1,400만원 초과 ~ 5,000만원 이하</td><td>15%</td><td>126만원</td><td>2023년 귀속 이후</td></tr>
+      <tr><td>5,000만원 초과 ~ 8,800만원 이하</td><td>24%</td><td>576만원</td><td>2023년 귀속 이후</td></tr>
+      <tr><td>8,800만원 초과 ~ 1.5억원 이하</td><td>35%</td><td>1,544만원</td><td>2023년 귀속 이후</td></tr>
+      <tr><td>1.5억원 초과 ~ 3억원 이하</td><td>38%</td><td>1,994만원</td><td>2023년 귀속 이후</td></tr>
+      <tr><td>3억원 초과 ~ 5억원 이하</td><td>40%</td><td>2,594만원</td><td>2023년 귀속 이후</td></tr>
+      <tr><td>5억원 초과 ~ 10억원 이하</td><td>42%</td><td>3,594만원</td><td>2021년 귀속 이후</td></tr>
+      <tr><td>10억원 초과</td><td>45%</td><td>6,594만원</td><td>2021년 귀속 이후</td></tr>
+    </tbody>
+  </table>
+  <div class="highlight-box">
+    <strong>2017년 이전:</strong> 최고세율 40% (5억 초과), <strong>2018~2020년:</strong> 최고세율 42% (5억 초과, 3억~5억 40%), <strong>2021년:</strong> 10억 초과 45% 신설
+  </div>
+
+  <h3>5. 분납 규정</h3>
+  <ul class="content-list">
+    <li>납부할 세액이 1,000만원을 초과하는 경우 확정신고 납부기한(5월 31일)로부터 2개월 이내 분납 가능</li>
+    <li>분납 가능 금액: 납부세액 - 1,000만원 (또는 납부세액의 50% 이하)</li>
+  </ul>
+
+  <h3>6. 부동산 매매업자 세액계산 특례 (소득세법 §122)</h3>
+  <ul class="content-list">
+    <li>토지 등 매매차익 예정신고: 매매일이 속하는 달의 말일부터 2개월 이내</li>
+    <li>비교과세 적용: 종합소득 산출세액과 토지 등 매매차익에 대한 세액 중 큰 금액으로 납부</li>
+    <li>토지등 매매차익 예정신고서 양식 별도 작성</li>
+  </ul>
+
+  <div class="memo-wrap">
+    <div class="memo-header">
+      <span>메모</span>
+      <button class="memo-clear" onclick="clearMemo('memo-tax-base')">지우기</button>
+    </div>
+    <textarea class="memo-box" id="memo-tax-base" placeholder="이 섹션에 대한 메모를 입력하세요..."></textarea>
+  </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SEC 2: 세액공제 및 세액감면 (세액공제및세액감면_2025.pdf)
+===================================================== -->
+<section id="sec-credit" class="section-card">
+  <div class="section-header">
+    <h2>제10장 세액공제·세액감면</h2>
+    <span class="pdf-source">원천: 세액공제및세액감면_2025.pdf</span>
+  </div>
+  <div class="section-body">
+
+  <h3>1. 감면대상소득의 구분계산</h3>
+  <h4>(1) 소득구분계산서</h4>
+  <ul class="content-list">
+    <li>감면대상 사업장 소득과 과세 사업장 소득을 구분하여 계산하는 서류</li>
+    <li>공통손익(공통수입·공통비용)은 기준수입금액 등 합리적 기준으로 안분계산</li>
+    <li>제출 서류: 소득구분계산서 (별지 서식)</li>
+  </ul>
+
+  <h4>(2) 세액감면·세액공제 배제 (조특법 §128)</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>배제 사유</th><th>내용</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>추계결정·경정 시</td><td>장부 없이 추계로 결정된 경우 조특법상 감면·공제 배제 (단, 기장세액공제 제외)</td></tr>
+      <tr><td>무신고자</td><td>법정신고기한 내 신고하지 않은 경우 배제 (경정청구 시 적용 불가)</td></tr>
+      <tr><td>추징세액에 대한 배제</td><td>감면 요건 위반으로 추징되는 세액에 대해 세액공제 불가</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2. 연구인력개발비 세액공제 (조특법 §10)</h3>
+  <h4>(1) 공제 대상</h4>
+  <ul class="content-list">
+    <li>자체연구개발비, 위탁·공동연구개발비, 인력개발비</li>
+    <li>신성장·원천기술 연구개발비 (별표 7 참고)</li>
+    <li>국가전략기술 연구개발비 (반도체, 이차전지, 백신, 디스플레이 등)</li>
+  </ul>
+
+  <h4>(2) 공제율 (2023년 이후)</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>구분</th><th>일반연구개발</th><th>신성장·원천기술</th><th>국가전략기술</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>중소기업</td><td>25% 또는 증가분 50%</td><td>당기 30% + 매출비율×3배 (10% 한도)</td><td>40%</td></tr>
+      <tr><td>중견기업</td><td>8% 또는 증가분 40%</td><td>15%</td><td>20%</td></tr>
+      <tr><td>대기업</td><td>2% 또는 증가분 25%</td><td>6%</td><td>10%</td></tr>
+    </tbody>
+  </table>
+
+  <h4>(3) 이월공제 기간</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>항목</th><th>이월공제 기간</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>조특법 세액공제 (투자세액공제 포함)</td><td>10년</td></tr>
+      <tr><td>기부금 세액공제</td><td>10년</td></tr>
+      <tr><td>해외납부세액공제</td><td>10년</td></tr>
+      <tr><td>결손금 공제</td><td>15년</td></tr>
+    </tbody>
+  </table>
+
+  <h3>3. 통합 투자세액공제 (조특법 §24, 시행령 §21)</h3>
+  <div class="highlight-box">
+    2020.12.29. 종전 조문별 투자세액공제 전부 폐지 → 조특법 §24 통합투자세액공제 신설. 2021년 이후 신고분부터 적용.
+  </div>
+
+  <h4>(1) 대상 업종</h4>
+  <ul class="content-list">
+    <li>모든 개인사업자 및 내국법인 원칙 (부동산임대·공급업 및 소비성서비스업 제외)</li>
+    <li>소비성서비스업 제외: 호텔업·여관업(관광숙박업 제외), 주점업(일반유흥주점·무도유흥주점·단란주점, 단 외국인전용유흥음식점·관광유흥음식점 제외)</li>
+  </ul>
+
+  <h4>(2) 공제 대상 자산</h4>
+  <ul class="content-list">
+    <li>① 기계장치 등 사업용 유형자산 (토지·건축물·차량·공구·비품·선박·항공기 원칙적 제외)</li>
+    <li>② 무형자산: 연구·시험 및 직업훈련시설, 에너지절약 시설, 환경보전 시설, 근로자복지 증진 시설, 안전시설</li>
+    <li>운수업 직접 사용 차량·운반구 (업종별 구분), 중소기업 사업 직접 사용 소프트웨어</li>
+    <li>신성장·원천기술 사업화 시설 (자율주행차, 전기차, AI, 클라우드, CO₂활용, 첨단반도체 등)</li>
+    <li>중소·중견기업이 내국인으로부터 취득하는 특허권·실용신안권·디자인권</li>
+    <li>임대 목적으로 취득한 자산은 2025년 투자분부터 제외</li>
+  </ul>
+
+  <h4>(3) 세액공제율</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>구분</th><th colspan="2">2020-2022년 투자분</th><th colspan="2">2023-2024년 투자분</th></tr>
+      <tr><th></th><th>일반투자</th><th>신성장·원천기술</th><th>일반투자</th><th>신성장·원천기술</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>중소기업</td><td>10%</td><td>12% (전략기술 16%)</td><td>10%</td><td>12% (전략기술 25%)</td></tr>
+      <tr><td>중견기업</td><td>3%</td><td>5% (전략기술 8%)</td><td>5%</td><td>6% (전략기술 15%)</td></tr>
+      <tr><td>대기업</td><td>1%</td><td>3% (전략기술 6%)</td><td>1%</td><td>3% (전략기술 15%)</td></tr>
+    </tbody>
+  </table>
+  <div class="highlight-box">
+    <strong>추가공제:</strong> 당해 과세연도 투자금액이 직전 3년간 연평균 투자금액 초과 시 초과금액의 3% (국가전략기술은 4%, 2025년부터 초과분 10%) 추가 공제. 추가공제가 기본공제의 2배 초과 불가.
+  </div>
+
+  <h4>임시투자세액공제 (2023~2025년 연장 적용)</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>구분</th><th>일반투자</th><th>신성장·원천기술</th><th>전략기술</th><th>추가공제</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>중소기업</td><td>12%</td><td>14%</td><td>25%</td><td rowspan="3">직전 3년 연평균 초과분의 10% (추가공제가 기본공제의 2배 한도)</td></tr>
+      <tr><td>중견기업</td><td>7%</td><td>8%</td><td>15%, 20%</td></tr>
+      <tr><td>대기업</td><td>1%</td><td>3%</td><td>15%</td></tr>
+    </tbody>
+  </table>
+
+  <h4>(4) 투자금액 계산</h4>
+  <ul class="content-list">
+    <li>해당 과세연도 투자금액 = Max(①, ②) - (③+④)</li>
+    <li>① 총투자금액에 「작업진행률」에 의해 계산한 금액</li>
+    <li>② 해당 과세연도까지 실제 지출 금액</li>
+    <li>③ 해당 과세연도 이전에 세액공제를 받은 투자금액</li>
+    <li>④ 세액공제 제도 적용 전 투자분에 ①을 준용 계산한 금액</li>
+  </ul>
+
+  <h4>(5) 수도권과밀억제권역 투자 배제</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>투자 종류</th><th>89년 이전 창업기업</th><th>90년 이후 창업 중소기업</th><th>90년 이후 창업 일반기업</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>대체 투자 (기존 장비 교체)</td><td>공제 가능</td><td>공제 가능</td><td>공제 불가</td></tr>
+      <tr><td>증설 투자</td><td>공제 불가 (산업단지·공업지역 가능)</td><td>공제 불가 (산업단지·공업지역 가능)</td><td>공제 불가</td></tr>
+      <tr><td colspan="4">무조건 공제 대상: 디지털방송장비, 정보통신장비, 연구·시험·직업훈련·에너지 절약·환경보전·근로자복지증진·안전시설, 신에너지·재생에너지생산시설, 의약품질관리개선시설</td></tr>
+    </tbody>
+  </table>
+
+  <h4>(6) 사후관리 (조특법 §146)</h4>
+  <ul class="content-list">
+    <li>투자완료일부터 2년(건물·구축물 5년) 이내 처분·임대 시 해당 자산 세액공제액 + 이자(1일 2.2/10,000) 가산하여 납부</li>
+    <li>현물출자·합병·분할 등으로 소유권 이전 시 처분으로 보지 않음 (시행령 §137)</li>
+  </ul>
+
+  <h3>4. 상가임대료 인하 임대사업자(착한 임대인) 세액공제 (조특법 §96의3)</h3>
+  <h4>(1) 임대인 요건</h4>
+  <ul class="content-list">
+    <li>부동산임대업(상가·업무용오피스텔) 사업자등록한 임대인</li>
+    <li>2020.1.1.~2025.12.31. 공제기간 내 임대료 인하하여 지급받는 경우</li>
+    <li>법인이거나 복식부기 의무자는 사업용계좌 개설신고 필수, 추계신고·결정은 적용 불가</li>
+    <li>개인 간편장부 대상자는 추계신고에도 공제 가능</li>
+  </ul>
+
+  <h4>(2) 임차인 요건</h4>
+  <ul class="content-list">
+    <li>소상공인 보호 및 지원에 관한 법률의 소상공인</li>
+    <li>특수관계자·사행성·소비성 업종 등 조특법 별표 14 규정 업종 제외</li>
+    <li>임대인과 특수관계 없이 사업자등록 후 임대상가건물을 2021.6.30. 이전부터 계속 임차하여 영업용으로 사용 중인 경우</li>
+    <li>임대차계약 종료 전 폐업자로서 2021.1.1. 이후 임대차계약 기간 남은 경우</li>
+  </ul>
+
+  <h4>(3) 세액공제액</h4>
+  <ul class="content-list">
+    <li>2020년: 임대료 인하액 × 50%</li>
+    <li>2021년 이후: 임대료 인하액 × 70% (단, 임대료 인하 전 종합소득금액 1억원 초과 시 50%)</li>
+  </ul>
+
+  <h4>(4) 배제 및 추징</h4>
+  <ul class="content-list">
+    <li>최저한세 적용 없음, 농어촌특별세 해당, 비거주자도 해당</li>
+    <li>이월공제: 결손으로 공제받지 못한 세액은 2021년 이후 신고분부터 10년간 이월공제</li>
+    <li>추계신고자(간편장부 제외) 적용 불가</li>
+    <li>임대료 인상(갱신 시 직전 계약 금액의 100분의 5 초과) 시 이미 공제받은 세액 추징</li>
+  </ul>
+
+  <h3>5. 고용지원 조세특례</h3>
+  <h4>가. 통합고용세액공제 (조특법 §29의8, 2023년 신설)</h4>
+  <div class="highlight-box">
+    사회보험료 세액공제(§30조의4)·고용증대세액공제(§29의7)·경력단절여성·정규직전환·육아휴직복귀자 세액공제를 통합하여 2023년부터 적용. 2024년까지는 개별 세액공제와 선택 적용 가능.
+  </div>
+  <table class="content-table">
+    <thead>
+      <tr><th>구분</th><th colspan="2">중소기업</th><th>중견기업</th><th>대기업</th></tr>
+      <tr><th></th><th>수도권</th><th>지방</th><th></th><th></th></tr>
+    </thead>
+    <tbody>
+      <tr><td>청년 외 상시근로자</td><td>850만원</td><td>950만원</td><td>450만원</td><td>-</td></tr>
+      <tr><td>청년등 상시근로자</td><td>1,450만원</td><td>1,550만원</td><td>800만원</td><td>400만원</td></tr>
+      <tr><td>공제기간</td><td colspan="2">3년 (인원 유지·증가시)</td><td>3년</td><td>2년</td></tr>
+    </tbody>
+  </table>
+
+  <h4>청년등 상시근로자 요건</h4>
+  <ul class="content-list">
+    <li>15세 이상 34세 이하 (병역 이행자: 병역 기간 현재 연령에서 제외, 최대 6년 한도)</li>
+    <li>장애인복지법 적용 장애인, 국가유공자 등</li>
+    <li>60세 이상, 경력단절여성, 북한이탈주민 (2025년 귀속부터 적용)</li>
+  </ul>
+
+  <h4>나. 고용증대세액공제 (§29의7, 2018~2024년 선택 적용)</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>구분</th><th colspan="2">중소기업 (3년 지원)</th><th>중견기업 (3년)</th><th>대기업 (2년)</th></tr>
+      <tr><th></th><th>수도권</th><th>지방</th><th></th><th></th></tr>
+    </thead>
+    <tbody>
+      <tr><td>청년 외 상시근로자</td><td>700만원</td><td>770만원</td><td>450만원</td><td>-</td></tr>
+      <tr><td>청년등 상시근로자</td><td>1,100만원</td><td>1,200만원</td><td>800만원</td><td>400만원</td></tr>
+    </tbody>
+  </table>
+
+  <h4>다. 특정중소기업 취업 청년등 근로소득세 감면 (조특법 §30)</h4>
+  <ul class="content-list">
+    <li>대상: 청년(34세 이하), 60세 이상, 장애인, 재취업 경력단절여성이 특정 중소기업(시행령 §27조 3항)에 2026.12.31.까지 취업 시</li>
+    <li>감면: 취업일부터 3년간(청년 5년) 근로소득세의 70%(청년 90%) 감면. 단, 과세기간 감면세액 한도 150만원(2023년부터 200만원)</li>
+    <li>소득세 감면기간: 감면받은 자가 다른 중소기업에 취업하거나 재취업해도 최초 취업일부터 3년 또는 5년 계산</li>
+  </ul>
+
+  <h4>라. 근로소득증대세액공제 (§29조의4)</h4>
+  <ul class="content-list">
+    <li>해당 과세연도 상시근로자 평균 임금증가율이 직전 3년 평균 임금증가율보다 큰 경우</li>
+    <li>직전 3년 평균 임금초과 증가분: 중소기업 20%, 중견기업 10%, 대기업 5% 세액공제 (대기업은 2023년부터 제외)</li>
+    <li>정규직 전환 근로자 임금증가분: 중소기업 20%, 중견기업 10%, 대기업 5%</li>
+  </ul>
+
+  <h3>6. 주의사항</h3>
+  <ul class="content-list">
+    <li>세액감면과 세액공제는 중복 적용 불가. 단 이월된 세액공제와 당해연도 감면은 중복 적용 가능</li>
+    <li>농어촌특별세 해당됨</li>
+    <li>최저한세 적용으로 공제받지 못한 세액은 10년간 이월공제</li>
+    <li>조특법상 세액공제는 개인사업자의 경우 사업소득에 대한 소득세에서만 공제 가능 (부동산임대소득 불포함). 단 성실신고확인서 첨부자, 성실신고비용 세액공제는 가능 (조특법 §7조의4 §1항)</li>
+    <li>수도권 과밀억제권역 투자는 직접 사용하는 사업장 기준 (건설업은 본점 소재지 기준)</li>
+  </ul>
+
+  <div class="memo-wrap">
+    <div class="memo-header">
+      <span>메모</span>
+      <button class="memo-clear" onclick="clearMemo('memo-credit')">지우기</button>
+    </div>
+    <textarea class="memo-box" id="memo-credit" placeholder="이 섹션에 대한 메모를 입력하세요..."></textarea>
+  </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SEC 3: 사업용계좌·현금영수증·농어촌특별세 (성실신고확인서_현금영수증_2025.pdf)
+===================================================== -->
+<section id="sec-sincere" class="section-card">
+  <div class="section-header">
+    <h2>제11장 기타사항 — 사업용계좌·현금영수증·농어촌특별세</h2>
+    <span class="pdf-source">원천: 성실신고확인서_현금영수증_2025.pdf</span>
+  </div>
+  <div class="section-body">
+
+  <h3>4. 사업용계좌 (소득세법 §160의5)</h3>
+  <h4>(1) 사업용계좌 의무 개설 대상</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>업종</th><th>수입금액 기준</th><th>비고</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>농업·임업·어업</td><td>3억원 이상</td><td>직전 과세기간 수입금액</td></tr>
+      <tr><td>제조업·건설업·도매업</td><td>1억 5,000만원 이상</td><td>직전 과세기간 수입금액</td></tr>
+      <tr><td>부동산임대업</td><td>7,500만원 이상</td><td>직전 과세기간 수입금액</td></tr>
+      <tr><td>서비스업(일반)</td><td>7,500만원 이상</td><td>직전 과세기간 수입금액</td></tr>
+      <tr><td>전문직(의사·변호사·세무사 등)</td><td>개업 연도부터 의무</td><td>수입금액 무관</td></tr>
+    </tbody>
+  </table>
+
+  <h4>(2) 계좌 개설 신고 및 대상 거래</h4>
+  <ul class="content-list">
+    <li>최초 의무 발생 과세기간 6개월 이내 관할 세무서에 신고</li>
+    <li>대상 거래: 거래 대금 수수(5만원 초과), 인건비·임차료 지급</li>
+    <li>별도로 사업과 무관한 거래는 제외 가능</li>
+  </ul>
+
+  <h4>(3) 미개설 시 제재</h4>
+  <ul class="content-list">
+    <li>가산세: 사업용계좌 미개설·미신고 시 거래금액의 2/1,000</li>
+    <li>사업용계좌 미사용 거래분에도 동일한 가산세 부과</li>
+  </ul>
+
+  <h4>(4) 주요 문답 (사례 요약)</h4>
+  <ul class="content-list">
+    <li>Q: 신규 개업 전문직 수입이 없어도 개설 의무?→ A: 전문직은 개업연도부터 의무</li>
+    <li>Q: 여러 업종 겸업 시?→ A: 수입금액이 큰 업종 기준 적용</li>
+    <li>Q: 공동사업장의 경우?→ A: 공동사업장 단위로 개설</li>
+    <li>Q: 사업용계좌 = 급여 통장도 되는가?→ A: 사업과 관련된 수입·지출에 전용 계좌 필요</li>
+  </ul>
+
+  <h3>5. 현금영수증 (소득세법 §162조의3)</h3>
+  <h4>(1) 현금영수증 가맹 의무</h4>
+  <ul class="content-list">
+    <li>직전 과세기간 수입금액 2,400만원 이상 사업자 가맹 의무</li>
+    <li>미가입 시 제재: 미가입 기간 수입금액의 1% 가산세</li>
+  </ul>
+
+  <h4>(2) 의무발행 업종 (별표 3의3)</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>업종 구분</th><th>예시</th><th>시행 시기</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>전문직</td><td>변호사·세무사·회계사·의사·치과의사·한의사·약사·수의사 등</td><td>2010~</td></tr>
+      <tr><td>의료업종</td><td>병·의원, 한방병원, 치과병원, 요양병원</td><td>2010~</td></tr>
+      <tr><td>기타업종</td><td>골프연습장, 예식장, 부동산중개, 자동차판매, 독서실 등</td><td>2012~</td></tr>
+      <tr><td>추가 업종</td><td>학원, 숙박업, 주유소, 이·미용업, 안경점 등</td><td>2013~2026</td></tr>
+    </tbody>
+  </table>
+
+  <h4>(3) 미발급 가산세</h4>
+  <ul class="content-list">
+    <li>2019년 이후 거래분: 미발급 금액의 <strong>20%</strong> 가산세</li>
+    <li>발급 거부·사실과 다른 영수증 발급: 발급금액의 5%</li>
+  </ul>
+
+  <h4>(4) 추계결정 시 단순경비율 배제</h4>
+  <ul class="content-list">
+    <li>현금영수증 미가입·발급 거부 업종에 해당하는 경우 추계신고 시 단순경비율 적용 불가 → 기준경비율 적용</li>
+  </ul>
+
+  <h4>(5) 소비자상대업종 (별표 3의2, 13개 구분)</h4>
+  <ul class="content-list">
+    <li>소매업, 음식업, 숙박업, 미용업, 여행업, 운수업, 교육 관련 서비스업 등 13개 대업종</li>
+    <li>해당 업종 사업자는 현금 수취 시 현금영수증 의무 발행</li>
+  </ul>
+
+  <h3>6. 농어촌특별세</h3>
+  <h4>(1) 과세 범위</h4>
+  <ul class="content-list">
+    <li>감면세액에 대해 농어촌특별세 부과 (감면세액의 20%)</li>
+    <li>세액공제·감면 받는 경우 농특세 추가 납부 필요</li>
+  </ul>
+
+  <h4>(2) 과세표준 계산</h4>
+  <ul class="content-list">
+    <li>농특세 과세표준 = 감면세액</li>
+    <li>농특세 세율 = 20%</li>
+  </ul>
+
+  <h4>(3) 비과세 항목 (법인세·소득세 관련)</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>비과세 항목</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>농어민·농민단체 감면</td></tr>
+      <tr><td>중소기업 감면</td></tr>
+      <tr><td>연구인력개발 감면</td></tr>
+      <tr><td>고용증대 관련 감면</td></tr>
+      <tr><td>지방이전 감면</td></tr>
+      <tr><td>창업중소기업 등 기타 비과세 항목</td></tr>
+    </tbody>
+  </table>
+
+  <div class="memo-wrap">
+    <div class="memo-header">
+      <span>메모</span>
+      <button class="memo-clear" onclick="clearMemo('memo-sincere')">지우기</button>
+    </div>
+    <textarea class="memo-box" id="memo-sincere" placeholder="이 섹션에 대한 메모를 입력하세요..."></textarea>
+  </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SEC 4: 확정신고 및 중간예납 (확정신고및중간예납_2025.pdf)
+===================================================== -->
+<section id="sec-final-filing" class="section-card">
+  <div class="section-header">
+    <h2>제12장 확정신고 및 중간예납</h2>
+    <span class="pdf-source">원천: 확정신고및중간예납_2025.pdf</span>
+  </div>
+  <div class="section-body">
+
+  <h3>1. 과세표준 확정신고 (소득세법 §70)</h3>
+  <h4>(1) 신고 의무 없는 자</h4>
+  <ul class="content-list">
+    <li>근로소득만 있는 자 (연말정산 완료)</li>
+    <li>퇴직소득만 있는 자</li>
+    <li>연금소득만 있는 자 (공적연금 연말정산 완료)</li>
+    <li>연말정산 대상 사업소득만 있는 자 (직전연도 수입 7,500만원 미만 간편장부 대상자)</li>
+    <li>분리과세되는 이자소득·배당소득·연금소득·기타소득만 있는 자</li>
+  </ul>
+
+  <h4>(2) 연말정산 대상 사업소득 정의</h4>
+  <ul class="content-list">
+    <li>직전 과세연도 수입금액 7,500만원 미만 간편장부 대상자로서 원천징수가 이루어지는 특정 사업소득</li>
+    <li>해당 사업소득에 대해 연말정산으로 납세의무 종결</li>
+  </ul>
+
+  <h4>(3) 근로소득자 확정신고·경정청구</h4>
+  <ul class="content-list">
+    <li>연말정산 누락 항목이 있으면 5월 확정신고 가능</li>
+    <li>과다납부 시 경정청구(법정 신고기한 다음날부터 5년)</li>
+  </ul>
+
+  <h4>(4) 확정신고 특례</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>사유</th><th>신고 기한</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>사망</td><td>사망일이 속하는 달의 말일부터 6개월 이내</td></tr>
+      <tr><td>국외 이주</td><td>출국일 전까지</td></tr>
+      <tr><td>토지등 매매차익 예정신고</td><td>매매일이 속하는 달의 말일부터 2개월 이내</td></tr>
+    </tbody>
+  </table>
+
+  <h4>(5) 확정신고 기한 연장 사유</h4>
+  <ul class="content-list">
+    <li>천재·지변 등 기한 연장 사유가 있는 경우 세무서장 승인으로 기한 연장</li>
+    <li>법인세법 소득처분으로 인한 소득 증가, 국세청 통보자료 오류 정정, 법원판결에 의한 변동 → 추가 확정신고 가능</li>
+  </ul>
+
+  <h3>2. 중간예납 (소득세법 §65)</h3>
+  <table class="content-table">
+    <thead>
+      <tr><th>구분</th><th>소득세 (개인)</th><th>법인세 (비교)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>확정신고기한</td><td>다음 연도 5월 31일</td><td>사업연도 종료 후 3개월</td></tr>
+      <tr><td>중간예납 기간</td><td>1월 1일 ~ 6월 30일</td><td>사업연도 개시일부터 6월</td></tr>
+      <tr><td>중간예납 기한</td><td>11월 30일</td><td>해당 기간 종료 후 2개월</td></tr>
+      <tr><td>의무 없는 자</td><td>신규 사업자, 분리과세자, 사업소득 없는 자 등</td><td>신규 법인 등</td></tr>
+      <tr><td>중간예납세액 계산</td><td>직전연도 납부세액의 1/2 (또는 6개월 가결산)</td><td>직전 사업연도 납부세액의 50%</td></tr>
+      <tr><td>분납</td><td>1,000만원 초과 시 2개월 분납</td><td>1,000만원 초과 시 1개월 분납</td></tr>
+    </tbody>
+  </table>
+
+  <div class="memo-wrap">
+    <div class="memo-header">
+      <span>메모</span>
+      <button class="memo-clear" onclick="clearMemo('memo-final-filing')">지우기</button>
+    </div>
+    <textarea class="memo-box" id="memo-final-filing" placeholder="이 섹션에 대한 메모를 입력하세요..."></textarea>
+  </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SEC 5: 지방소득세 + 단순·기준경비율 (지방소득세_2025.pdf)
+===================================================== -->
+<section id="sec-local-tax" class="section-card">
+  <div class="section-header">
+    <h2>제13장 지방소득세 및 단순·기준경비율</h2>
+    <span class="pdf-source">원천: 지방소득세_2025.pdf</span>
+  </div>
+  <div class="section-body">
+
+  <h3>7. 지방소득세 (2020년부터 별도 신고)</h3>
+  <h4>(1) 산출세액 계산</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>구분</th><th>세목</th><th>세율/금액</th></tr>
+    </thead>
+    <tbody>
+      <tr><td rowspan="3">주민세</td><td>균등분 — 개인</td><td>5만원 ~ 50만원 (자치단체별 상이)</td></tr>
+      <tr><td>재산분</td><td>사업소 연면적 330㎡ 초과 시 250원/㎡</td></tr>
+      <tr><td>종업원분</td><td>종업원 급여총액의 0.5%</td></tr>
+      <tr><td>개인지방소득세</td><td>종합소득세 등</td><td>소득세 산출세액의 10%</td></tr>
+      <tr><td>법인지방소득세</td><td>법인세</td><td>법인세 산출세액의 10%</td></tr>
+    </tbody>
+  </table>
+
+  <h4>(2) 지방소득세 신고기한</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>구분</th><th>신고 기한</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>종합소득 (개인)</td><td>다음 연도 5월 31일 (소득세 확정신고 기한과 동일)</td></tr>
+      <tr><td>양도소득 (개인)</td><td>양도일이 속하는 달의 말일부터 2개월 이내</td></tr>
+      <tr><td>법인</td><td>사업연도 종료 후 4개월 이내</td></tr>
+    </tbody>
+  </table>
+
+  <h4>(3) 지방소득세 납세지</h4>
+  <ul class="content-list">
+    <li>개인: 납세의무 성립일 현재의 주소지 관할 지방자치단체</li>
+    <li>법인: 본점 또는 주사무소 소재지</li>
+  </ul>
+
+  <h4>(4) 지방소득세 가산세</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>가산세 종류</th><th>내용</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>무신고 가산세</td><td>납부세액의 20% (부정 무신고 40%)</td></tr>
+      <tr><td>과소신고 가산세</td><td>과소납부세액의 10% (부정 40%)</td></tr>
+      <tr><td>납부지연 가산세</td><td>미납세액 × 미납기간 × 2.2/10,000</td></tr>
+    </tbody>
+  </table>
+
+  <h4>(5) 지방세특례법상 세액공제·감면</h4>
+  <ul class="content-list">
+    <li>지방세특례제한법에 따른 감면이 별도 적용됨 (소득세법상 감면과 별개)</li>
+  </ul>
+
+  <h4>(6) 2020년 지방소득세 주요 변동사항</h4>
+  <ul class="content-list">
+    <li>개인지방소득세 납세지 개선: 주소지 기준 일원화</li>
+    <li>확정신고 안내제도 도입</li>
+    <li>양도소득 신고기한 연장 (소득세와 동일 기한)</li>
+    <li>무신고 가산세 면제 (최초 신고 연도 한시적 면제)</li>
+    <li>행정심판 전치주의 도입</li>
+  </ul>
+
+  <h3>제8장 단순경비율 · 기준경비율</h3>
+  <h4>(1) 기준경비율 계산구조</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>항목</th><th>내용</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>수입금액</td><td>해당 과세기간 총 수입금액</td></tr>
+      <tr><td>주요경비</td><td>매입비용 + 임차료 + 인건비 (증빙 있는 것만)</td></tr>
+      <tr><td>기준경비율 적용 경비</td><td>수입금액 × 기준경비율</td></tr>
+      <tr><td>소득금액</td><td>수입금액 - 주요경비 - (수입금액 × 기준경비율)</td></tr>
+    </tbody>
+  </table>
+
+  <h4>(2) 기준경비율 한도 (배율 한도)</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>귀속연도</th><th>복식부기 의무자</th><th>간편장부 대상자</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>2007년~현재</td><td>기준경비율 적용 소득금액이 단순경비율 적용 소득금액의 3배 초과 불가</td><td>기준경비율 적용 소득금액이 단순경비율 적용 소득금액의 2.8배 초과 불가</td></tr>
+    </tbody>
+  </table>
+
+  <h4>(3) 단순경비율 적용 대상자</h4>
+  <table class="content-table">
+    <thead>
+      <tr><th>업종 구분</th><th>수입금액 기준</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>도·소매업, 부동산매매업 등</td><td>6,000만원 미만</td></tr>
+      <tr><td>제조업, 숙박·음식점업, 건설업 등</td><td>3,600만원 미만</td></tr>
+      <tr><td>서비스업(부동산임대·전문직 등)</td><td>2,400만원 미만</td></tr>
+    </tbody>
+  </table>
+
+  <h4>(4) 단순경비율 적용 제외자</h4>
+  <ul class="content-list">
+    <li>전문직 (의사·변호사·세무사 등)</li>
+    <li>현금영수증 미가입 또는 발급 거부 사업자 (해당 과세기간 소득분)</li>
+    <li>복식부기 의무자</li>
+    <li>직전 과세기간 기준경비율 대상자</li>
+  </ul>
+
+  <h4>(5) 단순경비율 적용 시 자가사업자 가산·차감율</h4>
+  <ul class="content-list">
+    <li>자가 건물에서 사업하는 경우: 임차료 상당액을 소득에 가산 (가산율 적용)</li>
+    <li>반대로 자가에서 임차료를 내지 않아도 소득이 줄어들지 않도록 조정</li>
+  </ul>
+
+  <h4>(6) 특별 규정</h4>
+  <ul class="content-list">
+    <li>장애자 적용 특례: 장애인이 영위하는 사업에 대해 경비율 우대 적용</li>
+    <li>인적용역 차등율: 인적용역 소득자는 수입금액 구간별 차등 경비율 적용 (3,600만원 기준)</li>
+  </ul>
+
+  <div class="memo-wrap">
+    <div class="memo-header">
+      <span>메모</span>
+      <button class="memo-clear" onclick="clearMemo('memo-local-tax')">지우기</button>
+    </div>
+    <textarea class="memo-box" id="memo-local-tax" placeholder="이 섹션에 대한 메모를 입력하세요..."></textarea>
+  </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SEC 6: 해외투자 및 거래 제출서류 (해외투자및거래에대한제출서류_2025.pdf)
+===================================================== -->
+<section id="sec-overseas" class="section-card">
+  <div class="section-header">
+    <h2>제14장 해외투자 및 거래에 관한 제출서류</h2>
+    <span class="pdf-source">원천: 해외투자및거래에대한제출서류_2025.pdf</span>
+  </div>
+  <div class="section-body">
+
+  <h3>1. 제출 서류 전체 (5개 구분)</h3>
+  <table class="content-table">
+    <thead>
+      <tr><th>구분</th><th>제출 서류</th><th>제출 기준</th><th>근거법령</th><th>미제출 과태료</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>해외 지점</td>
+        <td>해외지점 등의 영업현황표</td>
+        <td>해외지점 설치 시</td>
+        <td>국조법 §24</td>
+        <td>미제출·오류: 과태료 부과</td>
+      </tr>
+      <tr>
+        <td>해외현지법인</td>
+        <td>해외현지법인 명세서, 재무상황표</td>
+        <td>해외현지법인 지분 보유 시</td>
+        <td>국조법 §24</td>
+        <td>미제출·불성실: 1,000만원 이하 과태료</td>
+      </tr>
+      <tr>
+        <td>해외 부동산</td>
+        <td>해외부동산 취득·운용·처분 명세서</td>
+        <td>취득가액 2억원 이상 또는 처분가액 2억원 이상</td>
+        <td>국조법 §24</td>
+        <td>미제출: 취득가액의 10% 과태료</td>
+      </tr>
+      <tr>
+        <td>국외특수관계자 거래</td>
+        <td>국제거래명세서</td>
+        <td>국외특수관계자와 거래 시</td>
+        <td>국조법 §11</td>
+        <td>미제출·오류: 3,000만원 이하 과태료</td>
+      </tr>
+      <tr>
+        <td>해외금융계좌</td>
+        <td>해외금융계좌 신고서</td>
+        <td>매월 말일 잔액 5억원 초과</td>
+        <td>국조법 §53</td>
+        <td>미신고: 미신고금액의 최대 20%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>2. 해외현지법인 명세서 상세</h3>
+  <ul class="content-list">
+    <li>제출 대상: 해외현지법인에 대한 출자·투자 또는 대부·채권 보유자</li>
+    <li>주요 기재 사항: 법인명·소재지·사업 내용·지분율·출자금액</li>
+    <li>재무상황표: 자산·부채·자본·매출·순이익 기재</li>
+    <li>제출 기한: 법인세·소득세 신고 기한과 동일</li>
+  </ul>
+
+  <h3>3. 해외부동산 취득·운용·처분 명세서</h3>
+  <ul class="content-list">
+    <li>취득가액 2억원 이상인 해외부동산 취득 시 제출</li>
+    <li>처분가액 2억원 이상인 해외부동산 처분 시 제출</li>
+    <li>운용현황(임대료 수입 등) 매년 신고 기한 내 제출</li>
+    <li>미제출 시: 취득가액의 10% 과태료</li>
+  </ul>
+
+  <h3>4. 해외금융계좌 신고</h3>
+  <ul class="content-list">
+    <li>신고 기준: 해당 연도 매월 말일 중 어느 하루라도 모든 해외금융계좌 잔액 합계가 5억원 초과 시</li>
+    <li>신고 기한: 다음 연도 6월 30일</li>
+    <li>신고 대상: 거주자 및 내국법인</li>
+    <li>미신고 제재: 미신고금액의 최대 20% 과태료, 형사처벌 가능 (20억원 초과)</li>
+    <li>자진 신고 감면: 최초 위반 시 과태료 50% 감면</li>
+  </ul>
+
+  <div class="memo-wrap">
+    <div class="memo-header">
+      <span>메모</span>
+      <button class="memo-clear" onclick="clearMemo('memo-overseas')">지우기</button>
+    </div>
+    <textarea class="memo-box" id="memo-overseas" placeholder="이 섹션에 대한 메모를 입력하세요..."></textarea>
+  </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SEC 7: 소득세 주요 개정 (소득세_개정_2023~2025.pdf)
+===================================================== -->
+<section id="sec-revision" class="section-card">
+  <div class="section-header">
+    <h2>제15장 소득세 주요 개정사항 (2023~2025년)</h2>
+    <span class="pdf-source">원천: 소득세_개정_2023~2025.pdf</span>
+  </div>
+  <div class="section-body">
+
+  <h3>2023년 귀속 주요 개정</h3>
+  <table class="content-table">
+    <thead>
+      <tr><th>개정 항목</th><th>내용</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>세율 과표구간 조정</td><td>하위 2개 구간 조정: 1,200만원 이하 → 1,400만원 이하 (6%), 4,600만원 이하 → 5,000만원 이하 (15%) 으로 상향</td></tr>
+      <tr><td>비과세 식대</td><td>월 10만원 → <strong>월 20만원</strong>으로 상향</td></tr>
+      <tr><td>기부금 세액공제율</td><td>한시적 5% 상향 종료, 기본세율 적용 (1,000만원 이하 15%, 초과 30%)</td></tr>
+      <tr><td>인적용역 단순경비율</td><td>수입금액 기준 2,400만원 → <strong>3,600만원</strong>으로 상향 (2024년부터 시행)</td></tr>
+      <tr><td>전자계산서 발급 대상</td><td>개인사업자 중 직전연도 수입금액 3억원 이상으로 확대</td></tr>
+      <tr><td>자녀세액공제</td><td>6세 이상 → <strong>8세 이상</strong>으로 변경</td></tr>
+      <tr><td>의료비 세액공제</td><td>난임 시술비 20% → 30%, 미숙아·선천성이상아 15% → 20%</td></tr>
+      <tr><td>월세 세액공제</td><td>공제율 10%→15%(총급여 5,500만원 이하), 12%→17% (4,500만원 이하)</td></tr>
+      <tr><td>통합고용세액공제 신설</td><td>2023년부터 고용증대·사회보험료·경력단절여성·정규직전환·육아휴직복귀자 통합 (§29의8)</td></tr>
+      <tr><td>통합투자세액공제 상향</td><td>일반투자 공제율 중소기업 10%→12% (임시 상향), 투자증가분 추가 10%</td></tr>
+      <tr><td>간이지급명세서 제출 단축</td><td>반기 → 매월 제출 (사업소득·기타소득)</td></tr>
+      <tr><td>연금계좌 세액공제 한도 확대</td><td>연간 400만원 → <strong>600만원</strong> (퇴직연금 포함 시 700만원 → 900만원)</td></tr>
+      <tr><td>매입자 발행 계산서</td><td>발행 허용 거래 확대</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2024년 귀속 주요 개정</h3>
+  <table class="content-table">
+    <thead>
+      <tr><th>개정 항목</th><th>내용</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>양식업소득 비과세 한도</td><td>양식어업 소득 비과세 한도 상향</td></tr>
+      <tr><td>노후연금 세부담 완화</td><td>사적연금 분리과세 기준: 연 1,200만원 → <strong>1,500만원</strong> 초과 시 종합과세 또는 15% 분리과세 선택</td></tr>
+      <tr><td>주택임대소득 간주임대료</td><td>3주택 이상 기준 → <strong>2주택 이상</strong>으로 확대 (2026년부터 시행)</td></tr>
+      <tr><td>자녀세액공제 확대</td><td>2명 이상: 1명 15만원 + 2명 35만원 (종전 30만원)</td></tr>
+      <tr><td>통합고용세액공제 확대</td><td>출산휴가자를 통합고용세액공제 대상에 포함</td></tr>
+      <tr><td>사용자 고용·산재보험료</td><td>사업주가 부담하는 고용·산재보험료 필요경비 명시적 인정</td></tr>
+      <tr><td>보육수당 비과세</td><td>월 10만원 → <strong>월 20만원</strong></td></tr>
+      <tr><td>직무발명보상금 비과세</td><td>연 500만원 → <strong>연 700만원</strong></td></tr>
+      <tr><td>배당소득 배당가산 하향</td><td>Gross-up 비율 11% → <strong>10%</strong></td></tr>
+      <tr><td>간이지급명세서 개편</td><td>일용근로소득 분리 등</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2025년 귀속 주요 개정</h3>
+  <table class="content-table">
+    <thead>
+      <tr><th>개정 항목</th><th>내용</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>금융투자소득세 폐지</td><td>시행 전 폐지 확정</td></tr>
+      <tr><td>가상자산 과세 연기</td><td>2027년으로 재연기</td></tr>
+      <tr><td>거주자 범위 확대</td><td>국내 2과세기간 이상 183일 요건 추가 명확화</td></tr>
+      <tr><td>출산·육아 비과세 확대</td><td>자녀 출생 후 첫 번째·두 번째 지급 근로자에 대해 <strong>전액 비과세</strong> (월정액 이외 지급 포함)</td></tr>
+      <tr><td>혼인 세액공제 신설</td><td>2026.12.31. 이전 혼인한 경우 1인당 <strong>50만원</strong> 세액공제 (생애 1회)</td></tr>
+      <tr><td>자녀세액공제 확대</td><td>첫째 <strong>25만원</strong>, 둘째 <strong>30만원</strong>, 셋째 이상 <strong>40만원</strong></td></tr>
+      <tr><td>고향사랑기부금 한도</td><td>500만원 → <strong>2,000만원</strong>으로 상향</td></tr>
+      <tr><td>소기업소상공인 공제 확대</td><td>노란우산공제 소득공제 한도 상향</td></tr>
+      <tr><td>종업원 할인금액 비과세</td><td>종업원이 자사 제품·서비스 구입 시 받는 할인금액 비과세 신설</td></tr>
+      <tr><td>장애인 범위 확대</td><td>장애인 인정 범위 추가 확대</td></tr>
+      <tr><td>통합고용세액공제 개정</td><td>탈북민 청년등 우대 대상 추가 (2025년 귀속부터), 일부 조항 개정</td></tr>
+      <tr><td>창업감면 축소</td><td>수도권 과밀억제권역 외 창업중소기업 감면율 조정</td></tr>
+      <tr><td>임시투자세액공제 재신설</td><td>2023~2025년 투자 한시 적용 (일몰 후 재신설)</td></tr>
+      <tr><td>중소기업특별세액공제</td><td>수도권 중소기업·출판업 포함</td></tr>
+      <tr><td>R&D 세액공제 중견기업 상향</td><td>중견기업 R&D 세액공제율 일부 상향</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <strong>주의:</strong> 개정 내용은 귀속연도·시행일에 따라 적용 시기가 다릅니다. 각 항목의 적용 시점을 반드시 확인하고, 최신 세법개정안과 대조하여 업무에 적용하십시오. (세무사 검수 필수)
+  </div>
+
+  <div class="memo-wrap">
+    <div class="memo-header">
+      <span>메모</span>
+      <button class="memo-clear" onclick="clearMemo('memo-revision')">지우기</button>
+    </div>
+    <textarea class="memo-box" id="memo-revision" placeholder="이 섹션에 대한 메모를 입력하세요..."></textarea>
+  </div>
+  </div>
+</section>
+
+</main><!-- /main -->
+</div><!-- /page-shell -->
+
+<script>
+// ── TOC 실시간 필터 ──
+document.getElementById('tocSearch').addEventListener('input', function(){
+  var q = this.value.toLowerCase();
+  document.querySelectorAll('#toc a').forEach(function(a){
+    a.style.display = a.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+});
+
+// ── Intersection Observer: TOC 활성 링크 ──
+(function(){
+  var links = document.querySelectorAll('#toc a');
+  var secs = Array.from(links).map(function(a){
+    return document.querySelector(a.getAttribute('href'));
+  }).filter(Boolean);
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(l){ l.classList.remove('active'); });
+        var link = document.querySelector('#toc a[href="#'+e.target.id+'"]');
+        if(link) link.classList.add('active');
+      }
+    });
+  },{threshold:0.2, rootMargin:'-60px 0px -70% 0px'});
+  secs.forEach(function(s){ obs.observe(s); });
+})();
+
+// ── 섹션 카드 헤더 클릭 펼치기/접기 ──
+document.querySelectorAll('.section-header').forEach(function(hdr){
+  // 토글 화살표 추가
+  if(!hdr.querySelector('.section-toggle')){
+    var span = document.createElement('span');
+    span.className = 'section-toggle';
+    span.textContent = '▾';
+    hdr.appendChild(span);
+  }
+  hdr.addEventListener('click', function(){
+    this.closest('.section-card').classList.toggle('collapsed');
+  });
+});
+
+// ── 전체 펼치기/접기 ──
+function expandAll(){
+  document.querySelectorAll('.section-card').forEach(function(c){ c.classList.remove('collapsed'); });
+}
+function collapseAll(){
+  document.querySelectorAll('.section-card').forEach(function(c){ c.classList.add('collapsed'); });
+}
+
+// ── 맨 위로 ──
+function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
+
+// ── 메모 LocalStorage ──
+var MEMO_PREFIX = '실무가이드_memo_';
+document.querySelectorAll('.memo-box').forEach(function(ta){
+  var key = MEMO_PREFIX + ta.id;
+  var saved = localStorage.getItem(key);
+  if(saved) ta.value = saved;
+  ta.addEventListener('input', function(){ localStorage.setItem(key, this.value); });
+});
+function clearMemo(id){
+  var ta = document.getElementById(id);
+  if(ta){ ta.value=''; localStorage.removeItem(MEMO_PREFIX+id); }
+}
+
+// ── 메모 내보내기 ──
+function exportMemo(){
+  var lines = [];
+  document.querySelectorAll('.memo-box').forEach(function(ta){
+    if(ta.value.trim()){
+      var sec = ta.closest('.section-card');
+      var title = sec ? (sec.querySelector('h2')||{}).textContent||ta.id : ta.id;
+      lines.push('=== '+title+' ===\n'+ta.value.trim()+'\n');
+    }
+  });
+  if(!lines.length){ alert('저장된 메모가 없습니다.'); return; }
+  var blob = new Blob([lines.join('\n')], {type:'text/plain;charset=utf-8'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '소득세실무가이드_메모_' + new Date().toISOString().slice(0,10) + '.txt';
+  a.click();
+}
+
+// ── 검색 ──
+function openSearch(){ document.getElementById('searchOverlay').classList.add('open'); document.getElementById('searchInput').focus(); }
+function closeSearch(){ document.getElementById('searchOverlay').classList.remove('open'); clearHighlights(); }
+function closeSearchOnOverlay(e){ if(e.target===e.currentTarget) closeSearch(); }
+
+document.addEventListener('keydown', function(e){
+  if((e.ctrlKey||e.metaKey) && e.key==='f'){ e.preventDefault(); openSearch(); }
+  if(e.key==='Escape') closeSearch();
+});
+
+function clearHighlights(){
+  document.querySelectorAll('mark.search-hi').forEach(function(m){
+    var t = document.createTextNode(m.textContent);
+    m.parentNode.replaceChild(t, m);
+  });
+}
+
+function doSearch(){
+  var q = document.getElementById('searchInput').value.trim();
+  var box = document.getElementById('searchResults');
+  clearHighlights();
+  if(q.length < 2){ box.innerHTML='<div class="search-empty">두 글자 이상 입력하세요</div>'; return; }
+  var re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi');
+  var results = [];
+  document.querySelectorAll('.section-card').forEach(function(card){
+    var h2 = card.querySelector('h2');
+    var body = card.querySelector('.section-body');
+    if(!body) return;
+    var text = body.innerText||body.textContent||'';
+    var matches = text.match(re);
+    if(!matches) return;
+    var snippet = text.substring(Math.max(0, text.search(re)-40), text.search(re)+80);
+    snippet = snippet.replace(re, '<mark>$&</mark>');
+    results.push({card:card, title:h2?h2.textContent:'', snippet:snippet, count:matches.length});
+  });
+  if(!results.length){ box.innerHTML='<div class="search-empty">검색 결과가 없습니다</div>'; return; }
+  box.innerHTML = results.map(function(r,i){
+    return '<div class="search-result-item" onclick="goToResult('+i+')" data-idx="'+i+'">'
+      +'<div class="search-result-title">'+r.title+' ('+r.count+'건)</div>'
+      +'<div class="search-result-snippet">...'+r.snippet+'...</div>'
+      +'</div>';
+  }).join('');
+  // 하이라이트
+  results.forEach(function(r){
+    r.card.classList.remove('collapsed');
+    highlightIn(r.card.querySelector('.section-body'), re);
+  });
+  // 전역 배열
+  window._searchResults = results;
+}
+
+function highlightIn(el, re){
+  if(!el) return;
+  var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+  var nodes = [];
+  while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(function(node){
+    if(!re.test(node.nodeValue)) return;
+    re.lastIndex=0;
+    var frag = document.createDocumentFragment();
+    var last = 0; var m;
+    re.lastIndex=0;
+    while((m=re.exec(node.nodeValue))!==null){
+      frag.appendChild(document.createTextNode(node.nodeValue.slice(last,m.index)));
+      var mark = document.createElement('mark');
+      mark.className='search-hi'; mark.textContent=m[0];
+      frag.appendChild(mark);
+      last=m.index+m[0].length;
+    }
+    frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+    node.parentNode.replaceChild(frag, node);
+  });
+}
+
+function goToResult(idx){
+  var r = (window._searchResults||[])[idx];
+  if(!r) return;
+  closeSearch();
+  setTimeout(function(){ r.card.scrollIntoView({behavior:'smooth',block:'start'}); }, 100);
+}
+</script>
+</body>
+</html>
